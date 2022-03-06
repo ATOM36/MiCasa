@@ -1,0 +1,111 @@
+:root {
+  /* CSS HEX */
+  --green-forest-green-traditional: #004b23ff;
+  --green-dark-green-x-11: #006400ff;
+  --green-pakistan-green: #007200ff;
+  --green-ao-english: #008000ff;
+  --green-yellow-green-color-wheel: #38b000ff;
+  --green-sheen-green: #70e000ff;
+  --green-green-lizard: #9ef01aff;
+  --green-electric-lime: #ccff33ff;
+
+  /* SCSS Gradient */
+  --green-gradient-top: linear-gradient(
+    0deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-right: linear-gradient(
+    90deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-bottom: linear-gradient(
+    180deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-left: linear-gradient(
+    270deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-top-right: linear-gradient(
+    45deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-bottom-right: linear-gradient(
+    135deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-top-left: linear-gradient(
+    225deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-bottom-left: linear-gradient(
+    315deg,
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+  --green-gradient-radial: radial-gradient(
+    #004b23ff,
+    #006400ff,
+    #007200ff,
+    #008000ff,
+    #38b000ff,
+    #70e000ff,
+    #9ef01aff,
+    #ccff33ff
+  );
+}

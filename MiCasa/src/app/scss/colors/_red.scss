@@ -1,0 +1,131 @@
+:root {
+  /* CSS HEX */
+  --red-persian-plum: #641220ff;
+  --red-burgundy: #6e1423ff;
+  --red-antique-ruby: #85182aff;
+  --red-crimson-ua: #a11d33ff;
+  --red-crimson-ua-2: #a71e34ff;
+  --red-red-ncs: #b21e35ff;
+  --red-cardinal: #bd1f36ff;
+  --red-cardinal-2: #c71f37ff;
+  --red-crimson: #da1e37ff;
+  --red-rose-madder: #e01e37ff;
+
+  /* SCSS Gradient */
+  --red-gradient-top: linear-gradient(
+    0deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-right: linear-gradient(
+    90deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-bottom: linear-gradient(
+    180deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-left: linear-gradient(
+    270deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-top-right: linear-gradient(
+    45deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-bottom-right: linear-gradient(
+    135deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-top-left: linear-gradient(
+    225deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-bottom-left: linear-gradient(
+    315deg,
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+  --red-gradient-radial: radial-gradient(
+    #641220ff,
+    #6e1423ff,
+    #85182aff,
+    #a11d33ff,
+    #a71e34ff,
+    #b21e35ff,
+    #bd1f36ff,
+    #c71f37ff,
+    #da1e37ff,
+    #e01e37ff
+  );
+}
