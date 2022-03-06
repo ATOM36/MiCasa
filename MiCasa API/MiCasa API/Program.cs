@@ -11,6 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Antiforgery config
+builder.Services.AddAntiforgery(opt => opt.HeaderName = "XSRF-TOKEN");
+
 //JSON responses configuration
 //With this configuration, we ensure that every given response by the API will be in JSON format
 //Using the AddControllersWithViews allows OpenApi and the whole program to add services for pages
