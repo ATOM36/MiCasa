@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "dcceccaa-61bf-481f-b978-1f874e654e13": {
+      "ProjectGuid": "dcceccaa-61bf-481f-b978-1f874e654e13",
+      "DisplayName": "MiCasa API",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
