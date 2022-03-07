@@ -13,6 +13,11 @@ namespace MiCasa.Controllers
 
         [Route("GetImageFolder")]
         [HttpGet]
-        public JsonResult GetImageFolder() => new(Path.Combine(_environment!.ContentRootPath, "img"));
+        public JsonResult GetImageFolder()
+        {
+            string path = Path.Combine(_environment!.ContentRootPath, "img");
+            path.Replace('\\', '/');
+            return new(path);
+        }
     }
 }

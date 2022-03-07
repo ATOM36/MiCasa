@@ -1,1 +1,39 @@
-<p>login-form works!</p>
+<div
+  class="container-fluid py-5 h-100"
+  data-aos="fade-in"
+  data-aos-duration="1000"
+  data-aos-easing="ease-in-out"
+>
+  <div class="row justify-content-center h-100">
+    <div class="col col-xl-10">
+      <div class="card" style="border-radius: 1rem">
+        <div class="row g-0">
+          <div class="col-md-6 col-lg-5 d-none d-md-block">
+            <app-image-carousel
+              alt="home-decor"
+              data-aos="fade-right"
+              data-aos-delay="500"
+              data-aos-duration="800"
+              data-aos-easing="ease-in-out"
+            ></app-image-carousel>
+          </div>
+
+          <div class="col-md-6 col-lg-7">
+            <div class="card-body p-4 p-lg-5 text-black">
+              <app-login-form-text></app-login-form-text>
+
+              <app-form></app-form>
+
+              <div class="utility-links">
+                <a href="#!" class="small text-muted"
+                  >Politique d'utilisation.</a
+                ><br />
+                <a href="#!" class="small text-muted">Vie privée.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
