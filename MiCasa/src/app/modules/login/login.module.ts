@@ -9,9 +9,9 @@ import { RegistrationComponent } from '@components/login/registration/registrati
 import { LoginComponent } from '@pages/login/login.component';
 import { LoginFormComponent } from '@components/login/login-form/login-form.component';
 import { LoginFormTextComponent } from '@components/login/login-form-text/login-form-text.component';
-import { FormButtonComponent } from '@components/login/form-button/form-button.component';
 import { FormComponent } from '@components/login/form/form.component';
 import { ImageCarouselComponent } from '@components/login/image-carousel/image-carousel.component';
+import { ResetPasswordComponent } from '@components/login/reset-password/reset-password.component';
 
 // Primeng imports
 import { ButtonModule } from 'primeng/button';
@@ -20,15 +20,13 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { InputTextModule } from 'primeng/inputtext';
 import { CarouselModule } from 'primeng/carousel';
-import { ResetPasswordComponent } from '../../components/login/reset-password/reset-password.component';
-
+import { SkeletonModule } from 'primeng/skeleton';
 @NgModule({
   declarations: [
     LoginComponent,
     LoginFormComponent,
     LoginFormTextComponent,
     RegistrationComponent,
-    FormButtonComponent,
     FormComponent,
     ImageCarouselComponent,
     ResetPasswordComponent,
@@ -44,6 +42,7 @@ import { ResetPasswordComponent } from '../../components/login/reset-password/re
     ButtonModule,
     InputTextModule,
     CarouselModule,
+    SkeletonModule,
   ],
 })
 export class LoginModule {}

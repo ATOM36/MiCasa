@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MiCasa.Controllers
 {
     [Route("api/[controller]")]
+    [EnableQuery]
     [ApiController]
     public class UtilityController : ControllerBase
     {
@@ -17,7 +18,11 @@ namespace MiCasa.Controllers
         {
             string path = Path.Combine(_environment!.ContentRootPath, "img");
             path.Replace('\\', '/');
-            return new(path);
+            return new(new Message
+            {
+                Content = path,
+                State = true
+            });
         }
     }
 }

@@ -112,11 +112,6 @@ $primary-color: #fff;
   }
 }
 
-.container-fluid {
-  width: 100%;
-  height: 100%;
-}
-
 //with loading text and shadow
 .cube-wrapper {
   position: fixed;
@@ -168,12 +163,21 @@ $primary-color: #fff;
 
 html,
 body {
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
-.container-fluid {
+.row {
+  width: 100vw;
+  height: 100vh;
   // for older browsers
   background: var(--green-webkit-gradient-bottom-right);
 
   background: var(--green-gradient-bottom-right);
+
+  // the displayed text
+  & span {
+    font-family: "GreatVibes";
+    font-size: xx-large;
+  }
 }

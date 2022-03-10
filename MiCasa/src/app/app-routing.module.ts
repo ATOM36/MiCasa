@@ -6,23 +6,51 @@ const routes: Routes = [
   {
     path: 'loading',
     component: LoadingComponent,
-  },
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+    data: {
+      animation: 'loading',
+    },
   },
   {
     path: 'login',
     loadChildren: () =>
       import('./modules/login/login.module').then((m) => m.LoginModule),
+    data: {
+      animation: 'login',
+    },
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./modules/home/home.module').then((m) => m.HomeModule),
+    data: {
+      animation: 'home',
+    },
+  },
+  {
+    path: 'admin/:location',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+    data: {
+      animation: 'admin',
+    },
+  },
+  {
+    path: 'agency',
+    loadChildren: () =>
+      import('./modules/agency/agency.module').then((m) => m.AgencyModule),
+    data: {
+      animation: 'agency',
+    },
   },
   {
     path: '',
     pathMatch: 'full',
     redirectTo: 'loading',
   },
-  { path: 'admin', loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
+  {
+    path: '**',
+    redirectTo: 'loading',
+  },
 ];
 
 @NgModule({

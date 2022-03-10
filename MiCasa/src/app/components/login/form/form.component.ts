@@ -19,7 +19,7 @@ export class FormComponent implements OnInit {
     ]),
   });
 
-  displayModal: boolean = false;
+  displayResetModal: boolean = false;
   displayRegistration: boolean = false;
 
   @Output() registrationModalController = new EventEmitter<boolean>();
@@ -28,7 +28,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  lezgo = () => this.router.navigate(['/home-page']);
+  lezgo = () => this.router.navigate(['/admin/dashboard']);
 
   /**
    * @summary Listens to to FormButtonComponent displayModal event and then sends its result to the LoginFormComponent
@@ -37,6 +37,10 @@ export class FormComponent implements OnInit {
    */
   displayRegistrationModal(answer: boolean) {
     this.displayRegistration = answer;
-    console.log('Form received');
+    setTimeout(() => {
+      console.log('Form received');
+    }, 1500);
   }
+
+  browseContent = () => this.router.navigate(['/home']);
 }
