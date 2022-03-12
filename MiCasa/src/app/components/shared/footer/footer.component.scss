@@ -1,0 +1,115 @@
+.site-footer {
+  background: #ede1d0;
+  font-size: 14px;
+  color: #888;
+  padding: 70px 0;
+
+  //styling the links
+  & a {
+    text-decoration: none;
+    color: #777;
+    position: relative;
+    display: inline-block;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      right: 0;
+      content: "";
+      background: rgba(81, 146, 89, 0.1);
+      height: 10%;
+      width: 100%;
+      bottom: 0;
+      -webkit-transition: 0.3s all ease;
+      -o-transition: 0.3s all ease;
+      transition: 0.3s all ease;
+    }
+
+    &:hover {
+      text-decoration: none;
+      color: #000;
+    }
+
+    &:hover::before {
+      background: var(--green-yellow-green-color-wheel);
+    }
+  }
+}
+
+//cta styling
+.site-footer .footer-cta h2,
+.site-footer .footer-cta .h2 {
+  font-size: 30px;
+  color: #519259;
+}
+
+//styling the widget and h3 titles
+.site-footer {
+  & .btn:before {
+    display: none;
+  }
+
+  & .widget {
+    margin-bottom: 40px;
+    display: block;
+
+    & h3,
+    & .h3 {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      color: var(--green-yellow-green-color-wheel);
+    }
+
+    & .links {
+      width: 150px;
+
+      & li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+//styling social media icons
+.site-footer .social {
+  & li {
+    display: inline-block;
+
+    & a {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      background: #fff;
+      background: var(--green-yellow-green-color-wheel);
+      border-radius: 50%;
+      color: #fff;
+      margin-right: 5px;
+      transition: all 0.5s ease-in-out;
+
+      &::before {
+        display: none;
+      }
+
+      &:hover {
+        color: var(--green-pakistan-green);
+        background: #fff;
+      }
+    }
+  }
+}
+
+.site-footer .social li a > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.text-center {
+  text-align: center !important;
+}
