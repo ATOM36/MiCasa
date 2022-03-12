@@ -5,7 +5,6 @@ C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\MiCasa API.deps.json
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\MiCasa API.runtimeconfig.json
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\MiCasa API.dll
-C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\ref\MiCasa API.dll
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\MiCasa API.pdb
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Azure.Identity.dll
@@ -72,3 +71,10 @@ C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\ref\MiCasa API.dll
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\MiCasa API.pdb
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\MiCasa API.genruntimeconfig.cache
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Microsoft.AspNetCore.OData.dll
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Microsoft.OData.Core.dll
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Microsoft.OData.Edm.dll
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Microsoft.OData.ModelBuilder.dll
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Microsoft.Spatial.dll
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Npgsql.dll
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\refint\MiCasa API.dll
