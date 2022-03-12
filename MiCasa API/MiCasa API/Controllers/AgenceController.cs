@@ -24,9 +24,19 @@ namespace MiCasa.Controllers
 
         [HttpGet]
         [Route("test")]
-        public string test()
+        public object test()
         {
-            return "Bonjour";
+            var _connection = DbConnection.GetConnection();
+            string query = "SELECT * FROM \"Agence\"";
+            _connection.Open();
+
+            NpgsqlCommand cmd = new(query, _connection);
+            var reader = cmd.ExecuteReader();
+            DataTable ta = new();
+            ta.Load(reader);
+            reader.Close();
+
+            return new JsonResult(ta);
         }
     }
 }
