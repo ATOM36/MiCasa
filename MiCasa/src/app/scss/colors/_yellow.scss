@@ -1,0 +1,131 @@
+:root {
+  /* CSS HEX */
+  --yellow-heat-wave: #ff7b00ff;
+  --yellow-dark-orange: #ff8800ff;
+  --yellow-yellow-orange-color-wheel: #ff9500ff;
+  --yellow-orange-peel: #ffa200ff;
+  --yellow-chrome-yellow: #ffaa00ff;
+  --yellow-selective-yellow: #ffb700ff;
+  --yellow-mikado-yellow: #ffc300ff;
+  --yellow-cyber-yellow: #ffd000ff;
+  --yellow-golden-yellow: #ffdd00ff;
+  --yellow-middle-yellow: #ffea00ff;
+
+  /* SCSS Gradient */
+  --yellow-gradient-top: linear-gradient(
+    0deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-right: linear-gradient(
+    90deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-bottom: linear-gradient(
+    180deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-left: linear-gradient(
+    270deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-top-right: linear-gradient(
+    45deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-bottom-right: linear-gradient(
+    135deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-top-left: linear-gradient(
+    225deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-bottom-left: linear-gradient(
+    315deg,
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+  --yellow-gradient-radial: radial-gradient(
+    #ff7b00ff,
+    #ff8800ff,
+    #ff9500ff,
+    #ffa200ff,
+    #ffaa00ff,
+    #ffb700ff,
+    #ffc300ff,
+    #ffd000ff,
+    #ffdd00ff,
+    #ffea00ff
+  );
+}

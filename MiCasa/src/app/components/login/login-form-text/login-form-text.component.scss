@@ -1,0 +1,14 @@
+span {
+  font-weight: lighter;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "GreatVibes";
+}
+
+@media screen and (max-width: 960px) {
+  span {
+    text-align: center;
+    word-wrap: break-word;
+  }
+}

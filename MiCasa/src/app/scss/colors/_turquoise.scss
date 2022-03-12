@@ -1,0 +1,131 @@
+:root {
+  /* CSS HEX */
+  --turquoise-celadon: #99e2b4ff;
+  --turquoise-turquoise-green: #88d4abff;
+  --turquoise-eton-blue: #78c6a3ff;
+  --turquoise-ocean-green: #67b99aff;
+  --turquoise-zomp: #56ab91ff;
+  --turquoise-zomp-2: #469d89ff;
+  --turquoise-illuminating-emerald: #358f80ff;
+  --turquoise-celadon-green: #248277ff;
+  --turquoise-skobeloff: #14746fff;
+  --turquoise-skobeloff-2: #036666ff;
+
+  /* SCSS Gradient */
+  --turquoise-gradient-top: linear-gradient(
+    0deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-right: linear-gradient(
+    90deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-bottom: linear-gradient(
+    180deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-left: linear-gradient(
+    270deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-top-right: linear-gradient(
+    45deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-bottom-right: linear-gradient(
+    135deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-top-left: linear-gradient(
+    225deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-bottom-left: linear-gradient(
+    315deg,
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+  --turquoise-gradient-radial: radial-gradient(
+    #99e2b4ff,
+    #88d4abff,
+    #78c6a3ff,
+    #67b99aff,
+    #56ab91ff,
+    #469d89ff,
+    #358f80ff,
+    #248277ff,
+    #14746fff,
+    #036666ff
+  );
+}
