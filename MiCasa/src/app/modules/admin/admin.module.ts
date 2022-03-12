@@ -22,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TooltipModule } from 'primeng/tooltip';
+import { AccordionModule } from 'primeng/accordion';
 
 // Material Design
 import { MatCardModule } from '@angular/material/card';
@@ -30,7 +31,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -45,9 +45,9 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
+    AccordionModule,
     TooltipModule,
     SplitButtonModule,
-    MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,

@@ -1,0 +1,21 @@
+@media screen and (max-width: 960px) {
+  mat-stepper {
+    width: 100vw;
+  }
+}
+
+input {
+  margin-top: 25px;
+}
+
+[pButton] {
+  margin-top: 25px;
+}
+
+[matStepLabel] {
+  font-size: large;
+}
+
+.next-button {
+  margin-left: 15px;
+}

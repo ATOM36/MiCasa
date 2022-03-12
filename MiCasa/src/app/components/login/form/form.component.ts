@@ -20,7 +20,14 @@ export class FormComponent implements OnInit {
   });
 
   displayResetModal: boolean = false;
+
   displayRegistration: boolean = false;
+
+  displayOptions: boolean = false;
+
+  choosenType!: string;
+
+  greenColor: string = '#007200ff';
 
   @Output() registrationModalController = new EventEmitter<boolean>();
 
@@ -43,4 +50,19 @@ export class FormComponent implements OnInit {
   }
 
   browseContent = () => this.router.navigate(['/home']);
+
+  choseAgency() {
+    this.choosenType = 'Agency';
+    this.displayRegistration = true;
+  }
+
+  choseUser() {
+    this.choosenType = 'User';
+    this.displayRegistration = true;
+  }
+
+  hideRegistration() {
+    this.displayRegistration = false;
+    this.displayOptions = false;
+  }
 }

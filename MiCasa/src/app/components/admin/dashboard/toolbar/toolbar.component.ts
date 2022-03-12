@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -9,6 +10,7 @@ import { MenuItem } from 'primeng/api';
 export class ToolbarComponent implements OnInit {
   items!: MenuItem[];
   isToggled: boolean = false;
+  @Input() location: string | undefined;
   @Output() drawerToggler = new EventEmitter<boolean>();
 
   constructor() {}
