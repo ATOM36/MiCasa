@@ -12,7 +12,11 @@
     (click)="toggleDrawer()"
   ></button>
 
-  <span class="brand">MiCasa</span>
+  <span class="brand" *ngIf="location === 'home'">MiCasa</span>
+
+  <span *ngIf="location === 'dashboard'" class="brand">MiCasa Admin</span>
+
+  <span *ngIf="location === 'agence'" class="brand">MiCasa Agence</span>
 
   <button
     pButton

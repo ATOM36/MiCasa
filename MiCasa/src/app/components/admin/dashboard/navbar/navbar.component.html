@@ -7,7 +7,10 @@
     <div *ngIf="links; then drawerButtons"></div>
   </mat-drawer>
 
-  <app-toolbar (drawerToggler)="toggleDrawer(isToggled)"></app-toolbar>
+  <app-toolbar
+    (drawerToggler)="toggleDrawer(isToggled)"
+    [location]="location"
+  ></app-toolbar>
 
   <div *ngIf="location === 'dashboard'; then dashboardSection"></div>
 </mat-drawer-container>
@@ -22,7 +25,7 @@
       [icon]="link.icon"
       iconPos="left"
       [routerLink]="link.route"
-      class="p-button-rounded p-button-raised p-button-text btn-block"
+      class="p-button-rounded p-button-raised p-button-text p-button-success btn-block"
       [style]="{
         'margin-top': '10px',
         color: 'var(--green-yellow-green-color-wheel)'

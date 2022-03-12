@@ -8,8 +8,8 @@ import { PrimeIcons } from 'primeng/api';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  @Input() components: any[] = [];
   links: any;
+  agencyLinks: any;
   location: string | undefined;
   isToggled: boolean = false;
 
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
       {
         route: '/admin/dashboard',
         label: 'Dashboard',
-        icon: PrimeIcons.HOME,
+        icon: PrimeIcons.CHART_LINE,
         tooltip: 'Aller au dashboard',
       },
       {
@@ -41,25 +41,25 @@ export class NavbarComponent implements OnInit {
       {
         route: '/agency',
         label: 'Agences',
-        icon: PrimeIcons.PLUS_CIRCLE,
+        icon: PrimeIcons.BUILDING,
         tooltip: 'Section des agences',
       },
       {
         route: '/users',
         label: 'Utilisateurs',
-        icon: PrimeIcons.CALENDAR,
+        icon: PrimeIcons.USERS,
         tooltip: 'Section des utilisateurs',
       },
       {
         route: '/publications',
         label: 'Annonces',
-        icon: PrimeIcons.STAR,
+        icon: PrimeIcons.IMAGE,
         tooltip: 'Section des annonces',
       },
       {
         route: '/reports',
         label: 'Les signalements',
-        icon: PrimeIcons.DESKTOP,
+        icon: PrimeIcons.THUMBS_DOWN,
         tooltip: 'Sections des signalements',
       },
       {
@@ -67,6 +67,35 @@ export class NavbarComponent implements OnInit {
         label: 'Déconnexion',
         icon: PrimeIcons.SIGN_OUT,
         tooltip: 'Terminer votre session',
+      },
+    ];
+  };
+
+  loadAgencyLinks = () => {
+    this.agencyLinks = [
+      {
+        route: '/admin/agency/details',
+        label: 'Consulter',
+        icon: PrimeIcons.LIST,
+        tooltip: "Consulter les données relatives à l'agence",
+      },
+      {
+        route: '/admin/agency/create',
+        label: 'Enregistrer',
+        icon: PrimeIcons.PLUS_CIRCLE,
+        tooltip: 'Ajouter une nouvelle agence sur la plateforme',
+      },
+      {
+        route: '/admin/agency/update',
+        label: 'Mettre à jour',
+        icon: PrimeIcons.USER_EDIT,
+        tooltip: "Modifier les informations relative l'agence",
+      },
+      {
+        route: '/admin/agency/stat',
+        label: 'Statut des agences',
+        icon: PrimeIcons.CHART_LINE,
+        tooltip: "Consulter le statut de l'agence",
       },
     ];
   };

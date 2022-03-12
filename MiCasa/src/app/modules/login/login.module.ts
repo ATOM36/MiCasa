@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { SharedModule } from '@modules/shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Declarations
 import { RegistrationComponent } from '@components/login/registration/registration.component';
@@ -12,6 +12,8 @@ import { LoginFormTextComponent } from '@components/login/login-form-text/login-
 import { FormComponent } from '@components/login/form/form.component';
 import { ImageCarouselComponent } from '@components/login/image-carousel/image-carousel.component';
 import { ResetPasswordComponent } from '@components/login/reset-password/reset-password.component';
+import { AgencyFormComponent } from '@components/login/agency-form/agency-form.component';
+import { UserFormComponent } from '@components/login/user-form/user-form.component';
 
 // Primeng imports
 import { ButtonModule } from 'primeng/button';
@@ -21,18 +23,35 @@ import { MessagesModule } from 'primeng/messages';
 import { InputTextModule } from 'primeng/inputtext';
 import { CarouselModule } from 'primeng/carousel';
 import { SkeletonModule } from 'primeng/skeleton';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
+
+// Material Design
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     LoginComponent,
+
     LoginFormComponent,
     LoginFormTextComponent,
     RegistrationComponent,
     FormComponent,
     ImageCarouselComponent,
     ResetPasswordComponent,
+    AgencyFormComponent,
+    UserFormComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    DividerModule,
+    PasswordModule,
+    InputNumberModule,
+    MatButtonModule,
+    MatStepperModule,
     LoginRoutingModule,
     SharedModule,
     DialogModule,
