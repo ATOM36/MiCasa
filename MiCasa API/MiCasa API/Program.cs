@@ -32,7 +32,7 @@ builder.Services.AddCors(options =>
     }));
 
 // Registering services in the DI container
-builder.Services.AddScoped<IAgency, BLL_Agency>();
+builder.Services.AddScoped<IAgence, BLL_Agence>();
 
 // Adding response caching
 builder.Services.AddControllers();

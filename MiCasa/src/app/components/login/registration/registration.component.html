@@ -1,9 +1,0 @@
-<div *ngIf="userType === 'Agency'; then agencyForm; else userForm"></div>
-
-<ng-template #agencyForm>
-  <app-agency-form></app-agency-form>
-</ng-template>
-
-<ng-template #userForm>
-  <app-user-form></app-user-form>
-</ng-template>

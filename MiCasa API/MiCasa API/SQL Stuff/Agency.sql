@@ -1,1 +1,1 @@
-﻿CREATE TABLE Agency();
+﻿CREATE TABLE Agence();

@@ -3,7 +3,7 @@
     public class DbConnection
     {
         private static IConfiguration? _configuration;
-        private static SqlConnection? _connection;
+        private static NpgsqlConnection? _connection;
 
         public static void Init(IConfiguration configuration) => _configuration = configuration;
 
@@ -11,7 +11,7 @@
         /// Creates a new <paramref name="SqlConnection"></paramref> object.
         /// </summary>
         /// <returns>Returns a pre-configured <paramref name="SqlConnection"></paramref> object.</returns>
-        public static SqlConnection GetConnection()
+        public static NpgsqlConnection GetConnection()
         {
             _connection = new(_configuration.GetConnectionString("MiCasaDB"));
             return _connection;
