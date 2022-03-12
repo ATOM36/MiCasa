@@ -1,0 +1,13 @@
+@media screen and (min-width: 900px) {
+  .content {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -23,10 +23,6 @@ namespace MiCasa.Controllers
          * ********************************************/
 
         [HttpGet]
-        [Route("GetAgencies/startIndex/stopIndex")]
-        public async Task<JsonResult> GetAgenices([FromRoute] int startIndex, [FromRoute] int stopIndex) => await _bll!.GetAgencies(startIndex, stopIndex);
-
-        [HttpGet]
         [Route("test")]
         public string test()
         {

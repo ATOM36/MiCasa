@@ -1,0 +1,229 @@
+<form [formGroup]="myForm">
+  <!--Email input-->
+  <div
+    class="form-outline mb-4"
+    data-aos="zoom-in"
+    data-aos-delay="1200"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+  >
+    <span class="p-float-label">
+      <input
+        type="email"
+        id="emailInput"
+        class="form-control form-control-lg"
+        pInputText
+        autocomplete
+        formControlName="email"
+      />
+      <label for="emailInput"> Email</label>
+    </span>
+
+    <!--Error messages-->
+    <div
+      *ngIf="
+        myForm.get('email')?.invalid &&
+        (myForm.get('email')?.dirty || myForm.get('email')?.touched)
+      "
+    >
+      <p-message
+        *ngIf="myForm.get('email')?.invalid"
+        severity="error"
+        text="Email invalide"
+      ></p-message>
+
+      <p-message
+        *ngIf="(myForm.get('email')?.errors)!['required']"
+        severity="error"
+        text="Email requis"
+        class="not-first-message"
+      >
+      </p-message>
+    </div>
+  </div>
+  <!--End email-->
+
+  <!--Password input-->
+  <div
+    class="form-outline mb-4"
+    data-aos="zoom-in"
+    data-aos-delay="1200"
+    data-aos-duration="600"
+    data-aos-easing="ease-in-out"
+  >
+    <span class="p-float-label">
+      <input
+        type="password"
+        id="passwordInput"
+        class="form-control form-control-lg"
+        formControlName="password"
+        pInputText
+        autocomplete=""
+      />
+      <label for="passwordInput">Mot de passe</label>
+    </span>
+
+    <!--Error messages-->
+    <div
+      *ngIf="
+        myForm.get('password')?.invalid &&
+        (myForm.get('password')?.dirty || myForm.get('password')?.touched)
+      "
+    >
+      <p-message
+        *ngIf="myForm.get('password')?.invalid"
+        severity="error"
+        text="Mot de passe invalide"
+      ></p-message>
+
+      <p-message
+        *ngIf="(myForm.get('password')?.errors)!['required']"
+        severity="error"
+        text="Mot de passe requis"
+        class="not-first-message"
+      >
+      </p-message>
+    </div>
+  </div>
+
+  <!--End password-->
+
+  <div
+    class="pt-1 mb-4"
+    data-aos="fade-up"
+    data-aos-delay="800"
+    data-aos-easing="ease-in-out"
+  >
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Se connecter"
+      icon="pi pi-sign-in"
+      class="p-button-raised p-button-rounded p-button-success p-button-outlined btn-block"
+      (click)="lezgo()"
+      [style]="{ color: '#007200ff' }"
+    ></button>
+
+    <button
+      pButton
+      pRipple
+      type="button"
+      class="p-button-text password-reset"
+      aria-label="Login in MiCasa"
+      (click)="displayResetModal = true"
+    >
+      Mot de passe oublié ?
+    </button>
+
+    <!--Alternatives-->
+
+    <span class="d-block text-center my-4 text-muted">&mdash; OU &mdash;</span>
+
+    <!-- Buttons à afficher si l'utilisateur veut s'inscrire ou juste consulter le catalogue -->
+    <div *ngIf="!displayOptions">
+      <button
+        pButton
+        pRipple
+        type="button"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block"
+        label="Nous rejoindre"
+        icon="pi pi-user-plus"
+        aria-label="join MiCasa"
+        (click)="displayOptions = true"
+      ></button>
+
+      <button
+        pButton
+        pRipple
+        type="button"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block"
+        label="Explorer notre catalogue"
+        icon="pi pi-book"
+        aria-label="browse MiCasa's content"
+        (click)="browseContent()"
+      ></button>
+    </div>
+
+    <!-- Choix de catégorie pour l'inscription -->
+    <div *ngIf="displayOptions">
+      <button
+        pButton
+        pRipple
+        label="Vous êtes une agence"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block"
+        icon="pi pi-building"
+        data-aos="fade-down"
+        (click)="choseAgency()"
+      ></button>
+
+      <button
+        pButton
+        pRipple
+        label="Vous êtes un particulier"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block"
+        icon="pi pi-user"
+        data-aos="fade-up"
+        (click)="choseUser()"
+      ></button>
+
+      <div id="hide-options">
+        <button
+          pButton
+          pRipple
+          class="p-button-outlined p-button-rounded p-button-success p-button-raised"
+          icon="pi pi-times"
+          (click)="displayOptions = false"
+          data-aos="zoom-out"
+        ></button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--Registration dialog-->
+<p-dialog
+  *ngIf="displayRegistration"
+  [(visible)]="displayRegistration"
+  [breakpoints]="{ '960px': '100vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+  [closeOnEscape]="false"
+  [style]="{ width: '80vw', height: '80vh' }"
+  (onHide)="hideRegistration()"
+>
+  <app-registration [userType]="choosenType"></app-registration>
+
+  <!-- End content-->
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-check"
+      (click)="hideRegistration()"
+      label="Fermer"
+      styleClass="p-button-text p-button-success"
+      [style]="{ color: '#007200ff' }"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<!--Reset password dialog-->
+<p-dialog
+  *ngIf="displayResetModal"
+  [(visible)]="displayResetModal"
+  [breakpoints]="{ '960px': '75vw' }"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="displayResetModal = false"
+>
+  <app-reset-password></app-reset-password>
+  <ng-template pTemplate="footer">
+    <p-button
+      (click)="displayResetModal = false"
+      label="Fermer"
+      styleClass="p-button-text"
+      [style]="{ color: '#007200ff' }"
+    ></p-button>
+  </ng-template>
+</p-dialog>

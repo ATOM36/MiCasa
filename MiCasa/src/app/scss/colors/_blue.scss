@@ -1,0 +1,130 @@
+:root {
+  /* CSS HEX */
+  --blue-french-sky-blue: #70b8ffff;
+  --blue-dodger-blue: #429bfaff;
+  --blue-azure: #147df5ff;
+  --blue-flickr-blue: #095dd7ff;
+  --blue-blue: #0000ffff;
+  --blue-trypan-blue: #0000b8ff;
+  --blue-duke-blue: #00008fff;
+  --blue-navy-blue: #000079ff;
+  --blue-midnight-blue: #000052ff;
+  --blue-midnight-blue-2: #00003dff;
+
+  --blue-gradient-top: linear-gradient(
+    0deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-right: linear-gradient(
+    90deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-bottom: linear-gradient(
+    180deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-left: linear-gradient(
+    270deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-top-right: linear-gradient(
+    45deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-bottom-right: linear-gradient(
+    135deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-top-left: linear-gradient(
+    225deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-bottom-left: linear-gradient(
+    315deg,
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+  --blue-gradient-radial: radial-gradient(
+    #70b8ffff,
+    #429bfaff,
+    #147df5ff,
+    #095dd7ff,
+    #0000ffff,
+    #0000b8ff,
+    #00008fff,
+    #000079ff,
+    #000052ff,
+    #00003dff
+  );
+}

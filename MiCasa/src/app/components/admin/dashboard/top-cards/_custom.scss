@@ -1,0 +1,9 @@
+:host ::ng-deep {
+  & .cus {
+    margin-top: 10px;
+  }
+}
+
+.custom-card {
+  margin-top: 10px;
+}
