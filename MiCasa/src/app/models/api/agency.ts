@@ -1,12 +1,13 @@
 export interface Agence {
-  AgenceId: number;
-  NumeroTelephone: string;
-  Mail: string;
-  Nom: string;
+  AgenceId: number | undefined;
+  NumeroTelephone: string | undefined;
+  Mail: string | undefined;
+  Nom: string | undefined;
   Latitude: number | undefined;
   Longitude: number | undefined;
-  DateInscription: Date;
-  IsBlocked: number;
-  Adresse: string;
-  Password: string;
+  DateInscription: string | undefined;
+  IsBlocked: number | undefined;
+  Adresse: string | undefined;
+  Password: string | undefined;
+  Username: string | undefined;
 }

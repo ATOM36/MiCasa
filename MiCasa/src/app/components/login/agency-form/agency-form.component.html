@@ -1,7 +1,8 @@
+<pre>{{ agency | json }}</pre>
 <mat-stepper orientation="vertical" [linear]="true">
-  <mat-step [stepControl]="generalInfo">
+  <mat-step>
     <form
-      [formGroup]="generalInfo"
+      #generalInfo="ngForm"
       class="form-outline mb-4"
       data-aos="zoom-in"
       data-aos-duration="600"
@@ -18,29 +19,30 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="Nom"
+            required
+            minlength="3"
+            maxlength="45"
+            name="Nom"
+            #Nom="ngModel"
+            [(ngModel)]="agency.Nom"
           />
           <label for="nameInput">Nom de l'agence</label>
         </span>
 
         <!--Name error messages-->
-        <div
-          *ngIf="
-            generalInfo.get('Nom')?.invalid &&
-            (generalInfo.get('Nom')?.dirty || generalInfo.get('Nom')?.touched)
-          "
-        >
+        <div *ngIf="Nom.invalid && (Nom.touched || Nom.dirty)">
           <p-message
-            *ngIf="generalInfo.get('Nom')?.invalid"
+            *ngIf="Nom.errors!['minlength']"
             severity="error"
-            text="name invalide"
-          ></p-message>
+            text="Au minimum 3 caractères"
+            class="first-message"
+          >
+          </p-message>
 
           <p-message
-            *ngIf="(generalInfo.get('Nom')?.errors)!['required']"
+            *ngIf="Nom.errors!['required']"
             severity="error"
-            text="name requis"
-            class="not-first-message"
+            text="Nom est un champ requis"
           >
           </p-message>
         </div>
@@ -53,12 +55,33 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="Mail"
+            email
+            name="Mail"
+            #Mail="ngModel"
+            maxlength="45"
+            required
+            [(ngModel)]="agency.Mail"
           />
           <label for="emailInput">Adresse email</label>
         </span>
 
         <!-- Mail error messages-->
+        <div *ngIf="Mail.invalid && (Mail.touched || Mail.dirty)">
+          <p-message
+            *ngIf="Mail.errors!['mail']"
+            severity="error"
+            text="Email invalide"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Mail.errors!['required']"
+            severity="error"
+            text="Email est un champ requis"
+          >
+          </p-message>
+        </div>
 
         <!-- Phone number section -->
         <span class="p-float-label">
@@ -68,12 +91,38 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="NumeroTelephone"
+            name="NumeroTelephone"
+            #NumeroTelephone="ngModel"
+            required
+            minlength="8"
+            maxlength="13"
+            [(ngModel)]="agency.NumeroTelephone"
           />
           <label for="phoneNumberInput">Numero de téléphone</label>
         </span>
 
         <!-- Phone number error messages-->
+        <div
+          *ngIf="
+            NumeroTelephone.invalid &&
+            (NumeroTelephone.touched || NumeroTelephone.dirty)
+          "
+        >
+          <p-message
+            *ngIf="NumeroTelephone.errors!['minlength']"
+            severity="error"
+            text="Au minimum 8 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="NumeroTelephone.errors!['required']"
+            severity="error"
+            text="Numéro de téléphone est un champ requis"
+          >
+          </p-message>
+        </div>
 
         <!-- Addresse section -->
         <span class="p-float-label">
@@ -83,15 +132,37 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="Adresse"
+            required
+            maxlength="45"
+            minlength="10"
+            name="Adresse"
+            [(ngModel)]="agency.Adresse"
+            #Adresse="ngModel"
           />
           <label for="adresseInput">Adresse</label>
         </span>
 
         <!-- Addresse error messages -->
+        <div *ngIf="Adresse.invalid && (Adresse.touched || Adresse.dirty)">
+          <p-message
+            *ngIf="Adresse.errors!['minlength']"
+            severity="error"
+            text="Au minimum 10 caractères"
+            class="first-message"
+          >
+          </p-message>
 
+          <p-message
+            *ngIf="Adresse.errors!['required']"
+            severity="error"
+            text="Adresse est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- End inputs -->
         <button
-          [disabled]="!generalInfo.valid"
+          [hidden]="generalInfo.invalid"
           pButton
           pRipple
           matStepperNext
@@ -104,8 +175,8 @@
   </mat-step>
 
   <!-- GEOGRAPHIC COORDINATES -->
-  <mat-step [stepControl]="coordinatesControl" [optional]="true">
-    <form [formGroup]="coordinatesControl">
+  <mat-step>
+    <form *ngIf="generalInfo.valid" #coordinatesForm="ngForm">
       <ng-template matStepLabel>Coordonées géographiques</ng-template>
 
       <ng-template matStepContent>
@@ -117,7 +188,10 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="longitude"
+            pattern="[0-9]+\.[0-9]*"
+            name="Longitude"
+            [(ngModel)]="agency.Longitude"
+            #Longitude="ngModel"
           />
           <label for="longitude">Longitude</label>
         </span>
@@ -132,7 +206,10 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="latitude"
+            pattern="[0-9]+\.[0-9]*"
+            name="Latitude"
+            [(ngModel)]="agency.Latitude"
+            #Latitude="ngModel"
           />
 
           <label for="latitude">Latitude</label>
@@ -161,8 +238,8 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="securityControl">
-    <form [formGroup]="securityControl">
+  <mat-step>
+    <form *ngIf="generalInfo.valid" #securityForm="ngForm">
       <ng-template matStepLabel>Sécurité</ng-template>
 
       <ng-template matStepContent>
@@ -174,12 +251,33 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="username"
+            name="Username"
+            #Username="ngModel"
+            [(ngModel)]="agency.Username"
+            required
+            minlength="5"
+            maxlength="20"
           />
           <label for="username">Nom d'utilisateur</label>
         </span>
 
         <!-- Username error messages -->
+        <div *ngIf="Username.invalid && (Username.touched || Username.dirty)">
+          <p-message
+            *ngIf="Username.errors!['minlength']"
+            severity="error"
+            text="Au minimum 5 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Username.errors!['required']"
+            severity="error"
+            text="Nom d'utilisateur est un champ requis"
+          >
+          </p-message>
+        </div>
 
         <!-- Password section -->
         <span class="p-float-label">
@@ -189,13 +287,34 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="password"
+            minlength="8"
+            maxlength="15"
+            required
+            #Password="ngModel"
+            [(ngModel)]="agency.Password"
+            name="Password"
           />
 
           <label for="password">Mot de passe</label>
         </span>
 
         <!-- Password error section -->
+        <div *ngIf="Password.invalid && (Password.touched || Password.dirty)">
+          <p-message
+            *ngIf="Password.errors!['minlength']"
+            severity="error"
+            text="Au minimum 8 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Password.errors!['required']"
+            severity="error"
+            text="Mot de passe est un champ requis"
+          >
+          </p-message>
+        </div>
 
         <!-- Confirm password section -->
         <span class="p-float-label">
@@ -205,14 +324,39 @@
             class="form-control form-control-lg"
             pInputText
             autocomplete
-            formControlName="confirmPassword"
+            required
+            #confirmPassword="ngModel"
+            ngModel
+            name="confirmPassword"
           />
 
           <label for="confirmPassword">Confirmer le mot de passe</label>
         </span>
 
         <!-- Confirm password error section -->
+        <div
+          *ngIf="
+            confirmPassword.invalid &&
+            (confirmPassword.touched || confirmPassword.dirty)
+          "
+        >
+          <p-message
+            *ngIf="confirmPassword.errors!['required']"
+            severity="error"
+            text="Ce champ est requis"
+            class="first-message"
+          >
+          </p-message>
 
+          <p-message
+            *ngIf="confirmPassword.value != Password.value"
+            severity="error"
+            text="Valeur différente du mot de passe donné"
+          >
+          </p-message>
+        </div>
+
+        <!-- End form -->
         <button
           pButton
           pRipple
@@ -227,6 +371,8 @@
           pRipple
           matStepperNext
           class="p-button-outlined p-button-rounded p-button-success next-button"
+          [hidden]="generalInfo.invalid || securityForm.invalid"
+          (click)="lezgo()"
         >
           Créer le compte
         </button>

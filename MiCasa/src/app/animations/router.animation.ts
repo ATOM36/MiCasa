@@ -60,4 +60,26 @@ export const routerAnimation = trigger('routing', [
       query(':enter', [animate('600ms ease-out', style({ right: '0%' }))]),
     ]),
   ]),
+
+  //? from login to an agency's space
+  transition('login => agency', [
+    style({ position: 'relative' }),
+
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        width: '100%',
+      }),
+    ]),
+
+    query(':enter', [style({ top: '-100%' })]),
+
+    query(':leave', animateChild()),
+
+    group([
+      query(':leave', [animate('600ms ease-out', style({ top: '100%' }))]),
+
+      query(':enter', [animate('600ms ease-out', style({ top: '0%' }))]),
+    ]),
+  ]),
 ]);
