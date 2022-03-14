@@ -34,7 +34,7 @@ export class AgencyService {
    */
   getAgencies = (startIndex: number, stopIndex: number): Observable<Agence[]> =>
     this.http.get<Agence[]>(
-      `${environment.apiUrl}Agence/GetAgencies?startIndex=${startIndex}&stopIndex=${stopIndex}`,
+      `${environment.apiUrl}Agence/GetAgence?startIndex=${startIndex}&stopIndex=${stopIndex}`,
       { headers: header }
     );
 

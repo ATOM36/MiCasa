@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoadingComponent } from '@pages/loading/loading.component';
+import { NotFoundComponent } from '@pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./modules/login/login.module').then((m) => m.LoginModule),
+      import('@modules/login/login.module').then((m) => m.LoginModule),
     data: {
       animation: 'login',
     },
@@ -21,35 +22,41 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./modules/home/home.module').then((m) => m.HomeModule),
+      import('@modules/home/home.module').then((m) => m.HomeModule),
     data: {
       animation: 'home',
     },
   },
   {
-    path: 'admin/:location',
+    path: 'admin/dashboard',
     loadChildren: () =>
-      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+      import('@modules/admin/admin.module').then((m) => m.AdminModule),
     data: {
       animation: 'admin',
+      origin: 'admin/',
     },
   },
   {
-    path: 'agency',
+    path: 'agency/dashboard',
     loadChildren: () =>
-      import('./modules/agency/agency.module').then((m) => m.AgencyModule),
+      import('@modules/agency/agency.module').then((m) => m.AgencyModule),
     data: {
       animation: 'agency',
+      origin: 'agency/',
     },
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'loading',
+    redirectTo: 'not-found',
   },
   {
     path: '**',
-    redirectTo: 'loading',
+    redirectTo: 'not-found',
   },
 ];
 

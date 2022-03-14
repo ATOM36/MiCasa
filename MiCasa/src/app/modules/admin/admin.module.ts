@@ -5,15 +5,14 @@ import {
   PathLocationStrategy,
 } from '@angular/common';
 
+// Custom modules
+import { SharedModule } from '@modules/shared/shared.module';
+import { DashboardModule } from '@modules/dashboard/dashboard.module';
+
+// Declarations
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from '@pages/admin/dashboard/admin-dashboard.component';
-import { TopCardsComponent } from '@components/admin/dashboard/top-cards/top-cards.component';
-import { BlogCardsComponent } from '@components/admin/dashboard/blog-cards/blog-cards.component';
-import { FeedsComponent } from '@components/admin/dashboard/feeds/feeds.component';
-import { SalesRatioComponent } from '@components/admin/dashboard/sales-ratio/sales-ratio.component';
-import { TopSellingComponent } from '@components/admin/dashboard/top-selling/top-selling.component';
-import { NavbarComponent } from '@components/admin/dashboard/navbar/navbar.component';
-import { ToolbarComponent } from '@components/admin/dashboard/toolbar/toolbar.component';
+import { DashboardComponent } from '@components/admin/dashboard/dashboard.component';
 
 // PrimeNg
 import { ChartModule } from 'primeng/chart';
@@ -33,19 +32,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
-  declarations: [
-    AdminDashboardComponent,
-    TopCardsComponent,
-    BlogCardsComponent,
-    FeedsComponent,
-    SalesRatioComponent,
-    TopSellingComponent,
-    NavbarComponent,
-    ToolbarComponent,
-  ],
+  declarations: [AdminDashboardComponent, DashboardComponent],
   imports: [
     CommonModule,
     AccordionModule,
+    DashboardModule,
     TooltipModule,
     SplitButtonModule,
     MatToolbarModule,
@@ -59,6 +50,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatCardModule,
     ButtonModule,
     MatGridListModule,
+    SharedModule,
   ],
   providers: [
     {

@@ -12,16 +12,21 @@ import {
   LocationStrategy,
 } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardModule } from '@modules/dashboard/dashboard.module';
+import { AdminModule } from '@modules/admin/admin.module';
+import { AgenceModule } from '@modules/admin/agence/agence.module';
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
   imports: [
     BrowserModule,
+    AdminModule,
+    AgenceModule,
     CommonModule,
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    AppRoutingModule,
   ],
   providers: [
     {

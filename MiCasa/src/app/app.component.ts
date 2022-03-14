@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     AOS.init();
 
-    this.router.navigate(['/login']); /*.then(() =>
+    this.router.navigate(['/agency/dashboard']); /*.then(() =>
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 4200)
@@ -29,9 +29,4 @@ export class AppComponent implements OnInit {
 
   getRouteAnimationData = () =>
     this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
-
-  prepareOutlet = (outlet: RouterOutlet) =>
-    outlet &&
-    outlet.activatedRouteData &&
-    outlet.activatedRouteData['animation'];
 }

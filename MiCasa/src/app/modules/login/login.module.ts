@@ -4,7 +4,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-// Declarations
+//? Declarations
 import { RegistrationComponent } from '@components/login/registration/registration.component';
 import { LoginComponent } from '@pages/login/login.component';
 import { LoginFormComponent } from '@components/login/login-form/login-form.component';
@@ -15,7 +15,7 @@ import { ResetPasswordComponent } from '@components/login/reset-password/reset-p
 import { AgencyFormComponent } from '@components/login/agency-form/agency-form.component';
 import { UserFormComponent } from '@components/login/user-form/user-form.component';
 
-// Primeng imports
+//? Primeng imports
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
@@ -27,7 +27,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 
-// Material Design
+//? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -46,6 +46,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     DividerModule,
     PasswordModule,

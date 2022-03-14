@@ -1,0 +1,18 @@
+<p-sidebar [(visible)]="isVisible" (onHide)="notifyClosing()">
+  <div *ngFor="let link of links">
+    <button
+      pButton
+      pRipple
+      [label]="link.label"
+      [pTooltip]="link.tooltip"
+      [icon]="link.icon"
+      iconPos="left"
+      (click)="lezgo(link.route)"
+      class="p-button-rounded p-button-raised p-button-text p-button-success btn-block"
+      [style]="{
+        'margin-top': '10px',
+        color: 'var(--green-yellow-green-color-wheel)'
+      }"
+    ></button>
+  </div>
+</p-sidebar>

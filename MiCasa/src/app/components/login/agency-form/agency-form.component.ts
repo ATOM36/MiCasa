@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
+import { AgencyStoreService } from '@services/stores/agency/agency-store.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-agency-form',
@@ -13,79 +11,36 @@ import { AgencyService } from '@services/api/agency/agency.service';
   styleUrls: ['./agency-form.component.scss'],
 })
 export class AgencyFormComponent implements OnInit {
-  generalInfo!: FormGroup;
-  coordinatesControl!: FormGroup;
-  securityControl!: FormGroup;
+  agency: Agence = {
+    AgenceId: undefined,
+    NumeroTelephone: undefined,
+    Mail: undefined,
+    Nom: undefined,
+    Latitude: undefined,
+    Longitude: undefined,
+    DateInscription: undefined,
+    IsBlocked: undefined,
+    Adresse: undefined,
+    Password: undefined,
+    Username: undefined,
+  };
+
+  subscription!: Subscription;
 
   constructor(
-    private _formBuilder: FormBuilder,
-    private _service: AgencyService
+    private _service: AgencyService,
+    private _agencyStore: AgencyStoreService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
-    this.createControls();
+    console.table(this.agency);
   }
 
-  /**
-   * @summary Uses the injected FormBuilder to build FormGroups with given Validators
-   */
-  createControls() {
-    this.generalInfo = this._formBuilder.group({
-      Nom: [
-        '',
-        Validators.required,
-        Validators.maxLength(45),
-        Validators.minLength(3),
-      ],
+  showState = () => console.table(this.agency);
 
-      Mail: [
-        '',
-        Validators.required,
-        Validators.email,
-        Validators.maxLength(45),
-      ],
-
-      NumeroTelephone: [
-        '',
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(13),
-      ],
-
-      Adresse: [
-        '',
-        Validators.required,
-        Validators.maxLength(45),
-        Validators.minLength(10),
-      ],
-    });
-
-    this.coordinatesControl = this._formBuilder.group({
-      longitude: ['', Validators.pattern('[0-9]+\\.[0-9]+')],
-      latitude: ['', Validators.pattern('[0-9]+\\.[0-9]+')],
-    });
-
-    this.securityControl = this._formBuilder.group({
-      username: [
-        '',
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(20),
-      ],
-
-      password: [
-        '',
-        Validators.required,
-        Validators.maxLength(15),
-        Validators.minLength(8),
-      ],
-
-      confirmPassword: [
-        '',
-        Validators.required,
-        Validators.maxLength(15),
-        Validators.minLength(8),
-      ],
-    });
+  lezgo() {
+    sessionStorage.setItem('ag', JSON.stringify(this.agency));
+    this._router.navigate(['/agency/account']);
   }
 }
