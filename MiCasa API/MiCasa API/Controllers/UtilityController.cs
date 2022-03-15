@@ -18,11 +18,8 @@ namespace MiCasa.Controllers
         {
             string path = Path.Combine(_environment!.ContentRootPath, "img");
             path.Replace('\\', '/');
-            return new(new Message
-            {
-                Content = path,
-                State = true
-            });
+            return new(new Message(path, true));
+           
         }
     }
 }
