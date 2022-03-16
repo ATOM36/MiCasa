@@ -1,12 +1,13 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Agence } from '@models/api/agency';
+import { AgencyService } from '@services/api/agency/agency.service';
 import {
   ConfirmationService,
   ConfirmEventType,
   LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
-import { Table } from 'primeng/table';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -14,7 +15,7 @@ import { Table } from 'primeng/table';
   styleUrls: ['./table.component.scss'],
   providers: [ConfirmationService, MessageService],
 })
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   agencies!: Agence[];
 
   loading!: boolean;
@@ -25,13 +26,28 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   displayEditModal!: boolean;
 
+  startIndex!: number;
+  stopIndex!: number;
+  subscription!: Subscription;
+
   constructor(
     private _messageService: MessageService,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    private _agencyService: AgencyService
   ) {}
 
   ngOnInit(): void {
-    this.loadData();
+    this.startIndex = 0;
+    this.stopIndex = 10;
+    this._agencyService
+      .getAgencies(this.startIndex, this.stopIndex)
+      .subscribe(async ($res) => {
+        this.agencies = $res.Data;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {}
@@ -91,25 +107,16 @@ export class TableComponent implements OnInit, AfterViewInit {
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        if (agence.IsBlocked) {
-          agence.IsBlocked = 0;
-          this._messageService.add({
-            severity: 'success',
-            summary: 'Changement de status',
-            detail: `${agence.Nom} débloqué avec succès !`,
-            key: 'message',
-            life: 2000,
+        this._agencyService
+          .bloquerCompteAgence(agence.AgenceId!)
+          .subscribe(async (response) => {
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Statut',
+              detail: `${response.Content}`,
+              key: 'message',
+            });
           });
-        } else {
-          agence.IsBlocked = 1;
-          this._messageService.add({
-            severity: 'success',
-            summary: 'Changement de status',
-            detail: `${agence.Nom} bloqué avec succès !`,
-            key: 'message',
-            life: 2000,
-          });
-        }
       },
 
       reject: (type: ConfirmEventType) => {
@@ -145,184 +152,5 @@ export class TableComponent implements OnInit, AfterViewInit {
   validateEdit(agence: Agence) {
     this.agencies[this.agencies.indexOf(this.selectedAgency!)] = agence;
     this.selectedAgency = undefined;
-  }
-
-  loadData() {
-    this.loading = true;
-
-    this.agencies = [
-      {
-        AgenceId: 1,
-        NumeroTelephone: '95412456',
-        Mail: 'zx@gd.com',
-        Nom: 'Alzeim',
-        Latitude: 12.5,
-        Longitude: 0.2,
-        DateInscription: '12/05/2020',
-        IsBlocked: 0,
-        Adresse: 'Rue de la république',
-        Password: '123456789',
-        Username: 'grizou',
-        Signalement: 15,
-      },
-      {
-        AgenceId: 2,
-        NumeroTelephone: '00255123',
-        Mail: 'az@fds',
-        Nom: 'Vivo 5',
-        Latitude: 54.5,
-        Longitude: 123.2,
-        DateInscription: '12/03/2022',
-        IsBlocked: 1,
-        Adresse: 'Fsm',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 20,
-      },
-      {
-        AgenceId: 3,
-        NumeroTelephone: '79812456',
-        Mail: 'lilo@f.or',
-        Nom: 'Lolipop',
-        Latitude: undefined,
-        Longitude: undefined,
-        DateInscription: '01/01/2021',
-        IsBlocked: 0,
-        Adresse: 'Station métro',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 5,
-      },
-      {
-        AgenceId: 4,
-        NumeroTelephone: '95412456',
-        Mail: 'zx@gd.com',
-        Nom: 'Alzeim',
-        Latitude: 12.5,
-        Longitude: 0.2,
-        DateInscription: '12/05/2020',
-        IsBlocked: 0,
-        Adresse: 'Rue de la république',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 15,
-      },
-      {
-        AgenceId: 5,
-        NumeroTelephone: '00255123',
-        Mail: 'az@fds',
-        Nom: 'Vivo 5',
-        Latitude: 54.5,
-        Longitude: 123.2,
-        DateInscription: '12/03/2022',
-        IsBlocked: 1,
-        Adresse: 'Fsm',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 20,
-      },
-      {
-        AgenceId: 6,
-        NumeroTelephone: '79812456',
-        Mail: 'lilo@f.or',
-        Nom: 'Lolipop',
-        Latitude: undefined,
-        Longitude: undefined,
-        DateInscription: '01/01/2021',
-        IsBlocked: 0,
-        Adresse: 'Station métro',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 5,
-      },
-      {
-        AgenceId: 7,
-        NumeroTelephone: '95412456',
-        Mail: 'zx@gd.com',
-        Nom: 'Alzeim',
-        Latitude: 12.5,
-        Longitude: 0.2,
-        DateInscription: '12/05/2020',
-        IsBlocked: 0,
-        Adresse: 'Rue de la république',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 15,
-      },
-      {
-        AgenceId: 8,
-        NumeroTelephone: '00255123',
-        Mail: 'az@fds',
-        Nom: 'Vivo 5',
-        Latitude: 54.5,
-        Longitude: 123.2,
-        DateInscription: '12/03/2022',
-        IsBlocked: 1,
-        Adresse: 'Fsm',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 20,
-      },
-      {
-        AgenceId: 9,
-        NumeroTelephone: '79812456',
-        Mail: 'lilo@f.or',
-        Nom: 'Lolipop',
-        Latitude: undefined,
-        Longitude: undefined,
-        DateInscription: '01/01/2021',
-        IsBlocked: 0,
-        Adresse: 'Station métro',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 5,
-      },
-      {
-        AgenceId: 10,
-        NumeroTelephone: '95412456',
-        Mail: 'zx@gd.com',
-        Nom: 'Alzeim',
-        Latitude: 12.5,
-        Longitude: 0.2,
-        DateInscription: '12/05/2020',
-        IsBlocked: 0,
-        Adresse: 'Rue de la république',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 15,
-      },
-      {
-        AgenceId: 11,
-        NumeroTelephone: '00255123',
-        Mail: 'az@fds',
-        Nom: 'Vivo 5',
-        Latitude: 54.5,
-        Longitude: 123.2,
-        DateInscription: '12/03/2022',
-        IsBlocked: 1,
-        Adresse: 'Fsm',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 20,
-      },
-      {
-        AgenceId: 12,
-        NumeroTelephone: '79812456',
-        Mail: 'lilo@f.or',
-        Nom: 'Lolipop',
-        Latitude: undefined,
-        Longitude: undefined,
-        DateInscription: '01/01/2021',
-        IsBlocked: 0,
-        Adresse: 'Station métro',
-        Password: undefined,
-        Username: undefined,
-        Signalement: 5,
-      },
-    ];
-
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
   }
 }

@@ -16,8 +16,8 @@ export class AgencyAccountComponent implements OnInit, OnDestroy {
   constructor(private $agencyStore: AgencyStoreService) {}
 
   ngOnInit(): void {
-    let $agency = JSON.parse(sessionStorage.getItem('ag')?.toString()!);
-    this.agency = $agency;
+    this.agency = JSON.parse(sessionStorage.getItem('a-x')!);
+    alert(this.agency.Username);
   }
 
   ngOnDestroy(): void {

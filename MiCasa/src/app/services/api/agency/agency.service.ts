@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import { Agence } from '@models/api/agency';
 import { Message } from '@models/api/message';
+import { QueryData } from '@models/api/query-data';
 import { Observable } from 'rxjs';
 import { header } from '../api-header';
 
@@ -14,13 +15,13 @@ export class AgencyService {
 
   /**
    * @summary Used for login in an agency's space
-   * @param email the agency's email
+   * @param username the agency's username
    * @param password the agency's password
    * @returns All data related to a given agency
    */
-  logIn = (email: string, password: string): Observable<Agence> =>
-    this.http.get<Agence>(
-      `${environment.apiUrl}Agence/LogIn?email=${email}&password=${password}`,
+  logIn = (username: string, password: string): Observable<QueryData<Agence>> =>
+    this.http.get<QueryData<Agence>>(
+      `${environment.apiUrl}Agence/LogIn?username=${username}&password=${password}`,
       {
         headers: header,
       }
@@ -32,8 +33,11 @@ export class AgencyService {
    * @param stopIndex the last row's index
    * @returns A sequence of agencies and all of their related data
    */
-  getAgencies = (startIndex: number, stopIndex: number): Observable<Agence[]> =>
-    this.http.get<Agence[]>(
+  getAgencies = (
+    startIndex: number,
+    stopIndex: number
+  ): Observable<QueryData<Agence[]>> =>
+    this.http.get<QueryData<Agence[]>>(
       `${environment.apiUrl}Agence/GetAgence?startIndex=${startIndex}&stopIndex=${stopIndex}`,
       { headers: header }
     );
@@ -57,9 +61,17 @@ export class AgencyService {
    * @param agenceId A given agency's id
    * @returns A message that describes the operation's state
    */
-  deleteAccount = (agenceId: number): Observable<Message> =>
-    this.http.post<Message>(
+  supprimerCompte = (agenceId: number): Observable<Message> =>
+    this.http.delete<Message>(
       `${environment.apiUrl}Agency/SupprimerCompte?agenceId=${agenceId}`,
+      {
+        headers: header,
+      }
+    );
+
+  bloquerCompteAgence = (agenceId: number): Observable<Message> =>
+    this.http.put<Message>(
+      `${environment.apiUrl}Agency/BloquerCompteAgence?agenceId=${agenceId}`,
       {
         headers: header,
       }

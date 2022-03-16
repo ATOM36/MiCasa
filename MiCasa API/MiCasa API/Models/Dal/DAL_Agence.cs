@@ -12,7 +12,7 @@ namespace MiCasa.Models.Dal
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query = "SELECT * FROM \"Agence\" WHERE Username= @username and Password= @password;";
+                    string query = "SELECT * FROM \"Agence\" WHERE \"Username\" = @username and \"Password\" = @password;";
                     _connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(query, _connection);
                     command.Parameters.AddWithValue("@username", username);
@@ -43,7 +43,7 @@ namespace MiCasa.Models.Dal
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query = "DELETE from \"Agence\" Where AgenceId=@agenceId ";
+                    string query = "DELETE from \"Agence\" Where \"AgenceId\" =@agenceId ";
                     _connection.Open();
                     NpgsqlCommand command = new(query, _connection);
                     command.Parameters.AddWithValue("@agenceId", agenceId);

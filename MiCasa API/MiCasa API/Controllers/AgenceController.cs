@@ -39,6 +39,6 @@ namespace MiCasa.Controllers
 
         [HttpPut]
         [Route("BloquerCompteAgence")]
-        public JsonResult BloquerCompteAgence([FromHeader] int agenceId) => _bll.BloquerCompteAgence(agenceId);
+        public JsonResult BloquerCompteAgence([FromQuery] int agenceId) => _bll.BloquerCompteAgence(agenceId);
     }
 }

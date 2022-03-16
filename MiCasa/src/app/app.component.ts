@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     AOS.init();
 
-    this.router.navigate(['/admin/dashboard/agence']); /*.then(() =>
+    this.router.navigate(['/admin/agence']); /*.then(() =>
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 4200)

@@ -62,6 +62,7 @@
   [rowsPerPageOptions]="[10, 25, 50]"
   responsiveLayout="scroll"
   [paginator]="true"
+  currentPageReportTemplate="{first} sur {last} de {totalRecords} agences"
   [filterDelay]="0"
   [globalFilterFields]="[
     'Id',
@@ -226,5 +227,21 @@
         ></button>
       </td>
     </tr>
+  </ng-template>
+
+  <ng-template pTemplate="paginatorleft">
+    <p-button
+      type="button"
+      icon="pi pi-plus"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+
+  <ng-template pTemplate="paginatorright">
+    <p-button
+      type="button"
+      icon="pi pi-cloud"
+      styleClass="p-button-text"
+    ></p-button>
   </ng-template>
 </p-table>
