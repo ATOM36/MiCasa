@@ -26,6 +26,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
@@ -46,6 +48,8 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   imports: [
     CommonModule,
+    ToastModule,
+    ConfirmDialogModule,
     ReactiveFormsModule,
     FormsModule,
     DividerModule,
@@ -64,5 +68,6 @@ import { MatButtonModule } from '@angular/material/button';
     CarouselModule,
     SkeletonModule,
   ],
+  exports: [AgencyFormComponent],
 })
 export class LoginModule {}

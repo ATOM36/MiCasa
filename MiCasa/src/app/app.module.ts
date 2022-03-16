@@ -12,7 +12,6 @@ import {
   LocationStrategy,
 } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { DashboardModule } from '@modules/dashboard/dashboard.module';
 import { AdminModule } from '@modules/admin/admin.module';
 import { AgenceModule } from '@modules/admin/agence/agence.module';
 

@@ -14,6 +14,9 @@ const routes: Routes = [
     data: {
       // ? origin so that the right message is displayed
       origin: 'admin/',
+
+      //? Data to notify the kind of action that will be done with form (edition | registration | consultation)
+      action: 'edtion',
     },
   },
 ];

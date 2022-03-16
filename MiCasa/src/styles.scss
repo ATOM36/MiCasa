@@ -22,3 +22,18 @@ body {
 
 // Custom fonts
 @import "./app/scss/fonts";
+
+// Confirm dialog buttons styles
+:root {
+  .confirm {
+    background: var(--green-yellow-green-color-wheel);
+  }
+
+  .confirm-radio {
+    accent-color: var(--green-yellow-green-color-wheel);
+  }
+
+  .reject {
+    background: var(--red-cardinal);
+  }
+}

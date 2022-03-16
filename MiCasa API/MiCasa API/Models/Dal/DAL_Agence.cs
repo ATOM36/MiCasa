@@ -76,13 +76,13 @@ namespace MiCasa.Models.Dal
                     command.Parameters.AddWithValue("@agenceId", agenceId);
                     command.ExecuteNonQuery();
                     return new JsonResult(new Message("le compte a été bloqué avec succès", true));
-                    
+
                 }
             }
             catch (Exception e)
             {
                 return new JsonResult(new Message(e.Message, false));
-               
+
             }
             finally
             {
@@ -96,8 +96,8 @@ namespace MiCasa.Models.Dal
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query= "SELECT * FROM \"Agence\" offset @startIndex fetch next @stopIndex rows only order by" +
-                        " [AgenceId]";
+                    string query = "SELECT * FROM \"Agence\" offset @startIndex fetch next @stopIndex rows only ;";
+
                     _connection.Open();
                     NpgsqlCommand command = new(query, _connection);
                     command.Parameters.AddWithValue("@startIndex", startIndex);
@@ -112,7 +112,7 @@ namespace MiCasa.Models.Dal
             catch (Exception e)
             {
                 return new JsonResult(new Message(e.Message, false));
-                    
+
             }
             finally
             {

@@ -22,26 +22,10 @@ namespace MiCasa.Controllers
          *  De préférence la route et la fonction ont le même nom
          * ********************************************/
 
-        [HttpGet]
-        [Route("test")]
-        public object test()
-        {
-            var _connection = DbConnection.GetConnection();
-            string query = "SELECT * FROM \"Agence\"";
-            _connection.Open();
-
-            NpgsqlCommand cmd = new(query, _connection);
-            var reader = cmd.ExecuteReader();
-            DataTable ta = new();
-            ta.Load(reader);
-            reader.Close();
-
-            return new JsonResult(ta);
-        }
 
         [HttpGet]
         [Route("LogIn")]
-        public JsonResult LogIn([FromQuery] string username,[FromQuery] string password) => _bll.LogIn(username, password);
+        public JsonResult LogIn([FromQuery] string username, [FromQuery] string password) => _bll.LogIn(username, password);
 
         [HttpDelete]
         [Route("SupprimerCompte")]
@@ -51,7 +35,7 @@ namespace MiCasa.Controllers
         [HttpGet]
         [Route("GetAgence")]
         public JsonResult GetAgence([FromQuery] int startIndex, [FromQuery] int stopIndex) =>
-            _bll.GetAgence(startIndex, stopIndex);
+           _bll.GetAgence(startIndex, stopIndex);
 
         [HttpPut]
         [Route("BloquerCompteAgence")]
