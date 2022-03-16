@@ -13,14 +13,14 @@ import {
 } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from '@modules/admin/admin.module';
-import { AgenceModule } from '@modules/admin/agence/agence.module';
+import { AgencyModule } from '@modules/agency/agency.module';
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
   imports: [
     BrowserModule,
     AdminModule,
-    AgenceModule,
+    AgencyModule,
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,

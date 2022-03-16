@@ -8,7 +8,7 @@ const routes: Routes = [
     component: AdminDashboardComponent,
   },
   {
-    path: 'admin/dashboard/agence',
+    path: 'admin/agence',
     loadChildren: () =>
       import('../admin/agence/agence.module').then((m) => m.AgenceModule),
     data: {
