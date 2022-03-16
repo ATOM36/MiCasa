@@ -3704,32 +3704,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\tchio\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\fatim\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+      "projectUniqueName": "C:\\Users\\fatim\\Documents\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
       "projectName": "MiCasa API",
-      "projectPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
-      "packagesPath": "C:\\Users\\tchio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+      "projectPath": "C:\\Users\\fatim\\Documents\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+      "packagesPath": "C:\\Users\\fatim\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\fatim\\Documents\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\tchio\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\fatim\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\tchio\\Documents\\Local Nuget Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3795,16 +3787,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problème de lecture du fichier cache C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

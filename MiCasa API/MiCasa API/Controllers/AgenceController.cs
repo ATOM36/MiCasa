@@ -38,5 +38,23 @@ namespace MiCasa.Controllers
 
             return new JsonResult(ta);
         }
+
+        [HttpGet]
+        [Route("LogIn")]
+        public JsonResult LogIn([FromQuery] string username,[FromQuery] string password) => _bll.LogIn(username, password);
+
+        [HttpDelete]
+        [Route("SupprimerCompte")]
+        public JsonResult SupprimerCompte([FromQuery] int agenceId) => _bll.SupprimerCompte(agenceId);
+
+
+        [HttpGet]
+        [Route("GetAgence")]
+        public JsonResult GetAgence([FromQuery] int startIndex, [FromQuery] int stopIndex) =>
+            _bll.GetAgence(startIndex, stopIndex);
+
+        [HttpPut]
+        [Route("BloquerCompteAgence")]
+        public JsonResult BloquerCompteAgence([FromHeader] int agenceId) => _bll.BloquerCompteAgence(agenceId);
     }
 }
