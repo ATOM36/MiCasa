@@ -10,4 +10,5 @@ export interface Agence {
   Adresse: string | undefined;
   Password: string | undefined;
   Username: string | undefined;
+  Signalement: number | undefined;
 }
