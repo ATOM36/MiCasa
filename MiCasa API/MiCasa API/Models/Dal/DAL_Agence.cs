@@ -12,7 +12,7 @@ namespace MiCasa.Models.Dal
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query = @"SELECT * FROM Agence WHERE Username= @username and Password= @password;";
+                    string query = "SELECT * FROM \"Agence\" WHERE Username= @username and Password= @password;";
                     _connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(query, _connection);
                     command.Parameters.AddWithValue("@username", username);
@@ -43,7 +43,7 @@ namespace MiCasa.Models.Dal
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query = @"DELETE from Agence Where AgenceId=@agenceId ";
+                    string query = "DELETE from \"Agence\" Where AgenceId=@agenceId ";
                     _connection.Open();
                     NpgsqlCommand command = new(query, _connection);
                     command.Parameters.AddWithValue("@agenceId", agenceId);
@@ -64,13 +64,13 @@ namespace MiCasa.Models.Dal
             }
         }
 
-        public static JsonResult BloquerCompte(int agenceId)
+        public static JsonResult BloquerCompteAgence(int agenceId)
         {
             try
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query = @"update Agence set IsBlocked = 1 where AgenceId= @agenceId ";
+                    string query = "update \"Agence\" set IsBlocked = 1 where AgenceId= @agenceId ";
                     _connection.Open();
                     NpgsqlCommand command = new(query, _connection);
                     command.Parameters.AddWithValue("@agenceId", agenceId);
@@ -96,8 +96,7 @@ namespace MiCasa.Models.Dal
             {
                 using (_connection = DbConnection.GetConnection())
                 {
-                    string query =
-                        @" SELECT * FROM Agence offset @startIndex fetch next @stopIndex rows only order by" +
+                    string query= "SELECT * FROM \"Agence\" offset @startIndex fetch next @stopIndex rows only order by" +
                         " [AgenceId]";
                     _connection.Open();
                     NpgsqlCommand command = new(query, _connection);
