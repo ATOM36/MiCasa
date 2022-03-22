@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "weather-app-1757f": {
+      "hosting": {
+        "MiCasa": [
+          "mi-casa-8fce9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "weather-app-1757f"
+  }
+}

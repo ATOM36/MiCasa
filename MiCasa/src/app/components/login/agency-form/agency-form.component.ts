@@ -26,7 +26,20 @@ import { Subscription } from 'rxjs';
   providers: [ConfirmationService, MessageService],
 })
 export class AgencyFormComponent implements OnInit {
-  @Input() agency!: Agence | null;
+  @Input() agency: Agence | null = {
+    AgenceId: null,
+    Username: null,
+    Password: null,
+    Signalement: null,
+    NumeroTelephone: null,
+    Mail: null,
+    Nom: null,
+    Latitude: null,
+    Longitude: null,
+    DateInscription: null,
+    Adresse: null,
+    IsBlocked: null,
+  };
 
   @Input() decoyAgency: Agence | undefined;
 

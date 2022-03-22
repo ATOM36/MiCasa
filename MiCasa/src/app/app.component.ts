@@ -5,6 +5,7 @@ import * as AOS from 'aos';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { filter, map, Observable, of, switchMap, switchMapTo } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -20,12 +21,13 @@ export class AppComponent implements OnInit {
     private router: Router,
     private contexts: ChildrenOutletContexts,
     private _confirmationService: ConfirmationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _update: SwUpdate
   ) {}
 
   ngOnInit(): void {
     AOS.init();
-    // this.checkUpdate();
+    this.checkUpdate();
     this.router.navigate(['/loading']).then(() =>
       setTimeout(() => {
         this.router.navigate(['/login']);
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit {
   getRouteAnimationData = () =>
     this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
 
-  /* checkUpdate() {
+  checkUpdate() {
     //the pipe operator combines of three operators : switchMap, filter, and map
     this._update.versionUpdates
       .pipe(
@@ -52,15 +54,12 @@ export class AppComponent implements OnInit {
     of(
       this._confirmationService.confirm({
         header: 'Mise à jour disponible',
-
         message:
           'Une nouvelle version est disponible !\nVoulez vous effectué une mise à jour ?',
-
         icon: 'pi pi-question-circle',
-
-        accept: () => {},
-
-        reject: () => {},
+        accept: () => {
+          this._update.activateUpdate().then(() => location.reload());
+        },
       })
-    );*/
+    );
 }

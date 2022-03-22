@@ -26,7 +26,9 @@ NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
 builder.Services.AddCors(options =>
     options.AddPolicy(name: "AllowOrigin", opt =>
     {
-        opt.WithOrigins("http://localhost:4200")
+        opt.WithOrigins("http://localhost:4200",
+            "https://inquisitive-snickerdoodle-f9acf7.netlify.app",
+            "http://localhost:8080")
         .AllowAnyMethod()
         .AllowAnyHeader();
     }));

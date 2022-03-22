@@ -11,6 +11,7 @@ import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -169,4 +170,11 @@ export class FormComponent implements OnInit, OnDestroy {
     this.agency.Adresse = Data[10];
     this.agency.IsBlocked = Data[11];
   };
+
+  resetPassword = () =>
+    Swal.fire({
+      icon: 'success',
+      title: 'Un oubli ?',
+      text: 'Aller fais un effort! Je suis sûr que tu vas le retrouver :-)',
+    });
 }
