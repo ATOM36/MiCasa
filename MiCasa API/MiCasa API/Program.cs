@@ -1,7 +1,4 @@
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,7 +17,10 @@ builder.Services.AddAntiforgery(opt => opt.HeaderName = "XSRF-TOKEN");
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(opt =>
         opt.SerializerSettings.ContractResolver = new DefaultContractResolver()).AddNewtonsoftJson(opt =>
-            opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize);
+
+// Postgres JSON config
+NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
 
 //Enabling cors for services
 builder.Services.AddCors(options =>

@@ -7,20 +7,7 @@ import { Agence } from '@models/api/agency';
   styleUrls: ['./agency-edit-template.component.scss'],
 })
 export class AgencyEditTemplateComponent implements OnInit {
-  @Input() agency: Agence | undefined = {
-    AgenceId: undefined,
-    NumeroTelephone: undefined,
-    Mail: undefined,
-    Nom: undefined,
-    Latitude: undefined,
-    Longitude: undefined,
-    DateInscription: undefined,
-    IsBlocked: undefined,
-    Adresse: undefined,
-    Password: undefined,
-    Username: undefined,
-    Signalement: undefined,
-  };
+  @Input() agency!: Agence;
 
   @Input() agencyCopy: Agence | undefined;
   constructor() {}

@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -69,5 +73,11 @@ import { MatButtonModule } from '@angular/material/button';
     SkeletonModule,
   ],
   exports: [AgencyFormComponent],
+  providers: [
+    {
+      provide: HashLocationStrategy,
+      useClass: PathLocationStrategy,
+    },
+  ],
 })
 export class LoginModule {}

@@ -13,6 +13,7 @@
           "Microsoft.AspNetCore.OData": "8.0.0",
           "Microsoft.Data.SqlClient": "4.0.0",
           "Npgsql": "6.0.2",
+          "Npgsql.Json.NET": "6.0.2",
           "Serilog.AspNetCore": "5.0.0",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
@@ -429,6 +430,18 @@
         },
         "runtime": {
           "lib/net6.0/Npgsql.dll": {
+            "assemblyVersion": "6.0.2.0",
+            "fileVersion": "6.0.2.0"
+          }
+        }
+      },
+      "Npgsql.Json.NET/6.0.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "Npgsql": "6.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Npgsql.Json.NET.dll": {
             "assemblyVersion": "6.0.2.0",
             "fileVersion": "6.0.2.0"
           }
@@ -1094,6 +1107,13 @@
       "sha512": "sha512-j/BJY/1lqtu5ssfGEi9D+qJ/3OMrK8ZdicsW4SldV49CahRVXVHldj636ucVcEqJPNDI0h+/PWJD7oHsQ/cFAQ==",
       "path": "npgsql/6.0.2",
       "hashPath": "npgsql.6.0.2.nupkg.sha512"
+    },
+    "Npgsql.Json.NET/6.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jyiYofII2HHpdA+izK08oa/kSNAQam0LBDxzI3hl4O5DjyhoRVR0kDw2QgoV6poA0hOcVemNnW8VE9VUN/P2Bg==",
+      "path": "npgsql.json.net/6.0.2",
+      "hashPath": "npgsql.json.net.6.0.2.nupkg.sha512"
     },
     "Serilog/2.10.0": {
       "type": "package",

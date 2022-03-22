@@ -15,7 +15,6 @@
         id="emailInput"
         class="form-control form-control-lg"
         pInputText
-        autocomplete
         formControlName="email"
       />
       <label for="emailInput"> Email</label>
@@ -60,7 +59,6 @@
         class="form-control form-control-lg"
         formControlName="password"
         pInputText
-        autocomplete=""
       />
       <label for="passwordInput">Mot de passe</label>
     </span>
@@ -102,7 +100,7 @@
       type="button"
       label="Se connecter"
       icon="pi pi-sign-in"
-      class="p-button-raised p-button-rounded p-button-success p-button-outlined btn-block"
+      class="p-button-raised p-button-rounded p-button-success p-button-outlined btn-block w-100"
       (click)="lezgo()"
       [style]="{ color: '#007200ff' }"
     ></button>
@@ -128,7 +126,7 @@
         pButton
         pRipple
         type="button"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block w-100"
         label="Nous rejoindre"
         icon="pi pi-user-plus"
         aria-label="join MiCasa"
@@ -139,7 +137,7 @@
         pButton
         pRipple
         type="button"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block w-100"
         label="Explorer notre catalogue"
         icon="pi pi-book"
         aria-label="browse MiCasa's content"
@@ -153,7 +151,7 @@
         pButton
         pRipple
         label="Vous êtes une agence"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block w-100"
         icon="pi pi-building"
         data-aos="fade-down"
         (click)="choseAgency()"
@@ -163,7 +161,7 @@
         pButton
         pRipple
         label="Vous êtes un particulier"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block w-100"
         icon="pi pi-user"
         data-aos="fade-up"
         (click)="choseUser()"
@@ -173,7 +171,7 @@
         <button
           pButton
           pRipple
-          class="p-button-outlined p-button-rounded p-button-success p-button-raised"
+          class="p-button-outlined p-button-rounded p-button-secondary p-button-raised"
           icon="pi pi-times"
           (click)="displayOptions = false"
           data-aos="zoom-out"

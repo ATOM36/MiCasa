@@ -26,20 +26,7 @@ import { Subscription } from 'rxjs';
   providers: [ConfirmationService, MessageService],
 })
 export class AgencyFormComponent implements OnInit {
-  @Input() agency: Agence | undefined = {
-    AgenceId: undefined,
-    NumeroTelephone: undefined,
-    Mail: undefined,
-    Nom: undefined,
-    Latitude: undefined,
-    Longitude: undefined,
-    DateInscription: undefined,
-    IsBlocked: undefined,
-    Adresse: undefined,
-    Password: undefined,
-    Username: undefined,
-    Signalement: undefined,
-  };
+  @Input() agency!: Agence | null;
 
   @Input() decoyAgency: Agence | undefined;
 
@@ -70,7 +57,7 @@ export class AgencyFormComponent implements OnInit {
     this._router.navigate(['/agency/account']);
   }
 
-  validateEdit = () => this.editValidator.emit(this.agency);
+  validateEdit = () => this.editValidator.emit(this.agency!);
 
   getAction = () =>
     this._activatedRoute.data.subscribe(($data) => {

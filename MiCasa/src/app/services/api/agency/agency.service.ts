@@ -19,8 +19,8 @@ export class AgencyService {
    * @param password the agency's password
    * @returns All data related to a given agency
    */
-  logIn = (username: string, password: string): Observable<QueryData<Agence>> =>
-    this.http.get<QueryData<Agence>>(
+  logIn = (username: string, password: string): Observable<QueryData<any[]>> =>
+    this.http.get<QueryData<any[]>>(
       `${environment.apiUrl}Agence/LogIn?username=${username}&password=${password}`,
       {
         headers: header,
@@ -63,15 +63,33 @@ export class AgencyService {
    */
   supprimerCompte = (agenceId: number): Observable<Message> =>
     this.http.delete<Message>(
-      `${environment.apiUrl}Agency/SupprimerCompte?agenceId=${agenceId}`,
+      `${environment.apiUrl}Agence/SupprimerCompte?agenceId=${agenceId}`,
       {
         headers: header,
       }
     );
 
+  /**
+   * @summary Blocks a given agency's account
+   * @param agenceId A given agency's id
+   * @returns A message that describes the operation's state
+   */
   bloquerCompteAgence = (agenceId: number): Observable<Message> =>
-    this.http.put<Message>(
-      `${environment.apiUrl}Agency/BloquerCompteAgence?agenceId=${agenceId}`,
+    this.http.get<Message>(
+      `${environment.apiUrl}Agence/BloquerCompteAgence?agenceId=${agenceId}`,
+      {
+        headers: header,
+      }
+    );
+
+  /**
+   * @summary Unblocks a given agency's account
+   * @param agenceId A given agency's id
+   * @returns A message that describes the operation's state
+   */
+  debloquerCompte = (agenceId: number): Observable<Message> =>
+    this.http.get<Message>(
+      `${environment.apiUrl}Agence/DebloquerCompte?agenceId=${agenceId}`,
       {
         headers: header,
       }

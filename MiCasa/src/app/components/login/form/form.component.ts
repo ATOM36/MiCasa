@@ -40,7 +40,20 @@ export class FormComponent implements OnInit, OnDestroy {
 
   greenColor: string = '#007200ff';
 
-  agency: Agence | undefined;
+  agency: Agence = {
+    AgenceId: null,
+    NumeroTelephone: null,
+    Mail: null,
+    Nom: null,
+    Latitude: null,
+    Longitude: null,
+    DateInscription: null,
+    IsBlocked: null,
+    Adresse: null,
+    Password: null,
+    Username: null,
+    Signalement: null,
+  };
 
   subscription!: Subscription;
 
@@ -60,18 +73,42 @@ export class FormComponent implements OnInit, OnDestroy {
     this._messageService.clear();
   }
 
+  /**
+   * @summary Gets all data of a given agency, does some control and then redirect it to its account page
+   */
   lezgo() {
     this.subscription = this._agencyService
       .logIn(
         this.myForm.get('email')?.value,
         this.myForm.get('password')?.value
       )
-      .subscribe(async (response) => {
-        this.agency = await response.Data;
-
-        console.table(this.agency);
-
-        sessionStorage.setItem('a-x', JSON.stringify(this.agency));
+      .subscribe(async ($response) => {
+        if ($response.State == false) {
+          this._messageService.add({
+            severity: 'danger',
+            summary: 'Echec !',
+            detail: `${$response.Data}`,
+            key: 'message',
+          });
+        } else {
+          // const keys: string[] = [
+          //   'AgenceId',
+          //   'Username',
+          //   'Password',
+          //   'Signalement',
+          //   'NumeroTelephone',
+          //   'Mail',
+          //   'Nom',
+          //   'Latitude',
+          //   'Longitude',
+          //   'DateInscription',
+          //   'Adresse',
+          //   'IsBlocked',
+          // ];
+          this.loadData($response.Data);
+          sessionStorage.setItem('a-x', JSON.stringify(this.agency));
+          this.router.navigate(['/agency/account']);
+        }
       });
   }
 
@@ -82,25 +119,54 @@ export class FormComponent implements OnInit, OnDestroy {
    */
   displayRegistrationModal(answer: boolean) {
     this.displayRegistration = answer;
-    setTimeout(() => {
-      console.log('Form received');
-    }, 1500);
   }
 
+  /**
+   * @summary Leads a user to the home page, even though he has no account but with some restrictions
+   */
   browseContent = () => this.router.navigate(['/home']);
 
+  /**
+   * @summary Displays a form so that an agency can be registered
+   */
   choseAgency() {
     this.choosenType = 'Agency';
     this.displayRegistration = true;
   }
 
+  /**
+   * @summary Displays a form so that a user can sign up
+   */
   choseUser() {
     this.choosenType = 'User';
     this.displayRegistration = true;
   }
 
+  /**
+   * @summary Hides signing up buttons
+   */
   hideRegistration() {
     this.displayRegistration = false;
     this.displayOptions = false;
   }
+
+  /**
+   *@summary Initialize the agency property with some values that will be used during the whole session
+  of an agency
+   * @param Data
+   */
+  loadData = (Data: any[]) => {
+    this.agency.AgenceId = Data[0];
+    this.agency.Username = Data[1];
+    this.agency.Password = Data[2];
+    this.agency.Signalement = Data[3];
+    this.agency.NumeroTelephone = Data[4];
+    this.agency.Mail = Data[5];
+    this.agency.Nom = Data[6];
+    this.agency.Latitude = Data[7];
+    this.agency.Longitude = Data[8];
+    this.agency.DateInscription = Data[9];
+    this.agency.Adresse = Data[10];
+    this.agency.IsBlocked = Data[11];
+  };
 }
