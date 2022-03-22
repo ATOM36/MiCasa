@@ -17,11 +17,5 @@ import { HomeComponent } from '@pages/home/home.component';
 @NgModule({
   declarations: [HomeComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
-  providers: [
-    {
-      provide: HashLocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-  ],
 })
 export class HomeModule {}

@@ -16,11 +16,5 @@ import { AgencyAccountModule } from './agency-account/agency-account.module';
 @NgModule({
   declarations: [AgencyDashboardComponent],
   imports: [CommonModule, DashboardModule, AgencyRoutingModule],
-  providers: [
-    {
-      provide: HashLocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-  ],
 })
 export class AgencyModule {}

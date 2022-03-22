@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
-import { SwUpdate } from '@angular/service-worker';
 import * as AOS from 'aos';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { filter, map, Observable, of, switchMap, switchMapTo } from 'rxjs';
@@ -20,14 +19,13 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private contexts: ChildrenOutletContexts,
-    private _update: SwUpdate,
     private _confirmationService: ConfirmationService,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     AOS.init();
-    this.checkUpdate();
+    // this.checkUpdate();
     this.router.navigate(['/loading']).then(() =>
       setTimeout(() => {
         this.router.navigate(['/login']);
@@ -38,7 +36,7 @@ export class AppComponent implements OnInit {
   getRouteAnimationData = () =>
     this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
 
-  checkUpdate() {
+  /* checkUpdate() {
     //the pipe operator combines of three operators : switchMap, filter, and map
     this._update.versionUpdates
       .pipe(
@@ -64,5 +62,5 @@ export class AppComponent implements OnInit {
 
         reject: () => {},
       })
-    );
+    );*/
 }
