@@ -4,9 +4,9 @@ import { AgencyService } from '@services/api/agency/agency.service';
 import {
   ConfirmationService,
   ConfirmEventType,
-  LazyLoadEvent,
   MessageService,
 } from 'primeng/api';
+import { Paginator } from 'primeng/paginator';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,11 +16,11 @@ import { Subscription } from 'rxjs';
   providers: [ConfirmationService, MessageService],
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
-  agencies!: Agence[];
+  agencies: Agence[] = [];
 
   loading!: boolean;
 
-  selectedAgency!: Agence | undefined;
+  selectedAgency!: Agence | null;
 
   editedAgency!: Agence;
 
@@ -29,6 +29,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   startIndex!: number;
   stopIndex!: number;
   subscription!: Subscription;
+  isLoading!: boolean;
+  recordsNumber: number = 0;
 
   constructor(
     private _messageService: MessageService,
@@ -39,18 +41,36 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.startIndex = 0;
     this.stopIndex = 10;
-    this._agencyService
-      .getAgencies(this.startIndex, this.stopIndex)
-      .subscribe(async ($res) => {
-        this.agencies = $res.Data;
-      });
+    this.loadData();
+    this.recordsNumber = this.getRecordsNumber();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   ngAfterViewInit(): void {}
+
+  loadData = () => {
+    this.isLoading = true;
+    this._agencyService
+      .getAgencies(this.startIndex, this.stopIndex)
+      .subscribe(async ($response) => {
+        this.agencies = $response.Data;
+      });
+    this.isLoading = false;
+  };
+
+  loadMoreData = (event: Paginator) =>
+    event.changePageToNext(() => {
+      this.startIndex = this.stopIndex;
+      this.stopIndex += 10;
+      this._agencyService
+        .getAgencies(this.startIndex, this.stopIndex)
+        .subscribe(async ($response) => {
+          this.agencies = this.agencies.concat($response.Data);
+        });
+    });
+
+  getRecordsNumber = () => this.agencies.length;
 
   deleteSelectedAgency(agence: Agence) {
     this._confirmationService.confirm({
@@ -61,14 +81,18 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
+        this._agencyService
+          .supprimerCompte(agence.AgenceId!)
+          .subscribe(async ($response) => {
+            this._messageService.add({
+              severity: $response.State == true ? 'success' : 'danger',
+              summary: 'Succès',
+              detail: `${$response.Content}`,
+              key: 'message',
+              life: 2000,
+            });
+          });
         this.agencies.splice(this.agencies.indexOf(agence), 1);
-        this._messageService.add({
-          severity: 'success',
-          summary: 'Succès',
-          detail: `${agence.Nom} supprimé avec succès`,
-          key: 'message',
-          life: 2000,
-        });
       },
 
       reject: (type: ConfirmEventType) => {
@@ -77,7 +101,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
             this._messageService.add({
               severity: 'warn',
               summary: 'Refus',
-              detail: "Vous avez refusé l'action",
+              detail: "Vous avez annulé l'action",
               key: 'message',
               life: 2000,
             });
@@ -107,16 +131,33 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        this._agencyService
-          .bloquerCompteAgence(agence.AgenceId!)
-          .subscribe(async (response) => {
-            this._messageService.add({
-              severity: 'success',
-              summary: 'Statut',
-              detail: `${response.Content}`,
-              key: 'message',
+        if (agence.IsBlocked) {
+          this._agencyService
+            .debloquerCompte(agence.AgenceId!)
+            .subscribe(async ($response) => {
+              this._messageService.add({
+                severity: $response.State == true ? 'success' : 'danger',
+                summary: 'Statut',
+                detail: `${$response.Content}`,
+                key: 'message',
+              });
             });
-          });
+
+          agence.IsBlocked = 0;
+        } else {
+          this._agencyService
+            .bloquerCompteAgence(agence.AgenceId!)
+            .subscribe(async ($response) => {
+              this._messageService.add({
+                severity: $response.State == true ? 'success' : 'danger',
+                summary: 'Statut',
+                detail: `${$response.Content}`,
+                key: 'message',
+              });
+            });
+
+          agence.IsBlocked = 1;
+        }
       },
 
       reject: (type: ConfirmEventType) => {
@@ -151,6 +192,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   validateEdit(agence: Agence) {
     this.agencies[this.agencies.indexOf(this.selectedAgency!)] = agence;
-    this.selectedAgency = undefined;
+    this.selectedAgency = null;
   }
 }

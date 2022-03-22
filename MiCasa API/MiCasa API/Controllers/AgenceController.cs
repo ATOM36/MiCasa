@@ -25,20 +25,20 @@ namespace MiCasa.Controllers
 
         [HttpGet]
         [Route("LogIn")]
-        public JsonResult LogIn([FromQuery] string username, [FromQuery] string password) => _bll.LogIn(username, password);
+        public JsonResult LogIn([FromQuery] string username, [FromQuery] string password) => DAL_Agence.LogIn(username, password);
 
         [HttpDelete]
         [Route("SupprimerCompte")]
-        public JsonResult SupprimerCompte([FromQuery] int agenceId) => _bll.SupprimerCompte(agenceId);
+        public JsonResult SupprimerCompte([FromQuery] int agenceId) => DAL_Agence.SupprimerCompte(agenceId);
 
 
         [HttpGet]
         [Route("GetAgence")]
         public JsonResult GetAgence([FromQuery] int startIndex, [FromQuery] int stopIndex) =>
-           _bll.GetAgence(startIndex, stopIndex);
+           DAL_Agence.GetAgence(startIndex, stopIndex);
 
-        [HttpPut]
+        [HttpGet]
         [Route("BloquerCompteAgence")]
-        public JsonResult BloquerCompteAgence([FromQuery] int agenceId) => _bll.BloquerCompteAgence(agenceId);
+        public JsonResult BloquerCompteAgence([FromQuery] int agenceId) => DAL_Agence.BloquerCompteAgence(agenceId);
     }
 }

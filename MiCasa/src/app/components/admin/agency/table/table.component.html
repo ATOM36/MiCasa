@@ -22,7 +22,7 @@
   [closeOnEscape]="false"
   [breakpoints]="{ '960px': '75vw' }"
   [style]="{ width: '50vw' }"
-  (onHide)="selectedAgency = undefined"
+  (onHide)="selectedAgency = null"
 >
   <ng-template pTemplate="header"
     >Modification de {{ selectedAgency?.Nom }}</ng-template
@@ -49,21 +49,34 @@
 </p-dialog>
 
 <!-- Data table -->
+<p-button
+  type="button"
+  icon="pi pi-refresh"
+  label="Recharger la table"
+  styleClass="p-button-text p-button-success"
+  [style]="{ 'margin-top': '10px' }"
+></p-button>
+
 <p-table
   #table
-  lang="FR"
   sortMode="multiple"
   dataKey="Id"
-  [value]="agencies"
   responsiveLayout="scroll"
+  sortMode="multiple"
+  sortField="Id"
+  responsiveLayout="scroll"
+  currentPageReportTemplate="{first} sur {last} de {totalRecords} agences"
+  (onPage)="loadMoreData($event)"
+  [value]="agencies"
   [rowHover]="true"
   [rows]="10"
+  [loading]="isLoading"
+  [totalRecords]="recordsNumber"
   [showCurrentPageReport]="true"
   [rowsPerPageOptions]="[10, 25, 50]"
-  responsiveLayout="scroll"
   [paginator]="true"
-  currentPageReportTemplate="{first} sur {last} de {totalRecords} agences"
   [filterDelay]="0"
+  [resizableColumns]="true"
   [globalFilterFields]="[
     'Id',
     'Nom',
@@ -177,17 +190,29 @@
 
   <ng-template pTemplate="body" let-agency>
     <tr>
-      <td>{{ agency.AgenceId }}</td>
+      <td>
+        {{ agency.AgenceId | number }}
+      </td>
 
-      <td>{{ agency.Nom }}</td>
+      <td>
+        {{ agency.Nom }}
+      </td>
 
-      <td>{{ agency.Mail }}</td>
+      <td>
+        {{ agency.Mail }}
+      </td>
 
-      <td>{{ agency.NumeroTelephone }}</td>
+      <td>
+        {{ agency.NumeroTelephone }}
+      </td>
 
-      <td>{{ agency.DateInscription | date: "shortDate" }}</td>
+      <td>
+        {{ agency.DateInscription }}
+      </td>
 
-      <td>{{ agency.Signalement }}</td>
+      <td>
+        {{ agency.Signalement }}
+      </td>
 
       <td *ngIf="agency.IsBlocked === 0">
         <button
@@ -227,21 +252,5 @@
         ></button>
       </td>
     </tr>
-  </ng-template>
-
-  <ng-template pTemplate="paginatorleft">
-    <p-button
-      type="button"
-      icon="pi pi-plus"
-      styleClass="p-button-text"
-    ></p-button>
-  </ng-template>
-
-  <ng-template pTemplate="paginatorright">
-    <p-button
-      type="button"
-      icon="pi pi-cloud"
-      styleClass="p-button-text"
-    ></p-button>
   </ng-template>
 </p-table>

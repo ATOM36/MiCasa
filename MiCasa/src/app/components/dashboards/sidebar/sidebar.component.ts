@@ -39,31 +39,31 @@ export class SidebarComponent implements OnInit {
         tooltip: 'Aller au dashboard',
       },
       {
-        route: '/admin/dashboard/account',
+        route: '/admin/account',
         label: 'Votre compte',
         icon: PrimeIcons.USER,
         tooltip: 'Gérer vos informations personnelles',
       },
       {
-        route: '/admin/dashboard/agence',
+        route: '/admin/agence',
         label: 'Agences',
         icon: PrimeIcons.BUILDING,
         tooltip: 'Section des agences',
       },
       {
-        route: '/admin/dashboard/users',
+        route: '/admin/users',
         label: 'Utilisateurs',
         icon: PrimeIcons.USERS,
         tooltip: 'Section des utilisateurs',
       },
       {
-        route: '/admin/dashboard/publications',
+        route: '/admin/publications',
         label: 'Annonces',
         icon: PrimeIcons.IMAGE,
         tooltip: 'Section des annonces',
       },
       {
-        route: '/admin/dashboard/reports',
+        route: '/admin/reports',
         label: 'Les signalements',
         icon: PrimeIcons.THUMBS_DOWN,
         tooltip: 'Sections des signalements',
@@ -86,25 +86,25 @@ export class SidebarComponent implements OnInit {
         tooltip: "Consulter le dashboard de l'agence",
       },
       {
-        route: '/agency/dashboard/account',
+        route: '/agency/account',
         label: 'Votre compte',
         icon: PrimeIcons.USER,
         tooltip: "Consulter les données relatives à l'agence",
       },
       {
-        route: '/agency/dashboard/create',
+        route: '/agency/create',
         label: 'Publier une annonce',
         icon: PrimeIcons.PLUS_CIRCLE,
         tooltip: 'Ajouter une nouvelle annonce sur la plateforme',
       },
       {
-        route: '/agency/dashboard/publications',
+        route: '/agency/publications',
         label: 'Vos annonces',
         icon: PrimeIcons.IMAGES,
         tooltip: 'Consulter toutes les annonces que vous avez publié',
       },
       {
-        route: '/agency/dashboard/edit',
+        route: '/agency/edit',
         label: 'Mettre à jour',
         icon: PrimeIcons.USER_EDIT,
         tooltip: "Modifier les informations relative l'agence",
@@ -118,7 +118,12 @@ export class SidebarComponent implements OnInit {
     ];
   };
 
-  lezgo = (route: string) => this.router.navigate([`${route}`]);
+  lezgo(route: string) {
+    if (route === '/login') {
+      sessionStorage.clear();
+      this.router.navigate([`${route}`]);
+    } else this.router.navigate([`${route}`]);
+  }
 
   notifyClosing = () => this.closeNotifier.emit(false);
 }

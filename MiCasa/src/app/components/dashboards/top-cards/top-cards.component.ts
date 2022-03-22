@@ -42,7 +42,7 @@ export class TopCardsComponent implements OnInit {
         bgcolor: 'info',
         icon: PrimeIcons.CHART_LINE,
         title: '210',
-        subtitle: 'Connexion par semaine',
+        subtitle: 'Annonces',
       },
     ];
   }

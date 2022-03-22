@@ -158,3 +158,4 @@ C:\Users\fatim\Documents\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\staticweb
 C:\Users\fatim\Documents\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\scopedcss\bundle\MiCasa API.styles.css
 C:\Users\fatim\Documents\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\MiCasa API.csproj.CopyComplete
 C:\Users\fatim\Documents\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\MiCasa API.genruntimeconfig.cache
+C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\Npgsql.Json.NET.dll

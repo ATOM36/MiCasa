@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { SharedModule } from '@modules/shared/shared.module';
 
 // Declarations
@@ -13,5 +17,11 @@ import { HomeComponent } from '@pages/home/home.component';
 @NgModule({
   declarations: [HomeComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
+  providers: [
+    {
+      provide: HashLocationStrategy,
+      useClass: PathLocationStrategy,
+    },
+  ],
 })
 export class HomeModule {}
