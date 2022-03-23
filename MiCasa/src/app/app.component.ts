@@ -15,8 +15,6 @@ import { SwUpdate } from '@angular/service-worker';
   animations: [routerAnimation],
 })
 export class AppComponent implements OnInit {
-  title = 'MiCasa';
-
   constructor(
     private router: Router,
     private contexts: ChildrenOutletContexts,
@@ -31,7 +29,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/loading']).then(() =>
       setTimeout(() => {
         this.router.navigate(['/login']);
-      }, 4200)
+      }, 200)
     );
   }
 
@@ -57,6 +55,8 @@ export class AppComponent implements OnInit {
         message:
           'Une nouvelle version est disponible !\nVoulez vous effectué une mise à jour ?',
         icon: 'pi pi-question-circle',
+        acceptButtonStyleClass: 'p-button-success',
+        rejectButtonStyleClass: 'p-button-danger',
         accept: () => {
           this._update.activateUpdate().then(() => location.reload());
         },

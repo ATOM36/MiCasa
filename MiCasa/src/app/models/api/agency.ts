@@ -11,4 +11,5 @@ export interface Agence {
   DateInscription: string | null;
   Adresse: string | null;
   IsBlocked: number | null;
+  id?: string;
 }

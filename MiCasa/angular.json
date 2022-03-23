@@ -123,8 +123,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "MiCasa:build:production",
-            "firebaseProject": "weather-app-1757f",
-            "firebaseHostingSite": "mi-casa-8fce9"
+            "firebaseProject": "micasa-project-3e207",
+            "firebaseHostingSite": "micasa-project-3e207"
           }
         }
       }

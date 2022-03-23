@@ -47,7 +47,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'agency/dashboard',
+    path: 'agency/:name/dashboard',
     loadChildren: () =>
       import('@modules/agency/agency.module').then((m) => m.AgencyModule),
     data: {
