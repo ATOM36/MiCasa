@@ -73,11 +73,5 @@ import { MatButtonModule } from '@angular/material/button';
     SkeletonModule,
   ],
   exports: [AgencyFormComponent],
-  providers: [
-    {
-      provide: HashLocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-  ],
 })
 export class LoginModule {}

@@ -1,5 +1,11 @@
 <p-toast key="message"></p-toast>
 
+<!--Error dialog-->
+<p-dialog [(visible)]="userIsBlocked">
+  Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus
+  d'informations
+</p-dialog>
+
 <form [formGroup]="myForm">
   <!--Email input-->
   <div

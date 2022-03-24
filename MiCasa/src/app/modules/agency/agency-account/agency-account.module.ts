@@ -41,11 +41,5 @@ import { DividerModule } from 'primeng/divider';
     DividerModule,
     AgencyAccountRoutingModule,
   ],
-  providers: [
-    {
-      provide: HashLocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-  ],
 })
 export class AgencyAccountModule {}

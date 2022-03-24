@@ -4,15 +4,14 @@
 
 export const environment = {
   firebase: {
-    projectId: 'micasa-d1991',
-    appId: '1:6737342043:web:b1103d31a05b034f28197e',
-    databaseURL: 'https://micasa-d1991-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'micasa-d1991.appspot.com',
+    projectId: 'micasa-project-3e207',
+    appId: '1:194476213453:web:b5e637f2069a2835f41584',
+    storageBucket: 'micasa-project-3e207.appspot.com',
     locationId: 'europe-west',
-    apiKey: 'AIzaSyDFPZSx---Jnqsl-akaOZB9STMFWkwQjbo',
-    authDomain: 'micasa-d1991.firebaseapp.com',
-    messagingSenderId: '6737342043',
-    measurementId: 'G-042MTMV1BX',
+    apiKey: 'AIzaSyDkRtTUxZUUb38rcWvhYWIZp7b2hV9KgTI',
+    authDomain: 'micasa-project-3e207.firebaseapp.com',
+    messagingSenderId: '194476213453',
+    measurementId: 'G-TLLYF0SZGN',
   },
   production: false,
   apiUrl: 'http://localhost:5000/api/',

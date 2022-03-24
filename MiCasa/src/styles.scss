@@ -12,7 +12,7 @@ body {
 }
 
 /* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 // Importing AOS styles
 @import "../node_modules/aos/dist/aos.css";

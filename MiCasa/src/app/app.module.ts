@@ -14,17 +14,17 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from '@modules/admin/admin.module';
 import { AgencyModule } from '@modules/agency/agency.module';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { provideStorage, getStorage } from '@angular/fire/storage';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
@@ -39,6 +39,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ConfirmDialogModule,
     MatSnackBarModule,
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
@@ -46,25 +52,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     provideFunctions(() => getFunctions()),
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
   ],
-  providers: [
-    {
-      provide: LocationStrategy,
-      useClass: HashLocationStrategy,
-    },
-  ],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}

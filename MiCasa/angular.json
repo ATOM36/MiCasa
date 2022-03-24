@@ -29,7 +29,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -107,6 +106,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest",
+              "src/manifest.webmanifest",
+              "src/manifest.webmanifest",
               "src/manifest.webmanifest"
             ],
             "styles": [
@@ -122,8 +123,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "MiCasa:build:production",
-            "firebaseProject": "micasa-d1991",
-            "firebaseHostingSite": "micasa-d1991"
+            "firebaseProject": "micasa-project-3e207",
+            "firebaseHostingSite": "micasa-project-3e207"
           }
         }
       }

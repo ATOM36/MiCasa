@@ -52,11 +52,5 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatGridListModule,
     SharedModule,
   ],
-  providers: [
-    {
-      provide: HashLocationStrategy,
-      useClass: PathLocationStrategy,
-    },
-  ],
 })
 export class AdminModule {}

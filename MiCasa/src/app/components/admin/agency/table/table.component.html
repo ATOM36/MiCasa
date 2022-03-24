@@ -31,8 +31,8 @@
   <ng-template pTemplate="content">
     <app-agency-form
       [agency]="selectedAgency"
+      [decoyAgency]="selectedAgency"
       formAction="edition"
-      (editValidator)="validateEdit(editedAgency)"
     ></app-agency-form>
   </ng-template>
 

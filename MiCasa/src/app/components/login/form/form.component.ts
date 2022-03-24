@@ -9,8 +9,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
+import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -40,6 +42,8 @@ export class FormComponent implements OnInit, OnDestroy {
 
   greenColor: string = '#007200ff';
 
+  userIsBlocked: boolean = false;
+
   agency: Agence = {
     AgenceId: null,
     NumeroTelephone: null,
@@ -60,16 +64,16 @@ export class FormComponent implements OnInit, OnDestroy {
   @Output() registrationModalController = new EventEmitter<boolean>();
 
   constructor(
-    private router: Router,
+    private _router: Router,
     private _agencyService: AgencyService,
     private _messageService: MessageService,
-    private _confirmationService: ConfirmationService
+    private _confirmationService: ConfirmationService,
+    private _agencyFire: AgencyFireService
   ) {}
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
     this._messageService.clear();
   }
 
@@ -77,7 +81,33 @@ export class FormComponent implements OnInit, OnDestroy {
    * @summary Gets all data of a given agency, does some control and then redirect it to its account page
    */
   lezgo() {
-    this.subscription = this._agencyService
+    let emailEntry = String(this.myForm.get('email')?.value);
+
+    console.log('Request sent');
+
+    if (emailEntry.endsWith('agence')) {
+      console.log('Is agency');
+      this._agencyFire
+        .logIn(
+          //? removing useless data
+          emailEntry.replace('agence', '').trim(),
+          this.myForm.get('password')?.value
+        )
+        .subscribe(async ($response: Agence) => {
+          console.log($response);
+          //? Controlling the user's state after the request has been sent
+          //? If the account is blocked, then display an error message
+          if (await $response.IsBlocked) this.userIsBlocked = true;
+          //? If not, then save user's data in the session storage and it's done
+          else {
+            sessionStorage.setItem('a-x', JSON.stringify($response));
+            this._router.navigate([`agency/${$response.Nom}/account`]);
+          }
+        });
+    } else if (emailEntry.endsWith('admin'))
+      this._router.navigate(['/admin/dashboard']);
+
+    /* this.subscription = this._agencyService
       .logIn(
         this.myForm.get('email')?.value,
         this.myForm.get('password')?.value
@@ -109,7 +139,7 @@ export class FormComponent implements OnInit, OnDestroy {
           sessionStorage.setItem('a-x', JSON.stringify(this.agency));
           this.router.navigate(['/agency/account']);
         }
-      });
+      });*/
   }
 
   /**
@@ -124,7 +154,7 @@ export class FormComponent implements OnInit, OnDestroy {
   /**
    * @summary Leads a user to the home page, even though he has no account but with some restrictions
    */
-  browseContent = () => this.router.navigate(['/home']);
+  browseContent = () => this._router.navigate(['/home']);
 
   /**
    * @summary Displays a form so that an agency can be registered
@@ -169,4 +199,11 @@ export class FormComponent implements OnInit, OnDestroy {
     this.agency.Adresse = Data[10];
     this.agency.IsBlocked = Data[11];
   };
+
+  resetPassword = () =>
+    Swal.fire({
+      icon: 'success',
+      title: 'Un oubli ?',
+      text: 'Aller fais un effort! Je suis sûr que tu vas le retrouver :-)',
+    });
 }

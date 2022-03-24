@@ -1,14 +1,14 @@
 {
   "targets": {
-    "micasa-d1991": {
+    "micasa-project-3e207": {
       "hosting": {
         "MiCasa": [
-          "micasa-d1991"
+          "micasa-project-3e207"
         ]
       }
     }
   },
   "projects": {
-    "default": "micasa-d1991"
+    "default": "micasa-project-3e207"
   }
 }

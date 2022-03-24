@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
-import { SwUpdate } from '@angular/service-worker';
 import * as AOS from 'aos';
 import { ConfirmationService, ConfirmEventType } from 'primeng/api';
 import { filter, map, Observable, of, switchMap, switchMapTo } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +15,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   animations: [routerAnimation],
 })
 export class AppComponent implements OnInit {
-  title = 'MiCasa';
-
   constructor(
     private router: Router,
     private contexts: ChildrenOutletContexts,
-    private _update: SwUpdate,
     private _confirmationService: ConfirmationService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _update: SwUpdate
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +29,7 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/loading']).then(() =>
       setTimeout(() => {
         this.router.navigate(['/login']);
-      }, 4200)
+      }, 200)
     );
   }
 
@@ -54,15 +52,14 @@ export class AppComponent implements OnInit {
     of(
       this._confirmationService.confirm({
         header: 'Mise à jour disponible',
-
         message:
           'Une nouvelle version est disponible !\nVoulez vous effectué une mise à jour ?',
-
         icon: 'pi pi-question-circle',
-
-        accept: () => {},
-
-        reject: () => {},
+        acceptButtonStyleClass: 'p-button-success',
+        rejectButtonStyleClass: 'p-button-danger',
+        accept: () => {
+          this._update.activateUpdate().then(() => location.reload());
+        },
       })
     );
 }
