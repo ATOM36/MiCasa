@@ -4,20 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from '@modules/shared/shared.module';
-import { LoadingComponent } from '@pages/loading/loading.component';
-import {
-  CommonModule,
-  HashLocationStrategy,
-  LocationStrategy,
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { AdminModule } from '@modules/admin/admin.module';
-import { AgencyModule } from '@modules/agency/agency.module';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
+//? Firebase
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
@@ -26,18 +18,25 @@ import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 
+//? Feature modules
+import { LoginModule } from '@modules/login/login.module';
+import { HomeModule } from '@modules/home/home.module';
+import { AdminModule } from '@modules/admin/admin.module';
+import { AgencyModule } from '@modules/agency/agency.module';
+import { SharedModule } from '@modules/shared/shared.module';
+
 @NgModule({
-  declarations: [AppComponent, LoadingComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    LoginModule,
+    HomeModule,
     AdminModule,
     AgencyModule,
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
-    ConfirmDialogModule,
-    MatSnackBarModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

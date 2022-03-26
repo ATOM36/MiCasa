@@ -1,18 +1,20 @@
 import {
+  AfterViewInit,
   Component,
   EventEmitter,
+  HostListener,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
 import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
+import { setLocation } from '@utility/location-handler';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Observable, Subscription } from 'rxjs';
-import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -20,7 +22,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./form.component.scss'],
   providers: [ConfirmationService, MessageService],
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   myForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
 
@@ -63,6 +65,14 @@ export class FormComponent implements OnInit, OnDestroy {
 
   @Output() registrationModalController = new EventEmitter<boolean>();
 
+  /**
+   * @summary If the two entries have a value, then the login button is pressed
+   */
+  @HostListener('window:keydown.enter') onEnter() {
+    if (this.myForm.get('email')?.value && this.myForm.get('password')?.value)
+      document.getElementById('goButton')?.click();
+  }
+
   constructor(
     private _router: Router,
     private _agencyService: AgencyService,
@@ -76,6 +86,20 @@ export class FormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._messageService.clear();
   }
+
+  ngAfterViewInit(): void {
+    // could be anything
+    // if (document.cookie.indexOf('mycookie') == -1) {
+    //   // cookie doesn't exist, create it now
+    // } else {
+    //   // not first visit, so alert
+    //   alert('You refreshed!');
+    // }
+  }
+
+  // checkReload = () => setInterval(() => {
+  //   if(document.cookie.)
+  // }, 200);
 
   /**
    * @summary Gets all data of a given agency, does some control and then redirect it to its account page
@@ -199,11 +223,4 @@ export class FormComponent implements OnInit, OnDestroy {
     this.agency.Adresse = Data[10];
     this.agency.IsBlocked = Data[11];
   };
-
-  resetPassword = () =>
-    Swal.fire({
-      icon: 'success',
-      title: 'Un oubli ?',
-      text: 'Aller fais un effort! Je suis sûr que tu vas le retrouver :-)',
-    });
 }
