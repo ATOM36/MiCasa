@@ -93,7 +93,9 @@
 
   <ng-template pTemplate="header">
     <tr>
+      <!--
       <th pSortableColumn="Id">
+
         <div class="flex justify-content-center align-items-center">
           Id
           <p-sortIcon field="Id"></p-sortIcon>
@@ -105,7 +107,7 @@
           ></p-columnFilter>
         </div>
       </th>
-
+-->
       <th pSortableColumn="Nom">
         <div class="flex justify-content-center align-items-center">
           Nom
@@ -139,7 +141,7 @@
         </div>
 
         <p-columnFilter
-          type="numeric"
+          type="text"
           field="Téléphone"
           display="menu"
         ></p-columnFilter>
@@ -190,10 +192,11 @@
 
   <ng-template pTemplate="body" let-agency>
     <tr>
+      <!--
       <td>
         {{ agency.AgenceId | number }}
       </td>
-
+-->
       <td>
         {{ agency.Nom }}
       </td>

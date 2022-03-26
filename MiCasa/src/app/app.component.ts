@@ -1,65 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
 import * as AOS from 'aos';
-import { ConfirmationService, ConfirmEventType } from 'primeng/api';
-import { filter, map, Observable, of, switchMap, switchMapTo } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [ConfirmationService],
   animations: [routerAnimation],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  hasRefreshed!: boolean;
+
   constructor(
     private router: Router,
-    private contexts: ChildrenOutletContexts,
-    private _confirmationService: ConfirmationService,
-    private _snackBar: MatSnackBar,
-    private _update: SwUpdate
+    private contexts: ChildrenOutletContexts
   ) {}
 
   ngOnInit(): void {
     AOS.init();
-    this.checkUpdate();
-    this.router.navigate(['/loading']).then(() =>
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 200)
-    );
+
+    this.hasRefreshed = this.checkRefresh();
+    sessionStorage.setItem('reload-loc', 'yes');
+
+    if (this.hasRefreshed) {
+      let location = localStorage.getItem('loc');
+      this.router.navigate([`${location}`]);
+    } else this.router.navigate(['/login']);
   }
 
+  ngAfterViewInit(): void {}
+
+  /**
+   *@summary
+   */
+  setRefreshState = (): NodeJS.Timeout =>
+    setTimeout(() => {
+      if (this.hasRefreshed) this.hasRefreshed = false;
+    }, 2400);
+
+  /**
+   * @summary Clears the localStorage whenever the app is laucnhed, thus the refresh system won't have problems
+   */
+  clearMemory = (): void => localStorage.clear();
+
+  /**
+   * @summary
+   * @returns
+   */
+  checkRefresh = () => {
+    // If the page has been refreshed
+    if (sessionStorage.getItem('reload-loc') != null) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  /**
+   * @summary Retrieves metadata about the current route that is being used in order to trigger a given
+   * animation
+   * @returns The animation data's value
+   */
   getRouteAnimationData = () =>
     this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
-
-  checkUpdate() {
-    //the pipe operator combines of three operators : switchMap, filter, and map
-    this._update.versionUpdates
-      .pipe(
-        //switchMap is called when a new version is available
-        //it subscribes to the afterDismissed Observable
-        //afterDismissed emits when the snackBar is closed wheter using its API methods or clicking on the action button
-        switchMap(() => this.showUpdateDialog())
-      )
-      .subscribe();
-  }
-
-  showUpdateDialog = (): Observable<ConfirmationService> =>
-    of(
-      this._confirmationService.confirm({
-        header: 'Mise à jour disponible',
-        message:
-          'Une nouvelle version est disponible !\nVoulez vous effectué une mise à jour ?',
-        icon: 'pi pi-question-circle',
-        acceptButtonStyleClass: 'p-button-success',
-        rejectButtonStyleClass: 'p-button-danger',
-        accept: () => {
-          this._update.activateUpdate().then(() => location.reload());
-        },
-      })
-    );
 }

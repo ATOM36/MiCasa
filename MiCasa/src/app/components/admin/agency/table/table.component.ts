@@ -59,10 +59,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
    * @summary
    * @returns
    */
-  setIndexes = () =>
-    this.agencies.forEach(
-      ($agency) => ($agency.AgenceId = this.agencies.indexOf($agency) + 1)
-    );
+  setIndexes() {
+    for (let i = 0; i < this.agencies.length; i++)
+      this.agencies[i].AgenceId = i + 1;
+  }
 
   /**
    * @summary

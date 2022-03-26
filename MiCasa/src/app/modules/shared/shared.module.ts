@@ -16,6 +16,7 @@ import { MessagesModule } from 'primeng/messages';
 
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
+import { LoadingComponent } from '@pages/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     AgencyTemplateComponent,
     NotFoundComponent,
     AgencyEditTemplateComponent,
+    LoadingComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     FooterComponent,
     AgencyTemplateComponent,
     AgencyEditTemplateComponent,
+    LoadingComponent,
   ],
 })
 export class SharedModule {}
