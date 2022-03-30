@@ -46,6 +46,6 @@ export class ImageCarouselComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.carouselState = 'image';
       this.showSkeleton = false;
-    }, 500);
+    }, 3000);
   }
 }

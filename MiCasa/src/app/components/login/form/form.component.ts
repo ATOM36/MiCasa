@@ -8,11 +8,11 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
 import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
-import { setLocation } from '@utility/location-handler';
+import { isSmallScreen } from '@utility/screen-size';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -46,6 +46,8 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   userIsBlocked: boolean = false;
 
+  isSmall!: boolean;
+
   agency: Agence = {
     AgenceId: null,
     NumeroTelephone: null,
@@ -62,6 +64,10 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   };
 
   subscription!: Subscription;
+
+  availableUpdate: boolean = false;
+
+  wantsUpdate!: boolean;
 
   @Output() registrationModalController = new EventEmitter<boolean>();
 
@@ -81,7 +87,9 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     private _agencyFire: AgencyFireService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isSmall = isSmallScreen();
+  }
 
   ngOnDestroy(): void {
     this._messageService.clear();

@@ -21,6 +21,8 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 // Material Design
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { AppbarComponent } from '../../components/dashboards/appbar/appbar.component';
+import { BottomAppbarComponent } from '../../components/dashboards/bottom-appbar/bottom-appbar.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { MatDividerModule } from '@angular/material/divider';
     TopCardsComponent,
     FeedsComponent,
     SidebarComponent,
+    AppbarComponent,
+    BottomAppbarComponent,
   ],
   imports: [
     CommonModule,
