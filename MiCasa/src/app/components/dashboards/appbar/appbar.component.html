@@ -1,1 +1,98 @@
-<p>appbar works!</p>
+<nav class="navbar navbar-expand-custom navbar-mainbg w-100">
+  <span class="navbar-brand navbar-logo" *ngIf="location?.includes('home')"
+    >MiCasa</span
+  >
+
+  <span
+    *ngIf="location?.includes('admin')"
+    class="brand navbar-brand navbar-logo"
+    >MiCasa Admin</span
+  >
+
+  <span
+    *ngIf="location?.includes('agency')"
+    class="brand navbar-brand navbar-logo"
+    >MiCasa Agence</span
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <i class="fas fa-bars text-white"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <div class="hori-selector">
+        <div class="left"></div>
+        <div class="right"></div>
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#/admin/dashboard"
+          ><i class="fas fa-tachometer-alt"></i>Dashboard</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#/admin/agence"
+          ><i class="far fa-address-book"></i>Address Book</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=""><i class="far fa-clone"></i>Components</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=""
+          ><i class="far fa-calendar-alt"></i>Calendar</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=""><i class="far fa-chart-bar"></i>Charts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href=""><i class="far fa-copy"></i>Documents</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ng-template #admin>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/admin/dashboard"
+      ><i class="pi pi-chart-line"></i>Dashboard</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/not-found"
+      ><i class="pi pi-user"></i>Votre compte</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/admin/agence"
+      ><i class="pi pi-building"></i>Agences</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/not-found"
+      ><i class="pi pi-users"></i>Utilisateurs</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/not-found"
+      ><i class="pi pi-images"></i>Annonces</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/not-found"
+      ><i class="pi pi-thumbs-down"></i>Signalements</a
+    >
+  </li>
+</ng-template>

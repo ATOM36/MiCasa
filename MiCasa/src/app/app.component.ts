@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.hasRefreshed) {
       let location = localStorage.getItem('loc');
       this.router.navigate([`${location}`]);
-    } else this.router.navigate(['/login']);
+    } else this.router.navigate(['/admin/dashboard']);
   }
 
   ngAfterViewInit(): void {}
