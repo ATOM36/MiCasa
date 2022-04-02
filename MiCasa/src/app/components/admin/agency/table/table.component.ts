@@ -55,6 +55,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {}
 
+  //TODO: Le template pour visualiser les données d'une agence
+
   /**
    * @summary
    * @returns
@@ -142,7 +144,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         switch (type) {
           case ConfirmEventType.REJECT:
             this._messageService.add({
-              severity: 'warn',
+              severity: 'info',
               summary: 'Refus',
               detail: "Vous avez annulé l'action",
               key: 'message',
@@ -152,7 +154,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
           case ConfirmEventType.CANCEL:
             this._messageService.add({
-              severity: 'warn',
+              severity: 'info',
               summary: 'Annulation',
               detail: "Vous avez annulé l'opération",
               key: 'message',
@@ -229,7 +231,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         switch (type) {
           case ConfirmEventType.REJECT:
             this._messageService.add({
-              severity: 'warn',
+              severity: 'info',
               summary: 'Refus',
               detail: "Vous avez refusé l'action",
               key: 'message',
@@ -239,7 +241,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
           case ConfirmEventType.CANCEL:
             this._messageService.add({
-              severity: 'warn',
+              severity: 'info',
               summary: 'Annulation',
               detail: "Vous avez annulé l'opération",
               key: 'message',

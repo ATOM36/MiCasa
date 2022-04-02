@@ -3,6 +3,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   margin: 0;
 }
 
@@ -10,17 +11,6 @@ body {
 * {
   font-family: "Amiri", "Helvetica Neue", sans-serif;
 }
-
-html,
-body {
-  width: 100%;
-}
-
-/* Importing Bootstrap SCSS file. */
-@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-
-// Importing AOS styles
-@import "../node_modules/aos/dist/aos.css";
 
 // Importing the colors palettes
 @import "./app/scss/colors";

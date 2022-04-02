@@ -12,7 +12,7 @@ import { Observable, of, switchMap } from 'rxjs';
 export class LoginComponent implements OnInit, AfterViewInit {
   isLoading!: boolean;
 
-  availableUpdate: boolean = false;
+  availableUpdate: boolean = true;
 
   wantsUpdate: boolean = false;
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     setTimeout(() => {
       if (this.isLoading) this.isLoading = false;
-    }, 2400);
+    }, 1200);
   }
 
   /**
@@ -44,31 +44,4 @@ export class LoginComponent implements OnInit, AfterViewInit {
       return true;
     }
   };
-
-  /**
-   * @summary Whenever the app is launched, this function checks if an update has been deployed. If yes, then after `30s`
-   * the user will be prompted to update the app.
-   */
-  checkUpdate(): void {
-    //the pipe operator combines of three operators : switchMap, filter, and map
-    this._update.versionUpdates
-      .pipe(
-        //switchMap is called when a new version is available
-        //it subscribes to the afterDismissed Observable
-        //afterDismissed emits when the snackBar is closed wheter using its API methods or clicking on the action button
-        switchMap(() => this.showUpdateDialog())
-      )
-      .subscribe();
-  }
-
-  /**
-   * @summary Displays a dialog where the user is prompted to update. The user has the free will to do it right now.
-   * @returns An observable that describes whether or not the user has decided to update the app
-   */
-  showUpdateDialog = (): Observable<any> =>
-    of(() =>
-      this.wantsUpdate
-        ? this._update.activateUpdate().then(() => location.reload())
-        : null
-    );
 }

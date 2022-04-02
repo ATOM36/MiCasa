@@ -17,3 +17,15 @@ button {
   margin-top: 10px;
   font-size: large;
 }
+
+@media screen and (min-width: 900px) {
+  .update-choice {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// Update modal text
+p {
+  color: var(--green-pakistan-green);
+}

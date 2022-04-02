@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-// Declaration
+//? Declaration
 import { ToolbarComponent } from '@components/dashboards/toolbar/toolbar.component';
 import { SalesRatioComponent } from '@components/dashboards/sales-ratio/sales-ratio.component';
 import { TopCardsComponent } from '@components/dashboards/top-cards/top-cards.component';
@@ -10,7 +11,7 @@ import { BlogCardsComponent } from '@components/dashboards/blog-cards/blog-cards
 import { TopSellingComponent } from '@components/dashboards/top-selling/top-selling.component';
 import { SidebarComponent } from '@components/dashboards/sidebar/sidebar.component';
 
-// PrimeNg
+//? PrimeNg
 import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
@@ -18,7 +19,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { SidebarModule } from 'primeng/sidebar';
 import { ScrollTopModule } from 'primeng/scrolltop';
 
-// Material Design
+//? Material Design
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 
@@ -36,6 +37,7 @@ import { MatDividerModule } from '@angular/material/divider';
     CommonModule,
     ScrollTopModule,
     MatDividerModule,
+    RouterModule,
     SidebarModule,
     TooltipModule,
     MatToolbarModule,

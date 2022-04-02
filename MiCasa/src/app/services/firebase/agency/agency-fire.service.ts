@@ -9,8 +9,7 @@ import {
   where,
   orderBy,
 } from 'firebase/firestore';
-import { docData } from 'rxfire/firestore';
-import { filter, firstValueFrom, Observable, switchMap } from 'rxjs';
+import { firstValueFrom, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +21,8 @@ export class AgencyFireService {
   constructor(private _firestore: Firestore) {}
 
   /**
-   *
-   * @returns
+   * @summary Gets all related data to agencies registered in the system
+   * @returns A sequence of agencies
    */
   getAllAgencies(): Observable<Agence[]> {
     const $data = collection(this._firestore, 'Agency');
@@ -34,6 +33,12 @@ export class AgencyFireService {
     return this.agencyCollection;
   }
 
+  /**
+   * @summary Used by an agency to create a session
+   * @param $email the agency's email
+   * @param $password the agency's password
+   * @returns All data related to a specific agency
+   */
   logIn($email: string, $password: string): Observable<Agence> {
     // Retrieving the whole agency collection
     const $ref = collection(this._firestore, 'Agency');
@@ -53,9 +58,9 @@ export class AgencyFireService {
   }
 
   /**
-   *
-   * @param $agency
-   * @returns
+   * @summary Registers a new agency in the system
+   * @param $agency A collection a data to insert into the database
+   * @returns Generated data by `Firebase` for the given agency's instance
    */
   registerAgency($agency: Agence) {
     const $agencyCollectionRef = collection(this._firestore, 'Agency');
@@ -63,19 +68,21 @@ export class AgencyFireService {
   }
 
   /**
-   *
-   * @param $agency
-   * @returns
+   * @summary Deletes an agency's account
+   * @param $agency A collection of data used to reference a given agency
+   * @returns `Promise<void>` that can be used to display a message depending on the success
+   * or failure of the opereation
    */
-  delete($agency: Agence) {
+  delete($agency: Agence): Promise<void> {
     const $ref = doc(this._firestore, `Agency/${$agency.id}`);
     return deleteDoc($ref);
   }
 
   /**
-   *
-   * @param $agency
-   * @returns
+   * @summary Updates `public` data related to a given agency.
+   * @param $agency A collection of data that will be set as values for the specified agency
+   * @returns `Promise<void>` that can be used to display a message depending on the success
+   * or failure of the opereation
    */
   update($agency: Agence) {
     const $ref = doc(this._firestore, `Agency/${$agency.id}`);
@@ -90,9 +97,10 @@ export class AgencyFireService {
   }
 
   /**
-   *
-   * @param $id
-   * @returns
+   * @summary Prevents an agency from performing operations
+   * @param $id The `Firebase reference` of the agency
+   * @returns `Promise<void>` that can be used to display a message depending on the success
+   * or failure of the opereation
    */
   blockAgency($id: string) {
     const $ref = doc(this._firestore, `Agency/${$id}`);
@@ -100,9 +108,10 @@ export class AgencyFireService {
   }
 
   /**
-   *
-   * @param $id
-   * @returns
+   * @summary Allows an agency to perform operations again
+   * @param $id The `Firebase reference` of the agency
+   * @returns `Promise<void>` that can be used to display a message depending on the success
+   * or failure of the opereation
    */
   unblockAgency($id: string) {
     const $ref = doc(this._firestore, `Agency/${$id}`);

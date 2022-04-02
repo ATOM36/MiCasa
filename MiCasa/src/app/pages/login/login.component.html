@@ -8,33 +8,4 @@
   </main>
 
   <app-footer></app-footer>
-
-  <!--Update dialog-->
-  <p-dialog
-    *ngIf="availableUpdate"
-    [(visible)]="availableUpdate"
-    [breakpoints]="{ '960px': '75vw' }"
-    [style]="{ width: '50vw' }"
-    [draggable]="false"
-    [resizable]="false"
-    (onHide)="availableUpdate = false"
-  >
-    <app-reset-password></app-reset-password>
-    <ng-template pTemplate="footer">
-      <p-button
-        (click)="wantsUpdate = true"
-        icon="pi pi-check"
-        label="Oui"
-        class="p-button-text accept"
-        [style]="{ color: '#38b000ff' }"
-      ></p-button>
-
-      <p-button
-        (click)="availableUpdate = false"
-        label="Non"
-        styleClass="p-button-text reject"
-        [style]="{ color: '#007200ff' }"
-      ></p-button>
-    </ng-template>
-  </p-dialog>
 </ng-template>
