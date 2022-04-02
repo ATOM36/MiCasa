@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppbarComponent } from './appbar.component';
+import { PrimeiconComponent } from './primeicon.component';
 
-describe('AppbarComponent', () => {
-  let component: AppbarComponent;
-  let fixture: ComponentFixture<AppbarComponent>;
+describe('PrimeiconComponent', () => {
+  let component: PrimeiconComponent;
+  let fixture: ComponentFixture<PrimeiconComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppbarComponent ]
+      declarations: [ PrimeiconComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppbarComponent);
+    fixture = TestBed.createComponent(PrimeiconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,12 +9,20 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
 import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
+import { getSweetAlert } from '@utility/js-libraries';
 import { isSmallScreen } from '@utility/screen-size';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  MessageService,
+} from 'primeng/api';
+import { Observable, of, Subscription, switchMap } from 'rxjs';
+
+var Swal = getSweetAlert();
 
 @Component({
   selector: 'app-form',
@@ -71,20 +79,13 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Output() registrationModalController = new EventEmitter<boolean>();
 
-  /**
-   * @summary If the two entries have a value, then the login button is pressed
-   */
-  @HostListener('window:keydown.enter') onEnter() {
-    if (this.myForm.get('email')?.value && this.myForm.get('password')?.value)
-      document.getElementById('goButton')?.click();
-  }
-
   constructor(
     private _router: Router,
     private _agencyService: AgencyService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _agencyFire: AgencyFireService
+    private _agencyFire: AgencyFireService,
+    private _update: SwUpdate
   ) {}
 
   ngOnInit(): void {
@@ -95,24 +96,21 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     this._messageService.clear();
   }
 
-  ngAfterViewInit(): void {
-    // could be anything
-    // if (document.cookie.indexOf('mycookie') == -1) {
-    //   // cookie doesn't exist, create it now
-    // } else {
-    //   // not first visit, so alert
-    //   alert('You refreshed!');
-    // }
-  }
+  ngAfterViewInit(): void {}
 
-  // checkReload = () => setInterval(() => {
-  //   if(document.cookie.)
-  // }, 200);
+  /**
+   * @summary If the two entries have a value, then the login button can be called
+   */
+  @HostListener('window:keydown.enter')
+  onEnter() {
+    if (this.myForm.get('email')?.value && this.myForm.get('password')?.value)
+      document.getElementById('goButton')?.click();
+  }
 
   /**
    * @summary Gets all data of a given agency, does some control and then redirect it to its account page
    */
-  lezgo() {
+  lezgo(): void {
     let emailEntry = String(this.myForm.get('email')?.value);
 
     console.log('Request sent');
@@ -179,7 +177,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
    * @param answer sent by the FormButtonComponent
    * @emits a boolean set to true
    */
-  displayRegistrationModal(answer: boolean) {
+  displayRegistrationModal(answer: boolean): void {
     this.displayRegistration = answer;
   }
 
@@ -191,7 +189,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * @summary Displays a form so that an agency can be registered
    */
-  choseAgency() {
+  choseAgency(): void {
     this.choosenType = 'Agency';
     this.displayRegistration = true;
   }
@@ -199,7 +197,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * @summary Displays a form so that a user can sign up
    */
-  choseUser() {
+  choseUser(): void {
     this.choosenType = 'User';
     this.displayRegistration = true;
   }
@@ -207,7 +205,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   /**
    * @summary Hides signing up buttons
    */
-  hideRegistration() {
+  hideRegistration(): void {
     this.displayRegistration = false;
     this.displayOptions = false;
   }
@@ -231,4 +229,65 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.agency.Adresse = Data[10];
     this.agency.IsBlocked = Data[11];
   };
+
+  /**
+   * @summary Checks whether or not a `new version` of the app has been deployed.
+   * If yes, then a confirmation dialog will be shown to the user after `30s`.
+   */
+  checkUpdate(): void {
+    this._update.versionUpdates
+      .pipe(
+        //? switchMap is called when a new version is available
+        //? By doing this, the confirmation dialog will be shown to the user
+        switchMap(() => this.showUpdateDialog())
+      )
+      .subscribe();
+  }
+
+  /**
+   * @summary This function holds the whole process of updating the app.
+   * When the `SwUpdate` service checks whether or not an update is avaible, this function will show a
+   * confirmation modal to control the update operation
+   * @returns A observable of `ConfirmationService` to which we can subscribe to control the app's update state
+   */
+  showUpdateDialog = (): Observable<ConfirmationService> =>
+    of(
+      this._confirmationService.confirm({
+        header: 'Mise à jour disponible',
+
+        message:
+          'Une nouvelle version est disponible !\nVoulez vous effectué une mise à jour ?',
+
+        icon: 'pi pi-question-circle',
+
+        accept: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Mise à jour',
+            html: '<p> Mise à jour en cours </p>',
+          })
+            .then(() => this._update.activateUpdate())
+            .then((response: boolean) =>
+              response
+                ? location.reload()
+                : Swal.fire({
+                    title: 'Mise à jour',
+                    icon: 'error',
+                    html:
+                      '<p>Erreur lors de la mise à jour!</p><br/>' +
+                      '<p>Vous pourrez réesayer plus tard',
+                  })
+            );
+        },
+
+        reject: () => {
+          Swal.fire({
+            title: 'Annulation',
+            icon: 'info',
+            html: '<p>Vous pourrez effectuer la mise à jour plus </p>',
+            showCloseButton: true,
+          });
+        },
+      })
+    );
 }

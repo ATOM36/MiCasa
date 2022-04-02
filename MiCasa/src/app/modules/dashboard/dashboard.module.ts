@@ -10,8 +10,6 @@ import { FeedsComponent } from '@components/dashboards/feeds/feeds.component';
 import { BlogCardsComponent } from '@components/dashboards/blog-cards/blog-cards.component';
 import { TopSellingComponent } from '@components/dashboards/top-selling/top-selling.component';
 import { SidebarComponent } from '@components/dashboards/sidebar/sidebar.component';
-import { AppbarComponent } from '@components/dashboards/appbar/appbar.component';
-import { BottomAppbarComponent } from '@components/dashboards/bottom-appbar/bottom-appbar.component';
 
 //? PrimeNg
 import { ChartModule } from 'primeng/chart';
@@ -34,8 +32,6 @@ import { MatDividerModule } from '@angular/material/divider';
     TopCardsComponent,
     FeedsComponent,
     SidebarComponent,
-    AppbarComponent,
-    BottomAppbarComponent,
   ],
   imports: [
     CommonModule,
@@ -57,8 +53,6 @@ import { MatDividerModule } from '@angular/material/divider';
     TopCardsComponent,
     FeedsComponent,
     SidebarComponent,
-    AppbarComponent,
-    BottomAppbarComponent,
   ],
 })
 export class DashboardModule {}

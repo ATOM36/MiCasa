@@ -15,17 +15,17 @@ export class SalesRatioComponent implements OnInit {
 
   loadData() {
     const res = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet'],
       datasets: [
         {
-          label: 'First Dataset',
+          label: 'Agences',
           data: [65, 59, 80, 81, 56, 55, 40],
           fill: false,
           tension: 0.4,
           borderColor: '#42A5F5',
         },
         {
-          label: 'Second Dataset',
+          label: 'Utilisateurs',
           data: [28, 48, 40, 19, 86, 27, 90],
           fill: false,
           borderDash: [5, 5],
@@ -33,7 +33,7 @@ export class SalesRatioComponent implements OnInit {
           borderColor: '#66BB6A',
         },
         {
-          label: 'Third Dataset',
+          label: 'Annonces',
           data: [12, 51, 62, 33, 21, 62, 45],
           fill: true,
           borderColor: '#FFA726',

@@ -2,21 +2,34 @@
   data-aos="fade-down"
   data-aos-duration="1200"
   data-aos-easing="ease-in-out"
+  class="sticky-top d-block"
 >
   <button
     pButton
     pRipple
     type="button"
-    class="toggler-left p-button p-button-raised p-button-text p-button-success p-button-rounded"
+    class="toggler-left p-button p-button-raised p-button-text p-button-success p-button-rounded mt-lg-2 mt-md-5"
     icon="pi pi-bars"
     (click)="isToggled = true"
   ></button>
 
-  <span class="brand" *ngIf="location?.includes('home')">MiCasa</span>
+  <span
+    *ngIf="location?.includes('home')"
+    class="brand d-inline-block mt-2 mt-md-3"
+    >MiCasa</span
+  >
 
-  <span *ngIf="location?.includes('admin')" class="brand">MiCasa Admin</span>
+  <span
+    *ngIf="location?.includes('admin')"
+    class="brand d-inline-block mt-2 mt-md-3"
+    >MiCasa Admin</span
+  >
 
-  <span *ngIf="location?.includes('agency')" class="brand">MiCasa Agence</span>
+  <span
+    *ngIf="location?.includes('agency')"
+    class="brand d-inline-block mt-2 mt-md-3"
+    >MiCasa Agence</span
+  >
 
   <button
     pButton

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 //? Firebase
@@ -24,6 +23,7 @@ import { HomeModule } from '@modules/home/home.module';
 import { AdminModule } from '@modules/admin/admin.module';
 import { AgencyModule } from '@modules/agency/agency.module';
 import { SharedModule } from '@modules/shared/shared.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,12 +38,6 @@ import { SharedModule } from '@modules/shared/shared.module';
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
@@ -51,6 +45,12 @@ import { SharedModule } from '@modules/shared/shared.module';
     provideFunctions(() => getFunctions()),
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
 
   bootstrap: [AppComponent],

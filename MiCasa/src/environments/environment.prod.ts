@@ -2,7 +2,6 @@ export const environment = {
   firebase: {
     projectId: 'micasa-project-3e207',
     appId: '1:194476213453:web:b5e637f2069a2835f41584',
-    databaseURL: 'https://micasa-project-3e207-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'micasa-project-3e207.appspot.com',
     locationId: 'europe-west',
     apiKey: 'AIzaSyDkRtTUxZUUb38rcWvhYWIZp7b2hV9KgTI',

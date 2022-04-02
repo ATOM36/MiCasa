@@ -17,6 +17,8 @@ import { MessagesModule } from 'primeng/messages';
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { LoadingComponent } from '@pages/loading/loading.component';
+import { PrimebuttonComponent } from '../../components/shared/primebutton/primebutton.component';
+import { PrimeiconComponent } from '../../components/shared/primeicon/primeicon.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { LoadingComponent } from '@pages/loading/loading.component';
     NotFoundComponent,
     AgencyEditTemplateComponent,
     LoadingComponent,
+    PrimebuttonComponent,
+    PrimeiconComponent,
   ],
   imports: [
     CommonModule,
