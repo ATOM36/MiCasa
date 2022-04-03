@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
-import * as AOS from 'aos';
+import { getAos } from '@utility/js-libraries';
 
+var AOS = getAos();
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.hasRefreshed) {
       let location = localStorage.getItem('loc');
       this.router.navigate([`${location}`]);
-    } else this.router.navigate(['/login']);
+    } else this.router.navigate(['/admin/dashboard']);
   }
 
   ngAfterViewInit(): void {}

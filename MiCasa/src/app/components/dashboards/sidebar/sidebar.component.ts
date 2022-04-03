@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Administrateur } from '@models/api/administrator';
 import { Agence } from '@models/api/agency';
-import { PrimeIcons } from 'primeng/api';
+import { MenuItem, PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +10,7 @@ import { PrimeIcons } from 'primeng/api';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
-  links: any;
+  links!: MenuItem[];
 
   @Input() location!: string;
 
@@ -22,7 +22,9 @@ export class SidebarComponent implements OnInit {
 
   @Input() admin: Administrateur | undefined;
 
-  constructor(private router: Router) {}
+  displayWeather: boolean = false;
+
+  constructor(private _router: Router) {}
 
   ngOnInit(): void {
     // Loading links depending on the context
@@ -33,43 +35,48 @@ export class SidebarComponent implements OnInit {
   loadLinks = () => {
     this.links = [
       {
-        route: '/admin/dashboard',
+        routerLink: '/admin/dashboard',
         label: 'Dashboard',
         icon: PrimeIcons.CHART_LINE,
         tooltip: 'Aller au dashboard',
       },
       {
-        route: '/admin/account',
+        routerLink: '/admin/account',
         label: 'Votre compte',
         icon: PrimeIcons.USER,
         tooltip: 'Gérer vos informations personnelles',
       },
       {
-        route: '/admin/agence',
+        routerLink: '/admin/agence',
         label: 'Agences',
         icon: PrimeIcons.BUILDING,
         tooltip: 'Section des agences',
       },
       {
-        route: '/admin/users',
+        routerLink: '/admin/users',
         label: 'Utilisateurs',
         icon: PrimeIcons.USERS,
         tooltip: 'Section des utilisateurs',
       },
       {
-        route: '/admin/publications',
+        routerLink: '/admin/publications',
         label: 'Annonces',
         icon: PrimeIcons.IMAGE,
         tooltip: 'Section des annonces',
       },
       {
-        route: '/admin/reports',
+        routerLink: '/admin/reports',
         label: 'Les signalements',
         icon: PrimeIcons.THUMBS_DOWN,
         tooltip: 'Sections des signalements',
       },
       {
-        route: '/login',
+        label: 'Météo',
+        icon: PrimeIcons.CLOUD,
+        tooltip: 'Affiche la météo locale',
+      },
+      {
+        routerLink: '/login',
         label: 'Déconnexion',
         icon: PrimeIcons.SIGN_OUT,
         tooltip: 'Terminer votre session',
@@ -80,37 +87,37 @@ export class SidebarComponent implements OnInit {
   loadAgencyLinks = () => {
     this.links = [
       {
-        route: '/agency/dashboard',
+        routerLink: '/agency/dashboard',
         label: 'Dashboard',
         icon: PrimeIcons.CHART_LINE,
         tooltip: "Consulter le dashboard de l'agence",
       },
       {
-        route: '/agency/account',
+        routerLink: '/agency/account',
         label: 'Votre compte',
         icon: PrimeIcons.USER,
         tooltip: "Consulter les données relatives à l'agence",
       },
       {
-        route: '/agency/create',
+        routerLink: '/agency/create',
         label: 'Publier une annonce',
         icon: PrimeIcons.PLUS_CIRCLE,
         tooltip: 'Ajouter une nouvelle annonce sur la plateforme',
       },
       {
-        route: '/agency/publications',
+        routerLink: '/agency/publications',
         label: 'Vos annonces',
         icon: PrimeIcons.IMAGES,
         tooltip: 'Consulter toutes les annonces que vous avez publié',
       },
       {
-        route: '/agency/edit',
+        routerLink: '/agency/edit',
         label: 'Mettre à jour',
         icon: PrimeIcons.USER_EDIT,
         tooltip: "Modifier les informations relative l'agence",
       },
       {
-        route: '/login',
+        routerLink: '/login',
         label: 'Déconnexion',
         icon: PrimeIcons.SIGN_OUT,
         tooltip: 'Terminer votre session',
@@ -118,12 +125,14 @@ export class SidebarComponent implements OnInit {
     ];
   };
 
-  lezgo(route: string) {
-    if (route === '/login') {
+  lezgo(routerLink: string) {
+    if (routerLink === '/login') {
       sessionStorage.clear();
-      this.router.navigate([`${route}`]);
-    } else this.router.navigate([`${route}`]);
+      this._router.navigate([`${routerLink}`]);
+    } else this._router.navigate([`${routerLink}`]);
   }
+
+  displayWeatherDialog = () => (this.displayWeather = true);
 
   notifyClosing = () => this.closeNotifier.emit(false);
 }

@@ -13,8 +13,14 @@ export const environment = {
     messagingSenderId: '194476213453',
     measurementId: 'G-TLLYF0SZGN',
   },
+
   production: false,
   apiUrl: 'http://localhost:5000/api/',
+
+  openWeather: {
+    apiUrl: 'https://api.openweathermap.org/data/2.5/',
+    apiKey: 'a77aa463da3599204abbaf825e980b26',
+  },
 };
 
 /*

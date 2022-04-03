@@ -32,3 +32,17 @@ body {
     background: var(--red-cardinal);
   }
 }
+
+//? cross browser configs
+body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+//? End cross browser config
