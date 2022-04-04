@@ -1,7 +1,7 @@
 {
   "name": "MiCasa",
   "short_name": "MiCasa",
-  "lang": "fr",
+  "lang": "fr-FR",
   "theme_color": "#38b000ff",
   "background_color": "#fff",
   "display": "standalone",

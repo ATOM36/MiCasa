@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
-import * as AOS from 'aos';
+import { getAos } from '@utility/js-libraries';
 
+var AOS = getAos();
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

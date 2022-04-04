@@ -10,6 +10,7 @@ import { FeedsComponent } from '@components/dashboards/feeds/feeds.component';
 import { BlogCardsComponent } from '@components/dashboards/blog-cards/blog-cards.component';
 import { TopSellingComponent } from '@components/dashboards/top-selling/top-selling.component';
 import { SidebarComponent } from '@components/dashboards/sidebar/sidebar.component';
+import { WeatherComponent } from '@components/dashboards/weather/weather.component';
 
 //? PrimeNg
 import { ChartModule } from 'primeng/chart';
@@ -18,10 +19,12 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { SidebarModule } from 'primeng/sidebar';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { DialogModule } from 'primeng/dialog';
 
 //? Material Design
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { MatDividerModule } from '@angular/material/divider';
     TopCardsComponent,
     FeedsComponent,
     SidebarComponent,
+    WeatherComponent,
   ],
   imports: [
     CommonModule,
@@ -39,11 +43,13 @@ import { MatDividerModule } from '@angular/material/divider';
     MatDividerModule,
     RouterModule,
     SidebarModule,
+    MatCardModule,
     TooltipModule,
     MatToolbarModule,
     CardModule,
     ChartModule,
     ButtonModule,
+    DialogModule,
   ],
   exports: [
     BlogCardsComponent,
@@ -53,6 +59,7 @@ import { MatDividerModule } from '@angular/material/divider';
     TopCardsComponent,
     FeedsComponent,
     SidebarComponent,
+    WeatherComponent,
   ],
 })
 export class DashboardModule {}

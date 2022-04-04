@@ -1,4 +1,7 @@
 //? JS types
+
+import * as Aos from 'aos';
+
 //? jquery
 declare const $: JQueryStatic;
 
@@ -7,6 +10,10 @@ declare const moment: any;
 
 //? SweetAlert2
 declare const Swal: any;
+
+//? AOS
+declare const AOS: any;
+
 //? Helper functions
 /**
  * @returns A reference to `JQueryStatic` element
@@ -25,3 +32,9 @@ export const getMoment = () => moment;
  * @see https://sweetalert2.github.io/
  */
 export const getSweetAlert = () => Swal;
+
+/**
+ * @returns An instance of `AOS` interface
+ * @see https://michalsnik.github.io/aos/
+ */
+export const getAos = () => AOS;
