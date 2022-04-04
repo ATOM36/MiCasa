@@ -90,6 +90,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.isSmall = isSmallScreen();
+    this.checkUpdate();
   }
 
   ngOnDestroy(): void {
@@ -116,7 +117,8 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('Request sent');
 
     if (emailEntry.endsWith('agence')) {
-      console.log('Is agency');
+      this._router.navigate([`agency/lelo/account`]);
+      /* console.log('Is agency');
       this._agencyFire
         .logIn(
           //? removing useless data
@@ -133,7 +135,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
             sessionStorage.setItem('a-x', JSON.stringify($response));
             this._router.navigate([`agency/${$response.Nom}/account`]);
           }
-        });
+        });*/
     } else if (emailEntry.endsWith('admin'))
       this._router.navigate(['/admin/dashboard']);
 
