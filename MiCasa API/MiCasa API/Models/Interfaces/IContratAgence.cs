@@ -2,15 +2,16 @@
 {
     public interface IContratAgence
     {
+
         Task<Message> CreateContract(ContratAgence contrat);
 
-        Task<QueryData<ContratAgence>> Select(int id);
+        Task<QueryData<object>> Select(int id);
 
-        Task<IAsyncEnumerable<object>> SelectRange(int start, int end);
+        Task<QueryData<object>> SelectRange(int start, int end);
 
-        Task<Message> Activate(int id);
+        Task<Message> Activate(int id, string email, string name);
 
-        Task<Message> ActivateRange(List<int> idList);
+        Task<Message> ActivateRange(List<int> idList, List<string> emails, List<string> names);
 
         Task<Message> Delete(int id);
 
