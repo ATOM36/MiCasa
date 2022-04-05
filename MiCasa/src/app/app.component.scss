@@ -1,0 +1,13 @@
+.mobile-sidenav {
+  width: 35vw;
+}
+
+.large-sidenav {
+  width: 18vw;
+}
+
+@media screen and (max-width: 890px) {
+  .mobile-sidenav {
+    width: 50vw;
+  }
+}

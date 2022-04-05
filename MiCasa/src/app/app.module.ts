@@ -24,6 +24,12 @@ import { AdminModule } from '@modules/admin/admin.module';
 import { AgencyModule } from '@modules/agency/agency.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { DashboardModule } from '@modules/dashboard/dashboard.module';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +42,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatSidenavModule,
+    MatListModule,
+    DashboardModule,
+    ButtonModule,
+    DialogModule,
+    TooltipModule,
     SharedModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -49,7 +61,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
 

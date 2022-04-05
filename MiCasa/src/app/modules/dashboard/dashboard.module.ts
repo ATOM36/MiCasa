@@ -9,7 +9,6 @@ import { TopCardsComponent } from '@components/dashboards/top-cards/top-cards.co
 import { FeedsComponent } from '@components/dashboards/feeds/feeds.component';
 import { BlogCardsComponent } from '@components/dashboards/blog-cards/blog-cards.component';
 import { TopSellingComponent } from '@components/dashboards/top-selling/top-selling.component';
-import { SidebarComponent } from '@components/dashboards/sidebar/sidebar.component';
 import { WeatherComponent } from '@components/dashboards/weather/weather.component';
 
 //? PrimeNg
@@ -25,6 +24,8 @@ import { DialogModule } from 'primeng/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -34,12 +35,13 @@ import { MatCardModule } from '@angular/material/card';
     SalesRatioComponent,
     TopCardsComponent,
     FeedsComponent,
-    SidebarComponent,
     WeatherComponent,
   ],
   imports: [
     CommonModule,
     ScrollTopModule,
+    MatListModule,
+    MatSidenavModule,
     MatDividerModule,
     RouterModule,
     SidebarModule,
@@ -58,7 +60,6 @@ import { MatCardModule } from '@angular/material/card';
     SalesRatioComponent,
     TopCardsComponent,
     FeedsComponent,
-    SidebarComponent,
     WeatherComponent,
   ],
 })

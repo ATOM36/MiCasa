@@ -1,8 +1,9 @@
 <mat-card
   *ngIf="weather"
   data-aos="zoom-in"
-  data-aos-duration="1500"
+  data-aos-duration="1000"
   data-aos-easing="ease-out"
+  [class]="isSmall ? '' : 'w-50'"
 >
   <mat-card-header>
     <mat-card-title

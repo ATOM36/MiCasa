@@ -2,7 +2,7 @@
   data-aos="fade-down"
   data-aos-duration="1200"
   data-aos-easing="ease-in-out"
-  class="sticky-top d-block"
+  class="sticky-top d-block mat-elevation-z6"
 >
   <button
     pButton
@@ -10,7 +10,7 @@
     type="button"
     class="toggler-left p-button p-button-raised p-button-text p-button-success p-button-rounded mt-lg-2 mt-md-5"
     icon="pi pi-bars"
-    (click)="isToggled = true"
+    (click)="sidenav.toggle()"
   ></button>
 
   <span
@@ -37,17 +37,9 @@
     type="button"
     class="toggler-right p-button p-button-raised p-button-text p-button-success p-button-rounded"
     icon="pi pi-bars"
-    (click)="isToggled = true"
+    (click)="sidenav.toggle()"
   ></button>
 </mat-toolbar>
-
-<app-sidebar
-  [isVisible]="isToggled"
-  [location]="location"
-  [agency]="agency"
-  [admin]="admin"
-  (closeNotifier)="listenToClosing(isToggled)"
-></app-sidebar>
 
 <p-scrollTop
   [threshold]="200"

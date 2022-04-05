@@ -7,18 +7,17 @@ import { AgencyEditTemplateComponent } from '@components/shared/agency-edit-temp
 import { AgencyTemplateComponent } from '@components/shared/agency-template/agency-template.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
 import { NotFoundComponent } from '@pages/not-found/not-found.component';
+import { PrimebuttonComponent } from '@components/shared/primebutton/primebutton.component';
+import { PrimeiconComponent } from '@components/shared/primeicon/primeicon.component';
 
 //? PrimeNg
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
 
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { LoadingComponent } from '@pages/loading/loading.component';
-import { PrimebuttonComponent } from '../../components/shared/primebutton/primebutton.component';
-import { PrimeiconComponent } from '../../components/shared/primeicon/primeicon.component';
 
 @NgModule({
   declarations: [

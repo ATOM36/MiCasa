@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Weather } from '@models/utility/weather';
 import { WeatherService } from '@services/utility/weather.service';
+import { isSmallScreen } from '@utility/screen-size';
 
 @Component({
   selector: 'app-weather',
@@ -9,6 +10,7 @@ import { WeatherService } from '@services/utility/weather.service';
 })
 export class WeatherComponent implements OnInit {
   weather!: Weather;
+  isSmall = isSmallScreen();
   constructor(private _service: WeatherService) {}
 
   ngOnInit(): void {
