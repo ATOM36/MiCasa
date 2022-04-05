@@ -8,6 +8,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { Agence } from '@models/api/agency';
@@ -32,7 +33,7 @@ var Swal = getSweetAlert();
 })
 export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   myForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
 
     password: new FormControl('', [
       Validators.required,
@@ -76,6 +77,8 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   availableUpdate: boolean = false;
 
   wantsUpdate!: boolean;
+
+  errorMatcher = new ErrorStateMatcher();
 
   @Output() registrationModalController = new EventEmitter<boolean>();
 

@@ -27,26 +27,22 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
-import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    LoginModule,
     HomeModule,
     AdminModule,
     AgencyModule,
     CommonModule,
+    LoginModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatListModule,
     DashboardModule,
-    ButtonModule,
-    DialogModule,
     TooltipModule,
     SharedModule,
     AppRoutingModule,

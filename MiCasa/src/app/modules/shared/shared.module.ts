@@ -18,6 +18,13 @@ import { MessageModule } from 'primeng/message';
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { LoadingComponent } from '@pages/loading/loading.component';
+import { AgencyFormComponent } from '@components/login/agency-form/agency-form.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormField } from '@angular/material/form-field';
+import { LoginHelperModule } from '@modules/login/helper.module';
 
 @NgModule({
   declarations: [
@@ -28,20 +35,37 @@ import { LoadingComponent } from '@pages/loading/loading.component';
     LoadingComponent,
     PrimebuttonComponent,
     PrimeiconComponent,
+    AgencyFormComponent,
   ],
   imports: [
+    //? Angular
     CommonModule,
-    MessageModule,
     FormsModule,
+
+    //? Prime
+    MessageModule,
     InputTextModule,
-    MatStepperModule,
     ButtonModule,
+    ConfirmDialogModule,
+    ToastModule,
+
+    //? Material
+    MatStepperModule,
+    LoginHelperModule,
   ],
   exports: [
     FooterComponent,
     AgencyTemplateComponent,
     AgencyEditTemplateComponent,
     LoadingComponent,
+    AgencyFormComponent,
+
+    //? Modules
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    ToastModule,
+    MatIconModule,
   ],
 })
 export class SharedModule {}

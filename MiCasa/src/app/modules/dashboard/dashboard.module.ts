@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 //? Declaration
 import { ToolbarComponent } from '@components/dashboards/toolbar/toolbar.component';
@@ -16,15 +15,12 @@ import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { SidebarModule } from 'primeng/sidebar';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { DialogModule } from 'primeng/dialog';
 
 //? Material Design
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 
 @NgModule({
@@ -41,10 +37,6 @@ import { MatListModule } from '@angular/material/list';
     CommonModule,
     ScrollTopModule,
     MatListModule,
-    MatSidenavModule,
-    MatDividerModule,
-    RouterModule,
-    SidebarModule,
     MatCardModule,
     TooltipModule,
     MatToolbarModule,
@@ -61,6 +53,9 @@ import { MatListModule } from '@angular/material/list';
     TopCardsComponent,
     FeedsComponent,
     WeatherComponent,
+
+    //? Modules
+    TooltipModule,
   ],
 })
 export class DashboardModule {}
