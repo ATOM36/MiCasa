@@ -7,18 +7,24 @@ import { AgencyEditTemplateComponent } from '@components/shared/agency-edit-temp
 import { AgencyTemplateComponent } from '@components/shared/agency-template/agency-template.component';
 import { FooterComponent } from '@components/shared/footer/footer.component';
 import { NotFoundComponent } from '@pages/not-found/not-found.component';
+import { PrimebuttonComponent } from '@components/shared/primebutton/primebutton.component';
+import { PrimeiconComponent } from '@components/shared/primeicon/primeicon.component';
 
 //? PrimeNg
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
 
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { LoadingComponent } from '@pages/loading/loading.component';
-import { PrimebuttonComponent } from '../../components/shared/primebutton/primebutton.component';
-import { PrimeiconComponent } from '../../components/shared/primeicon/primeicon.component';
+import { AgencyFormComponent } from '@components/login/agency-form/agency-form.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormField } from '@angular/material/form-field';
+import { LoginHelperModule } from '@modules/login/helper.module';
 
 @NgModule({
   declarations: [
@@ -29,20 +35,37 @@ import { PrimeiconComponent } from '../../components/shared/primeicon/primeicon.
     LoadingComponent,
     PrimebuttonComponent,
     PrimeiconComponent,
+    AgencyFormComponent,
   ],
   imports: [
+    //? Angular
     CommonModule,
-    MessageModule,
     FormsModule,
+
+    //? Prime
+    MessageModule,
     InputTextModule,
-    MatStepperModule,
     ButtonModule,
+    ConfirmDialogModule,
+    ToastModule,
+
+    //? Material
+    MatStepperModule,
+    LoginHelperModule,
   ],
   exports: [
     FooterComponent,
     AgencyTemplateComponent,
     AgencyEditTemplateComponent,
     LoadingComponent,
+    AgencyFormComponent,
+
+    //? Modules
+    ButtonModule,
+    DialogModule,
+    InputTextModule,
+    ToastModule,
+    MatIconModule,
   ],
 })
 export class SharedModule {}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Label="" LastModificationDate="1649084245" Name="diagrams" Objects="180" Symbols="28" Target="C# 2.0" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.7.3.6726"?>
+<?PowerDesigner AppLocale="UTF16" ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Label="" LastModificationDate="1649084694" Name="diagrams" Objects="180" Symbols="31" Target="C# 2.0" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.7.3.6726"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1621,7 +1621,7 @@ Shadow=0</a:DisplayPreferences>
 <o:AssociationSymbol Id="o14">
 <a:CreationDate>1646992215</a:CreationDate>
 <a:ModificationDate>1649081843</a:ModificationDate>
-<a:Rect>((-24476,-33), (8092,1886))</a:Rect>
+<a:Rect>((-24476,-30), (8092,1889))</a:Rect>
 <a:ListOfPoints>((-24076,930),(7692,930))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
@@ -1752,7 +1752,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1649081809</a:CreationDate>
 <a:ModificationDate>1649081845</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-16180,8424), (-3802,16042))</a:Rect>
+<a:Rect>((-16119,8424), (-3863,16042))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:FillColor>16770222</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2573,7 +2573,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Agence</a:Code>
 <a:CreationDate>1646921904</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649081832</a:ModificationDate>
+<a:ModificationDate>1649084694</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
@@ -2715,7 +2715,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Administrateur</a:Code>
 <a:CreationDate>1646921910</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649081832</a:ModificationDate>
+<a:ModificationDate>1649084694</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
@@ -2849,11 +2849,11 @@ LABL 0 Arial,8,N</a:FontList>
 <c:Attributes>
 <o:Attribute Id="o88">
 <a:ObjectID>2552CB90-0622-44D3-8551-F9B44D5CE95B</a:ObjectID>
-<a:Name>ContratAgenceId</a:Name>
-<a:Code>contratAgenceId</a:Code>
+<a:Name>ContratId</a:Name>
+<a:Code>contratId</a:Code>
 <a:CreationDate>1649081875</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649081955</a:ModificationDate>
+<a:ModificationDate>1649084658</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:DataType>int</a:DataType>
 </o:Attribute>
@@ -3167,9 +3167,9 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Association1</a:Code>
 <a:CreationDate>1646992215</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649083327</a:ModificationDate>
+<a:ModificationDate>1649084694</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
-<a:RoleAMultiplicity>0..1</a:RoleAMultiplicity>
+<a:RoleAMultiplicity>1..1</a:RoleAMultiplicity>
 <a:RoleBMultiplicity>0..*</a:RoleBMultiplicity>
 <a:RoleBNavigability>0</a:RoleBNavigability>
 <a:ExtendedAttributesText>{48DE8DAA-F163-416B-ACAA-3F3ABD6F9EE9},C# 2,154={B30A1960-E74E-41E5-88BC-74AF259F1A68},roleAContainer,6=&lt;None&gt;

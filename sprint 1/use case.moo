@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Label="" LastModificationDate="1649084694" Name="diagrams" Objects="180" Symbols="31" Target="C# 2.0" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.7.3.6726"?>
+<?PowerDesigner AppLocale="UTF16" ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Label="" LastModificationDate="1649084932" Name="diagrams" Objects="194" Symbols="28" Target="C# 2.0" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.7.3.6726"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -980,7 +980,7 @@ IndxFKName=%REFR%_FK
 IndxThreshold=
 ColnFKName=%.3:PARENT%_%COLUMN%
 ColnFKNameUse=No</a:ModelOptionsText>
-<a:RepositoryFilename>C:\Users\tchio\Documents\TP\Agile\sprint 1\use case.moo</a:RepositoryFilename>
+<a:RepositoryFilename>C:\Users\tchio\Documents\TP\Agile\MiCasa\sprint 1\use case.moo</a:RepositoryFilename>
 <c:Keywords>
 <o:Keyword Id="o3">
 <a:ObjectID>193067A6-5AFF-46D2-99B1-98365541635B</a:ObjectID>
@@ -1621,7 +1621,7 @@ Shadow=0</a:DisplayPreferences>
 <o:AssociationSymbol Id="o14">
 <a:CreationDate>1646992215</a:CreationDate>
 <a:ModificationDate>1649081843</a:ModificationDate>
-<a:Rect>((-24476,-30), (8092,1889))</a:Rect>
+<a:Rect>((-24476,-32), (8092,1887))</a:Rect>
 <a:ListOfPoints>((-24076,930),(7692,930))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
@@ -1662,8 +1662,8 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:GeneralizationSymbol Id="o19">
 <a:CreationDate>1649084135</a:CreationDate>
 <a:ModificationDate>1649084248</a:ModificationDate>
-<a:Rect>((-37321,5539), (-35521,16012))</a:Rect>
-<a:ListOfPoints>((-36421,5939),(-36421,15612))</a:ListOfPoints>
+<a:Rect>((-37321,5539), (-35521,14092))</a:Rect>
+<a:ListOfPoints>((-36421,5939),(-36421,13692))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>7</a:ArrowStyle>
 <a:LineColor>0</a:LineColor>
@@ -1775,7 +1775,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1649084126</a:CreationDate>
 <a:ModificationDate>1649084248</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-47100,15612), (-25742,24230))</a:Rect>
+<a:Rect>((-49666,13692), (-23176,26150))</a:Rect>
 <a:LineColor>16744576</a:LineColor>
 <a:FillColor>16765136</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -2843,7 +2843,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>ContratAgence</a:Code>
 <a:CreationDate>1649081809</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649082254</a:ModificationDate>
+<a:ModificationDate>1649084932</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
@@ -3086,7 +3086,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>IContratAgence</a:Code>
 <a:CreationDate>1649084126</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649084843</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <a:Classifier.Abstract>1</a:Classifier.Abstract>
@@ -3097,65 +3097,241 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>CreateContract</a:Code>
 <a:CreationDate>1649084138</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649084871</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:ReturnType>Task&lt;Message&gt;</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o108">
+<a:ObjectID>F549D609-430B-4BA8-A02B-8E42010F0B7E</a:ObjectID>
+<a:Name>contrat</a:Name>
+<a:Code>contrat</a:Code>
+<a:CreationDate>1649084850</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084871</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>ContratAgence</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+<c:ObjectDataType>
+<o:Class Ref="o25"/>
+</c:ObjectDataType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
-<o:Operation Id="o108">
+<o:Operation Id="o109">
 <a:ObjectID>073E4A3B-496E-4DF7-BE4E-6E1118FA7A18</a:ObjectID>
 <a:Name>Select</a:Name>
 <a:Code>Select</a:Code>
 <a:CreationDate>1649084138</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649097018</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
-<a:ReturnType>Task&lt;Query&lt;ContratAgence&gt;&gt;</a:ReturnType>
+<a:ReturnType>Task&lt;Query&lt;object&gt;&gt;</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o110">
+<a:ObjectID>4BDB7C66-7581-435F-869D-89612154C052</a:ObjectID>
+<a:Name>id</a:Name>
+<a:Code>id</a:Code>
+<a:CreationDate>1649084873</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084879</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
-<o:Operation Id="o109">
+<o:Operation Id="o111">
 <a:ObjectID>D4D2C808-FA57-4F4E-8CE5-1A740229904C</a:ObjectID>
 <a:Name>SelectRange</a:Name>
 <a:Code>SelectRange</a:Code>
 <a:CreationDate>1649084138</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649097018</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
-<a:ReturnType>Task&lt;IAsyncEnumerable&lt;object&gt;&gt;</a:ReturnType>
+<a:ReturnType>Task&lt;QueryData&lt;object&gt;&gt;</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o112">
+<a:ObjectID>DC8D4C92-FD03-4E7F-9905-912BFE4C5C56</a:ObjectID>
+<a:Name>start</a:Name>
+<a:Code>start</a:Code>
+<a:CreationDate>1649084882</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084891</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o113">
+<a:ObjectID>5DAC1F03-E26B-4455-BB91-8D7AFE293E17</a:ObjectID>
+<a:Name>end</a:Name>
+<a:Code>end</a:Code>
+<a:CreationDate>1649084882</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084891</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
-<o:Operation Id="o110">
+<o:Operation Id="o114">
 <a:ObjectID>CA822A05-D407-433C-BF00-60C74BCF46CE</a:ObjectID>
 <a:Name>Delete</a:Name>
 <a:Code>Delete</a:Code>
 <a:CreationDate>1649084138</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649084898</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:ReturnType>Task&lt;Message&gt;</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o115">
+<a:ObjectID>71754F9C-5D1C-42F1-97ED-AAC9BF753131</a:ObjectID>
+<a:Name>id</a:Name>
+<a:Code>id</a:Code>
+<a:CreationDate>1649084893</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084898</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
-<o:Operation Id="o111">
+<o:Operation Id="o116">
 <a:ObjectID>41F705FA-4500-417E-96D4-BDACD9852B7E</a:ObjectID>
 <a:Name>DeleteRange</a:Name>
 <a:Code>DeleteRange</a:Code>
 <a:CreationDate>1649084138</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649084912</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:ReturnType>Task&lt;Message&gt;</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o117">
+<a:ObjectID>FBE963DA-381D-40A1-8F01-3985B6FE058B</a:ObjectID>
+<a:Name>idList</a:Name>
+<a:Code>idList</a:Code>
+<a:CreationDate>1649084900</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084912</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>List&lt;int&gt;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
-<o:Operation Id="o112">
+<o:Operation Id="o118">
 <a:ObjectID>5EA80B2B-3A07-4D98-8F2B-F80ECC6AF8A7</a:ObjectID>
 <a:Name>Update</a:Name>
 <a:Code>Update</a:Code>
 <a:CreationDate>1649084138</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084245</a:ModificationDate>
+<a:ModificationDate>1649084932</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:ReturnType>Task&lt;Message&gt;</a:ReturnType>
 <a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o119">
+<a:ObjectID>EB26FE40-C945-4A75-A9CD-955D857BDE87</a:ObjectID>
+<a:Name>id</a:Name>
+<a:Code>id</a:Code>
+<a:CreationDate>1649084915</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084932</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o120">
+<a:ObjectID>44EEF4F7-D552-4484-A8FD-334195FF67D3</a:ObjectID>
+<a:Name>contrat</a:Name>
+<a:Code>contrat</a:Code>
+<a:CreationDate>1649084915</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084932</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>ContratAgence</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+<c:ObjectDataType>
+<o:Class Ref="o25"/>
+</c:ObjectDataType>
+</o:Parameter>
+</c:Parameters>
+</o:Operation>
+<o:Operation Id="o121">
+<a:ObjectID>0D395B73-190B-4918-B5E5-710BC5D1189A</a:ObjectID>
+<a:Name>Activate</a:Name>
+<a:Code>Activate</a:Code>
+<a:CreationDate>1649084812</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084945</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:ReturnType>Task&lt;Message&gt;</a:ReturnType>
+<a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o122">
+<a:ObjectID>B9B5D58B-1AC7-4736-983C-F1A5D93692F4</a:ObjectID>
+<a:Name>id</a:Name>
+<a:Code>id</a:Code>
+<a:CreationDate>1649084935</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084945</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>int</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
+</o:Operation>
+<o:Operation Id="o123">
+<a:ObjectID>51A76B6C-3282-4668-8AAE-A93506D44DF1</a:ObjectID>
+<a:Name>ActivateRange</a:Name>
+<a:Code>ActivateRange</a:Code>
+<a:CreationDate>1649084812</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649097050</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:ReturnType>Task&lt;Message&gt;</a:ReturnType>
+<a:Operation.Abstract>1</a:Operation.Abstract>
+<c:Parameters>
+<o:Parameter Id="o124">
+<a:ObjectID>8685366F-4DE4-4445-8ACB-2749B795EE2C</a:ObjectID>
+<a:Name>idList</a:Name>
+<a:Code>idList</a:Code>
+<a:CreationDate>1649084948</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649084964</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>List&lt;int&gt;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o125">
+<a:ObjectID>E6659542-906D-4D10-8C15-023CDE11445C</a:ObjectID>
+<a:Name>emails</a:Name>
+<a:Code>emails</a:Code>
+<a:CreationDate>1649097029</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649097050</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>List&lt;string&gt;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+<o:Parameter Id="o126">
+<a:ObjectID>83C53FDC-9F3A-4DD5-A503-248AC63794AA</a:ObjectID>
+<a:Name>names</a:Name>
+<a:Code>names</a:Code>
+<a:CreationDate>1649097029</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649097050</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:Parameter.DataType>List&lt;string&gt;</a:Parameter.DataType>
+<a:ParameterType>I</a:ParameterType>
+</o:Parameter>
+</c:Parameters>
 </o:Operation>
 </c:Operations>
 </o:Interface>
@@ -3167,7 +3343,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Association1</a:Code>
 <a:CreationDate>1646992215</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649084694</a:ModificationDate>
+<a:ModificationDate>1649084804</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:RoleAMultiplicity>1..1</a:RoleAMultiplicity>
 <a:RoleBMultiplicity>0..*</a:RoleBMultiplicity>
@@ -3483,7 +3659,7 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Area>
 </c:ArchitectureAreas>
 <c:TargetModels>
-<o:TargetModel Id="o113">
+<o:TargetModel Id="o127">
 <a:ObjectID>9464220A-0BA3-4320-9597-8208F9DEF050</a:ObjectID>
 <a:Name>C# 2.0</a:Name>
 <a:Code>C# 2</a:Code>
@@ -3499,7 +3675,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:Shortcut Ref="o4"/>
 </c:SessionShortcuts>
 </o:TargetModel>
-<o:TargetModel Id="o114">
+<o:TargetModel Id="o128">
 <a:ObjectID>59ED30EE-E699-4EE9-9D2D-2F5521D05C55</a:ObjectID>
 <a:Name>WSDL for .NET</a:Name>
 <a:Code>WSDLDotNet</a:Code>
