@@ -46,5 +46,31 @@ namespace MiCasa.Services
         {
             throw new NotImplementedException();
         }
+        
+        
+        
+        public void OnDeleteEmail(string _email; string name){
+
+            try{
+
+            var apiKey = _configuration.GetValue<string>("SendGridApiKey");
+                var client = new SendGridClient(apiKey);
+                var sendGridMessage = new SendGridMessage();
+                sendGridMessage.SetFrom("leotim91@gmail.com", "Mi Casa");
+                sendGridMessage.AddTo(_email);
+                sendGridMessage.SetTemplateId("d-7509b8198ba1479ea0d702ff2e272029");
+                sendGridMessage.SetSubject("suppression  de compte");
+                sendGridMessage.SetTemplateData(new
+                {
+                    name = _name,
+                });
+
+                var response = await client.SendEmailAsync(sendGridMessage);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
