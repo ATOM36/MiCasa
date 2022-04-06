@@ -18,7 +18,8 @@ NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
 
 // Builder configuration
 ApiConfiguration config = new(builder.Services, builder.Configuration);
-config.ConfigureLogging()
+config.RegisterInterfacesServices()
+    .ConfigureLogging()
     .ConfigureEmailService()
     .ConfigureCors()
     .ConfigureJsonSerialization();

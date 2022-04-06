@@ -29,15 +29,3 @@ button {
 p {
   color: var(--green-pakistan-green);
 }
-
-mat-icon {
-  margin-right: 10px;
-}
-
-.password-errors {
-  display: flex;
-
-  & p-message {
-    display: block;
-  }
-}
