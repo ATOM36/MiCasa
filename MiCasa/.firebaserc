@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "micasa-project-3e207": {
+      "hosting": {
+        "MiCasa": [
+          "micasa-project-3e207"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "micasa-project-3e207"
+  }
+}

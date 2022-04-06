@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { SharedModule } from '@modules/shared/shared.module';
 
 // Declarations

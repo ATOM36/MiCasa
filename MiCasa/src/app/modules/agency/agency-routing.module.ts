@@ -7,8 +7,9 @@ const routes: Routes = [
     path: '',
     component: AgencyDashboardComponent,
   },
+
   {
-    path: 'agency/dashboard/account',
+    path: 'agency/:name/account',
     loadChildren: () =>
       import('./agency-account/agency-account.module').then(
         (m) => m.AgencyAccountModule

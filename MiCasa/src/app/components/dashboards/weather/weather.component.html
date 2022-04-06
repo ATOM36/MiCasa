@@ -1,0 +1,27 @@
+<mat-card
+  *ngIf="weather"
+  data-aos="zoom-in"
+  data-aos-duration="1000"
+  data-aos-easing="ease-out"
+  [class]="isSmall ? '' : 'w-50'"
+>
+  <mat-card-header>
+    <mat-card-title
+      >{{ weather.name }}, {{ weather.sys.country }}</mat-card-title
+    >
+    <mat-card-subtitle>{{ weather.weather[0].main }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img
+    matCardImage
+    src="https://openweathermap.org/img/wn/{{ weather.weather[0].icon }}@2x.png"
+    [alt]="weather.weather[0].main"
+  />
+
+  <mat-card-content>
+    <h1>{{ weather.main.temp | number: "1.0-0" }}&#8451;</h1>
+    <p>Pressure: {{ weather.main.pressure }} hPa</p>
+    <p>Humidity: {{ weather.main.humidity }} %</p>
+    <p>Wind: {{ weather.wind.speed }} m/s</p>
+  </mat-card-content>
+</mat-card>

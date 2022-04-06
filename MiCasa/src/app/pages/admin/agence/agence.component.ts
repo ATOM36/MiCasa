@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Administrateur } from '@models/api/administrator';
+import { setLocation } from '@utility/location-handler';
 
 @Component({
   selector: 'app-agence',
@@ -8,7 +10,10 @@ import { Administrateur } from '@models/api/administrator';
 })
 export class AgenceComponent implements OnInit {
   admin: Administrateur | undefined;
-  constructor() {}
+  constructor(private _router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //? Saving the current location's path
+    setLocation(this._router.url);
+  }
 }

@@ -1,3 +1,65 @@
-<main [@routing]="getRouteAnimationData()">
-  <router-outlet #outlet="outlet"></router-outlet>
-</main>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav
+    #sidenav
+    class="mat-elevation-z4"
+    [mode]="isSmallScreen() ? 'over' : 'side'"
+    [class]="isSmallScreen() ? 'mobile-sidenav' : 'large-sidenav'"
+  >
+    <button
+      *ngFor="let link of links"
+      pButton
+      pRipple
+      type="button"
+      [label]="link.label!"
+      [pTooltip]="link.tooltip!"
+      [icon]="link.icon!"
+      (click)="
+        link.routerLink ? lezgo(link.routerLink) : (displayWeather = true)
+      "
+      iconPos="left"
+      class="p-button-rounded p-button-raised p-button-text p-button-success d-block w-100"
+      [id]="link.id ? link.id : ''"
+      [style]="{
+        'margin-top': '10px',
+        color: 'var(--green-yellow-green-color-wheel)'
+      }"
+    ></button>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-toolbar
+      *ngIf="!checkLocation()"
+      [sidenav]="sidenav"
+      [location]="location"
+    ></app-toolbar>
+
+    <!--Dialog to display weather -->
+    <p-dialog
+      *ngIf="displayWeather"
+      [(visible)]="displayWeather"
+      [breakpoints]="{ '960px': '75vw' }"
+      [style]="{
+        width: '50vw',
+        height: '80vh',
+        background: 'var(--green-yellow-green-color-wheel)'
+      }"
+      [draggable]="false"
+      [resizable]="false"
+      (onHide)="displayWeather = false"
+    >
+      <app-weather></app-weather>
+      <ng-template pTemplate="footer">
+        <p-button
+          (click)="displayWeather = false"
+          label="Fermer"
+          styleClass="p-button-text p-button-success"
+          [style]="{ color: '#007200ff' }"
+        ></p-button>
+      </ng-template>
+    </p-dialog>
+
+    <main [@routing]="getRouteAnimationData()">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

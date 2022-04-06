@@ -10,7 +10,7 @@ import {
 
 export const routerAnimation = trigger('routing', [
   //? from login to home || admin to login
-  transition('login => home, admin => login', [
+  transition('login => home, admin-dashboard => login', [
     //! During a transition, a new view is inserted directly after the old one and both elements appear on screen at the same time.
     //! To prevent this behavior, update the host view to use relative positioning.
     style({ position: 'relative' }),
@@ -38,7 +38,7 @@ export const routerAnimation = trigger('routing', [
   ]),
 
   //? from login to admin || home to login
-  transition('login => admin, home => login', [
+  transition('login => admin-dashboard,home => login', [
     style({ position: 'relative' }),
 
     query(':enter, :leave', [

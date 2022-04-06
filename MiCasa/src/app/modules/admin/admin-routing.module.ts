@@ -7,13 +7,17 @@ const routes: Routes = [
     path: '',
     component: AdminDashboardComponent,
   },
+
   {
-    path: 'admin/dashboard/agence',
+    path: 'admin/agence',
     loadChildren: () =>
       import('../admin/agence/agence.module').then((m) => m.AgenceModule),
     data: {
       // ? origin so that the right message is displayed
       origin: 'admin/',
+
+      //? Data to notify the kind of action that will be done with form (edition | registration | consultation)
+      action: 'edtion',
     },
   },
 ];

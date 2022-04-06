@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 
 //? Custom modules
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
@@ -29,12 +33,9 @@ import { DividerModule } from 'primeng/divider';
   imports: [
     CommonModule,
     AvatarModule,
-    ButtonModule,
     DashboardModule,
     SharedModule,
     CardModule,
-    DialogModule,
-    DividerModule,
     AgencyAccountRoutingModule,
   ],
 })

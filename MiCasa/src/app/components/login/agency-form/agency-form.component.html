@@ -1,4 +1,15 @@
-<pre>{{ agency | json }}</pre>
+<!-- The messenger-->
+<p-toast key="message" position="bottom-left"></p-toast>
+
+<!-- Confirmation dialog -->
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="confirm p-button-success"
+  rejectButtonStyleClass="reject p-button-danger"
+></p-confirmDialog>
+
 <mat-stepper orientation="vertical" [linear]="true">
   <mat-step>
     <form
@@ -24,7 +35,7 @@
             maxlength="45"
             name="Nom"
             #Nom="ngModel"
-            [(ngModel)]="agency.Nom"
+            [(ngModel)]="agency!.Nom"
           />
           <label for="nameInput">Nom de l'agence</label>
         </span>
@@ -60,7 +71,7 @@
             #Mail="ngModel"
             maxlength="45"
             required
-            [(ngModel)]="agency.Mail"
+            [(ngModel)]="agency!.Mail"
           />
           <label for="emailInput">Adresse email</label>
         </span>
@@ -96,7 +107,7 @@
             required
             minlength="8"
             maxlength="13"
-            [(ngModel)]="agency.NumeroTelephone"
+            [(ngModel)]="agency!.NumeroTelephone"
           />
           <label for="phoneNumberInput">Numero de téléphone</label>
         </span>
@@ -136,7 +147,7 @@
             maxlength="45"
             minlength="10"
             name="Adresse"
-            [(ngModel)]="agency.Adresse"
+            [(ngModel)]="agency!.Adresse"
             #Adresse="ngModel"
           />
           <label for="adresseInput">Adresse</label>
@@ -190,7 +201,7 @@
             autocomplete
             pattern="[0-9]+\.[0-9]*"
             name="Longitude"
-            [(ngModel)]="agency.Longitude"
+            [(ngModel)]="agency!.Longitude"
             #Longitude="ngModel"
           />
           <label for="longitude">Longitude</label>
@@ -208,7 +219,7 @@
             autocomplete
             pattern="[0-9]+\.[0-9]*"
             name="Latitude"
-            [(ngModel)]="agency.Latitude"
+            [(ngModel)]="agency!.Latitude"
             #Latitude="ngModel"
           />
 
@@ -253,7 +264,7 @@
             autocomplete
             name="Username"
             #Username="ngModel"
-            [(ngModel)]="agency.Username"
+            [(ngModel)]="agency!.Username"
             required
             minlength="5"
             maxlength="20"
@@ -291,7 +302,7 @@
             maxlength="15"
             required
             #Password="ngModel"
-            [(ngModel)]="agency.Password"
+            [(ngModel)]="agency!.Password"
             name="Password"
           />
 
@@ -367,14 +378,27 @@
         </button>
 
         <button
+          *ngIf="formAction === 'registration'"
           pButton
           pRipple
           matStepperNext
           class="p-button-outlined p-button-rounded p-button-success next-button"
           [hidden]="generalInfo.invalid || securityForm.invalid"
-          (click)="lezgo()"
+          (click)="register()"
         >
           Créer le compte
+        </button>
+
+        <button
+          *ngIf="formAction === 'edition'"
+          (click)="updateAgency()"
+          pButton
+          pRipple
+          matStepperNext
+          class="p-button-outlined p-button-rounded p-button-success next-button"
+          [hidden]="generalInfo.invalid || securityForm.invalid"
+        >
+          Mettre à jour
         </button>
       </ng-template>
     </form>
