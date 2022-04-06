@@ -20,6 +20,19 @@ const routes: Routes = [
       action: 'edtion',
     },
   },
+
+  {
+    path: 'admin/agence/contracts',
+    loadChildren: () =>
+      import(
+        '@modules/admin/contracts/agency-contract/agency-contract.module'
+      ).then((m) => m.AgencyContractModule),
+
+    data: {
+      // ? origin so that the right message is displayed
+      origin: 'admin/',
+    },
+  },
 ];
 
 @NgModule({

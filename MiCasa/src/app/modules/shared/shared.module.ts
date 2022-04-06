@@ -14,17 +14,11 @@ import { PrimeiconComponent } from '@components/shared/primeicon/primeicon.compo
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { LoadingComponent } from '@pages/loading/loading.component';
-import { AgencyFormComponent } from '@components/login/agency-form/agency-form.component';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastModule } from 'primeng/toast';
-import { DialogModule } from 'primeng/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormField } from '@angular/material/form-field';
-import { LoginHelperModule } from '@modules/login/helper.module';
 
 @NgModule({
   declarations: [
@@ -35,37 +29,20 @@ import { LoginHelperModule } from '@modules/login/helper.module';
     LoadingComponent,
     PrimebuttonComponent,
     PrimeiconComponent,
-    AgencyFormComponent,
   ],
   imports: [
-    //? Angular
     CommonModule,
-    FormsModule,
-
-    //? Prime
     MessageModule,
+    FormsModule,
     InputTextModule,
-    ButtonModule,
-    ConfirmDialogModule,
-    ToastModule,
-
-    //? Material
     MatStepperModule,
-    LoginHelperModule,
+    ButtonModule,
   ],
   exports: [
     FooterComponent,
     AgencyTemplateComponent,
     AgencyEditTemplateComponent,
     LoadingComponent,
-    AgencyFormComponent,
-
-    //? Modules
-    ButtonModule,
-    DialogModule,
-    InputTextModule,
-    ToastModule,
-    MatIconModule,
   ],
 })
 export class SharedModule {}
