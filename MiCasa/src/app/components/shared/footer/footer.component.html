@@ -1,1 +1,83 @@
-<p>footer works!</p>
+<div class="site-footer bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4" data-aos="fade-right">
+        <div class="widget">
+          <h3>
+            <i class="pi pi-phone"></i>
+            Contact
+          </h3>
+          <address>43 Place de la République, Monastir-Tunisie</address>
+          <ul class="list-unstyled links">
+            <li><a href="#">+216 98 524 120</a></li>
+            <li><a href="#">+216 20 366 227</a></li>
+            <li><a href="#">text@text.com</a></li>
+          </ul>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /.col-lg-4 -->
+      <div class="col-lg-4" data-aos="fade-down" data-aos-delay="100">
+        <div class="widget">
+          <h3>
+            <i class="pi pi-book"></i>
+            Sources
+          </h3>
+          <ul class="list-unstyled float-start links">
+            <li><a href="#">A propos de nous</a></li>
+            <li><a href="#">Vision</a></li>
+            <li><a href="#">Politique d'utilisation</a></li>
+            <li><a href="#">Vie privée</a></li>
+          </ul>
+          <ul class="list-unstyled float-start links">
+            <li><a routerLink="/agency/dashboard">Partenaires</a></li>
+            <li><a href="#">Carières</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a routerLink="/admin/dashboard">FAQ</a></li>
+          </ul>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /.col-lg-4 -->
+      <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+        <div class="widget">
+          <h3>
+            <i class="pi pi-link"></i>
+            Liens utiles
+          </h3>
+          <ul class="list-unstyled links">
+            <li><a href="#">Notre Vision</a></li>
+            <li><a href="#">Plus d'informations</a></li>
+            <li><a href="#">Nous contacter</a></li>
+          </ul>
+
+          <ul
+            class="list-unstyled social"
+            data-aos="zoom-out"
+            data-aos-delay="500"
+          >
+            <li *ngFor="let ressource of ressources; trackBy: trackFunc">
+              <a [href]="ressource.link">
+                <span [class]="ressource.icon"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.widget -->
+      </div>
+      <!-- /.col-lg-4 -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row mt-5" data-aos="fade-up" data-aos-delay="400">
+      <div class="col-12 text-center">
+        <p class="mb-0">
+          Copyright &copy;{{ currentYear }}. All Rights Reserved. &mdash;
+          Designed by MiCasa Corporation &bullet;
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /.container -->
+</div>
+<!-- /.site-footer -->

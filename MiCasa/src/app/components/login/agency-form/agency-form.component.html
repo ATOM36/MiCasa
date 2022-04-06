@@ -1,0 +1,406 @@
+<!-- The messenger-->
+<p-toast key="message" position="bottom-left"></p-toast>
+
+<!-- Confirmation dialog -->
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  acceptButtonStyleClass="confirm p-button-success"
+  rejectButtonStyleClass="reject p-button-danger"
+></p-confirmDialog>
+
+<mat-stepper orientation="vertical" [linear]="true">
+  <mat-step>
+    <form
+      #generalInfo="ngForm"
+      class="form-outline mb-4"
+      data-aos="zoom-in"
+      data-aos-duration="600"
+      data-aos-easing="ease-in-out"
+    >
+      <ng-template matStepLabel>Informations générales</ng-template>
+
+      <ng-template matStepContent>
+        <!-- Name section-->
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="nameInput"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            required
+            minlength="3"
+            maxlength="45"
+            name="Nom"
+            #Nom="ngModel"
+            [(ngModel)]="agency!.Nom"
+          />
+          <label for="nameInput">Nom de l'agence</label>
+        </span>
+
+        <!--Name error messages-->
+        <div *ngIf="Nom.invalid && (Nom.touched || Nom.dirty)">
+          <p-message
+            *ngIf="Nom.errors!['minlength']"
+            severity="error"
+            text="Au minimum 3 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Nom.errors!['required']"
+            severity="error"
+            text="Nom est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- Mail section -->
+        <span class="p-float-label">
+          <input
+            type="email"
+            id="emailInput"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            email
+            name="Mail"
+            #Mail="ngModel"
+            maxlength="45"
+            required
+            [(ngModel)]="agency!.Mail"
+          />
+          <label for="emailInput">Adresse email</label>
+        </span>
+
+        <!-- Mail error messages-->
+        <div *ngIf="Mail.invalid && (Mail.touched || Mail.dirty)">
+          <p-message
+            *ngIf="Mail.errors!['mail']"
+            severity="error"
+            text="Email invalide"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Mail.errors!['required']"
+            severity="error"
+            text="Email est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- Phone number section -->
+        <span class="p-float-label">
+          <input
+            type="tel"
+            id="phoneNumberInput"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            name="NumeroTelephone"
+            #NumeroTelephone="ngModel"
+            required
+            minlength="8"
+            maxlength="13"
+            [(ngModel)]="agency!.NumeroTelephone"
+          />
+          <label for="phoneNumberInput">Numero de téléphone</label>
+        </span>
+
+        <!-- Phone number error messages-->
+        <div
+          *ngIf="
+            NumeroTelephone.invalid &&
+            (NumeroTelephone.touched || NumeroTelephone.dirty)
+          "
+        >
+          <p-message
+            *ngIf="NumeroTelephone.errors!['minlength']"
+            severity="error"
+            text="Au minimum 8 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="NumeroTelephone.errors!['required']"
+            severity="error"
+            text="Numéro de téléphone est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- Addresse section -->
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="adresseInput"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            required
+            maxlength="45"
+            minlength="10"
+            name="Adresse"
+            [(ngModel)]="agency!.Adresse"
+            #Adresse="ngModel"
+          />
+          <label for="adresseInput">Adresse</label>
+        </span>
+
+        <!-- Addresse error messages -->
+        <div *ngIf="Adresse.invalid && (Adresse.touched || Adresse.dirty)">
+          <p-message
+            *ngIf="Adresse.errors!['minlength']"
+            severity="error"
+            text="Au minimum 10 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Adresse.errors!['required']"
+            severity="error"
+            text="Adresse est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- End inputs -->
+        <button
+          [hidden]="generalInfo.invalid"
+          pButton
+          pRipple
+          matStepperNext
+          class="p-button-outlined p-button-rounded p-button-success"
+        >
+          Suivant
+        </button>
+      </ng-template>
+    </form>
+  </mat-step>
+
+  <!-- GEOGRAPHIC COORDINATES -->
+  <mat-step>
+    <form *ngIf="generalInfo.valid" #coordinatesForm="ngForm">
+      <ng-template matStepLabel>Coordonées géographiques</ng-template>
+
+      <ng-template matStepContent>
+        <!-- Longitude section -->
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="Longitude"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            pattern="[0-9]+\.[0-9]*"
+            name="Longitude"
+            [(ngModel)]="agency!.Longitude"
+            #Longitude="ngModel"
+          />
+          <label for="longitude">Longitude</label>
+        </span>
+
+        <!-- Longitude error messages -->
+
+        <!-- Latitude section -->
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="Latitude"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            pattern="[0-9]+\.[0-9]*"
+            name="Latitude"
+            [(ngModel)]="agency!.Latitude"
+            #Latitude="ngModel"
+          />
+
+          <label for="latitude">Latitude</label>
+        </span>
+
+        <!-- latitude error section -->
+
+        <button
+          pButton
+          pRipple
+          matStepperPrevious
+          class="p-button-outlined p-button-rounded p-button-secondary"
+        >
+          Précédent
+        </button>
+
+        <button
+          pButton
+          pRipple
+          matStepperNext
+          class="p-button-outlined p-button-rounded p-button-success next-button"
+        >
+          Suivant
+        </button>
+      </ng-template>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <form *ngIf="generalInfo.valid" #securityForm="ngForm">
+      <ng-template matStepLabel>Sécurité</ng-template>
+
+      <ng-template matStepContent>
+        <!-- Username section -->
+        <span class="p-float-label">
+          <input
+            type="text"
+            id="username"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            name="Username"
+            #Username="ngModel"
+            [(ngModel)]="agency!.Username"
+            required
+            minlength="5"
+            maxlength="20"
+          />
+          <label for="username">Nom d'utilisateur</label>
+        </span>
+
+        <!-- Username error messages -->
+        <div *ngIf="Username.invalid && (Username.touched || Username.dirty)">
+          <p-message
+            *ngIf="Username.errors!['minlength']"
+            severity="error"
+            text="Au minimum 5 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Username.errors!['required']"
+            severity="error"
+            text="Nom d'utilisateur est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- Password section -->
+        <span class="p-float-label">
+          <input
+            type="password"
+            id="password"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            minlength="8"
+            maxlength="15"
+            required
+            #Password="ngModel"
+            [(ngModel)]="agency!.Password"
+            name="Password"
+          />
+
+          <label for="password">Mot de passe</label>
+        </span>
+
+        <!-- Password error section -->
+        <div *ngIf="Password.invalid && (Password.touched || Password.dirty)">
+          <p-message
+            *ngIf="Password.errors!['minlength']"
+            severity="error"
+            text="Au minimum 8 caractères"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="Password.errors!['required']"
+            severity="error"
+            text="Mot de passe est un champ requis"
+          >
+          </p-message>
+        </div>
+
+        <!-- Confirm password section -->
+        <span class="p-float-label">
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control form-control-lg"
+            pInputText
+            autocomplete
+            required
+            #confirmPassword="ngModel"
+            ngModel
+            name="confirmPassword"
+          />
+
+          <label for="confirmPassword">Confirmer le mot de passe</label>
+        </span>
+
+        <!-- Confirm password error section -->
+        <div
+          *ngIf="
+            confirmPassword.invalid &&
+            (confirmPassword.touched || confirmPassword.dirty)
+          "
+        >
+          <p-message
+            *ngIf="confirmPassword.errors!['required']"
+            severity="error"
+            text="Ce champ est requis"
+            class="first-message"
+          >
+          </p-message>
+
+          <p-message
+            *ngIf="confirmPassword.value != Password.value"
+            severity="error"
+            text="Valeur différente du mot de passe donné"
+          >
+          </p-message>
+        </div>
+
+        <!-- End form -->
+        <button
+          pButton
+          pRipple
+          matStepperPrevious
+          class="p-button-outlined p-button-rounded p-button-secondary"
+        >
+          Précédent
+        </button>
+
+        <button
+          *ngIf="formAction === 'registration'"
+          pButton
+          pRipple
+          matStepperNext
+          class="p-button-outlined p-button-rounded p-button-success next-button"
+          [hidden]="generalInfo.invalid || securityForm.invalid"
+          (click)="register()"
+        >
+          Créer le compte
+        </button>
+
+        <button
+          *ngIf="formAction === 'edition'"
+          (click)="updateAgency()"
+          pButton
+          pRipple
+          matStepperNext
+          class="p-button-outlined p-button-rounded p-button-success next-button"
+          [hidden]="generalInfo.invalid || securityForm.invalid"
+        >
+          Mettre à jour
+        </button>
+      </ng-template>
+    </form>
+  </mat-step>
+</mat-stepper>

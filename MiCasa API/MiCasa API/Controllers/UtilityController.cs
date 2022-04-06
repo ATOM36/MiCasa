@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MiCasa.Controllers
 {
     [Route("api/[controller]")]
+    [EnableQuery]
     [ApiController]
     public class UtilityController : ControllerBase
     {
@@ -13,6 +14,12 @@ namespace MiCasa.Controllers
 
         [Route("GetImageFolder")]
         [HttpGet]
-        public JsonResult GetImageFolder() => new(Path.Combine(_environment!.ContentRootPath, "img"));
+        public JsonResult GetImageFolder()
+        {
+            string path = Path.Combine(_environment!.ContentRootPath, "img");
+            path.Replace('\\', '/');
+            return new(new Message(path, true));
+           
+        }
     }
 }

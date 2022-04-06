@@ -1,0 +1,42 @@
+.container-fluid {
+  background: var(--green-gradient-top-left-bottom-right);
+
+  // For older browsers
+  background: var(--green-webkit-gradient-top-left-bottom-right);
+}
+
+img {
+  display: block;
+  border-radius: 1rem 0 0 1rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100%;
+}
+
+.password-reset {
+  margin-top: 10px;
+}
+
+i {
+  color: #fff;
+}
+
+.btn-text {
+  color: #fff;
+  font-size: medium;
+}
+
+button {
+  &:hover {
+    color: #fff;
+  }
+}
+
+input {
+  font-size: medium;
+}
+
+// for error messages
+p-message {
+  margin-top: 15px;
+}

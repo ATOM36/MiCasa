@@ -1,1 +1,11 @@
-<p>login works!</p>
+<div *ngIf="isLoading; then loading; else login"></div>
+
+<ng-template #loading> </ng-template>
+<app-loading [class]="isLoading ? 'current' : 'loading'"></app-loading>
+<ng-template #login>
+  <main>
+    <app-login-form></app-login-form>
+  </main>
+
+  <app-footer></app-footer>
+</ng-template>
