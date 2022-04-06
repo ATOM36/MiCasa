@@ -180,3 +180,6 @@ C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\tchio\Documents\TP\Agile\MiCasa\MiCasa API\MiCasa API\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\ykhal\OneDrive\Images\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\MiCasa API.dll
+C:\Users\ykhal\OneDrive\Images\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\refint\MiCasa API.dll
+C:\Users\ykhal\OneDrive\Images\MiCasa\MiCasa API\MiCasa API\obj\Debug\net6.0\MiCasa API.pdb
