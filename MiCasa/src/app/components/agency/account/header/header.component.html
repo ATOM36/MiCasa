@@ -21,6 +21,7 @@
               label="Modifier le profile"
               class="p-button-secondary p-button-outlined p-button-rounded p-button-raised"
               [style]="{ 'margin-top': '10px' }"
+              (click)="displayEditModal = true"
             ></button>
           </div>
           <div class="ms-3 details" style="margin-top: 130px">
@@ -39,8 +40,8 @@
               <p class="small text-muted mb-0">Clients</p>
             </div>
             <div>
-              <p class="mb-1 h5">15</p>
-              <p class="small text-muted mb-0">Signalements</p>
+              <p class="mb-1 h5">{{ agency.Signalement }}</p>
+              <p class="small text-muted mb-0">Singalements</p>
             </div>
           </div>
         </div>
@@ -49,3 +50,38 @@
   </div>
 </div>
 <!--TODO: Amélioration du header de compte -->
+<!-- Modal for agency editing -->
+<p-dialog
+  [(visible)]="displayEditModal"
+  [resizable]="false"
+  [draggable]="false"
+  position="center"
+  [modal]="true"
+  [closeOnEscape]="false"
+  [breakpoints]="{ '960px': '100vw' }"
+  [style]="{ width: '80vw' }"
+  (onHide)="displayEditModal = false"
+>
+  <ng-template pTemplate="header"
+    >Modification de {{ agency?.Nom }}</ng-template
+  >
+
+  <ng-template pTemplate="content">
+    <app-agency-form
+      [agency]="agency"
+      [decoyAgency]="agency"
+      formAction="edition"
+    ></app-agency-form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Annuler"
+      (click)="displayEditModal = false"
+      class="p-button-danger"
+      [style]="{ background: '#e01e37ff' }"
+    ></button>
+  </ng-template>
+</p-dialog>

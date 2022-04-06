@@ -24,7 +24,7 @@ export class AgencyAccountComponent implements OnInit, OnDestroy {
     //? Saving the current location's path
     setLocation(this._router.url);
 
-    this.agency = JSON.parse(sessionStorage.getItem('a-x')!);
+    this.agency = JSON.parse(localStorage.getItem('a-x')!);
   }
 
   ngOnDestroy(): void {

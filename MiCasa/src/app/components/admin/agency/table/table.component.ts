@@ -43,11 +43,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.startIndex = 0;
     this.stopIndex = 10;
-    //this.loadData();
-    this._agencyFire.getAllAgencies().subscribe(async (response: Agence[]) => {
-      this.agencies = await response;
-    });
-    this.setIndexes();
+    this.loadData();
+    // this._agencyFire.getAllAgencies().subscribe(async (response: Agence[]) => {
+    //   this.agencies = await response;
+    // });
+    // this.setIndexes();
     this.recordsNumber = this.getRecordsNumber();
   }
 
@@ -114,7 +114,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        this._agencyFire
+        /* this._agencyFire
           .delete(agence)
           .then(() => console.log('Bye bye'))
           .then(() => {
@@ -125,8 +125,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               key: 'message',
               life: 2000,
             });
-          });
-        /*this._agencyService
+          });*/
+        this._agencyService
           .supprimerCompte(agence.AgenceId!)
           .subscribe(async ($response) => {
             this._messageService.add({
@@ -136,7 +136,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               key: 'message',
               life: 2000,
             });
-          });*/
+          });
         this.agencies.splice(this.agencies.indexOf(agence), 1);
       },
 
@@ -181,16 +181,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
       accept: () => {
         if (agence.IsBlocked) {
-          this._agencyFire.unblockAgency(agence.id!).then(() => {
+          /* this._agencyFire.unblockAgency(agence.id!).then(() => {
             this._messageService.add({
               severity: 'success',
               summary: 'Statut',
               detail: `${agence.Nom} débloquée avec succès !`,
               key: 'message',
             });
-          });
+          });*/
 
-          /*this._agencyService
+          this._agencyService
             .debloquerCompte(agence.AgenceId!)
             .subscribe(async ($response) => {
               this._messageService.add({
@@ -201,9 +201,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               });
             });
 
-          agence.IsBlocked = 0;*/
+          agence.IsBlocked = 0;
         } else {
-          this._agencyFire.blockAgency(agence.id!).then(() => {
+          /* this._agencyFire.blockAgency(agence.id!).then(() => {
             this._messageService.add({
               severity: 'success',
               summary: 'Statut',
@@ -211,8 +211,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               key: 'message',
             });
           });
+          */
 
-          /*this._agencyService
+          this._agencyService
             .bloquerCompteAgence(agence.AgenceId!)
             .subscribe(async ($response) => {
               this._messageService.add({
@@ -223,7 +224,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               });
             });
 
-          agence.IsBlocked = 1;*/
+          agence.IsBlocked = 1;
         }
       },
 

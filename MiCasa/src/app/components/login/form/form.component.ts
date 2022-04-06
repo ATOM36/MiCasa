@@ -8,7 +8,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { Agence } from '@models/api/agency';
@@ -33,7 +32,7 @@ var Swal = getSweetAlert();
 })
 export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   myForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required]),
 
     password: new FormControl('', [
       Validators.required,
@@ -78,8 +77,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   wantsUpdate!: boolean;
 
-  errorMatcher = new ErrorStateMatcher();
-
   @Output() registrationModalController = new EventEmitter<boolean>();
 
   constructor(
@@ -117,10 +114,30 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   lezgo(): void {
     let emailEntry = String(this.myForm.get('email')?.value);
 
-    console.log('Request sent');
-
     if (emailEntry.endsWith('agence')) {
-      this._router.navigate([`agency/lelo/account`]);
+      this.subscription = this._agencyService
+        .logIn(
+          this.myForm.get('email')?.value,
+          this.myForm.get('password')?.value
+        )
+        .subscribe(async ($response) => {
+          if ($response.State == false) {
+            this._messageService.add({
+              severity: 'danger',
+              summary: 'Echec !',
+              detail: `${$response.Data}`,
+              key: 'message',
+            });
+          } else {
+            this.loadData($response.Data);
+            if (this.agency.IsBlocked) this.userIsBlocked = true;
+            else {
+              localStorage.setItem('a-x', JSON.stringify(this.agency));
+              this._router.navigate([`agency/${this.agency.Nom}/account`]);
+            }
+          }
+        });
+
       /* console.log('Is agency');
       this._agencyFire
         .logIn(
@@ -141,40 +158,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
         });*/
     } else if (emailEntry.endsWith('admin'))
       this._router.navigate(['/admin/dashboard']);
-
-    /* this.subscription = this._agencyService
-      .logIn(
-        this.myForm.get('email')?.value,
-        this.myForm.get('password')?.value
-      )
-      .subscribe(async ($response) => {
-        if ($response.State == false) {
-          this._messageService.add({
-            severity: 'danger',
-            summary: 'Echec !',
-            detail: `${$response.Data}`,
-            key: 'message',
-          });
-        } else {
-          // const keys: string[] = [
-          //   'AgenceId',
-          //   'Username',
-          //   'Password',
-          //   'Signalement',
-          //   'NumeroTelephone',
-          //   'Mail',
-          //   'Nom',
-          //   'Latitude',
-          //   'Longitude',
-          //   'DateInscription',
-          //   'Adresse',
-          //   'IsBlocked',
-          // ];
-          this.loadData($response.Data);
-          sessionStorage.setItem('a-x', JSON.stringify(this.agency));
-          this.router.navigate(['/agency/account']);
-        }
-      });*/
   }
 
   /**

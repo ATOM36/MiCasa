@@ -25,7 +25,8 @@ namespace MiCasa.Controllers
 
         [HttpGet]
         [Route("LogIn")]
-        public JsonResult LogIn([FromQuery] string username, [FromQuery] string password) => DAL_Agence.LogIn(username, password);
+        public JsonResult LogIn([FromQuery] string username, [FromQuery] string password) => DAL_Agence.LogIn(username.Replace("@agence", ""),
+            password);
 
         [HttpDelete]
         [Route("SupprimerCompte")]
