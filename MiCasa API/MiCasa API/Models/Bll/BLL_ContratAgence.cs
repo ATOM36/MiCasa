@@ -22,27 +22,6 @@ namespace MiCasa.Models.Bll
             }
         }
 
-        public async Task<Message> ActivateRange(List<int> idList, List<string> emails, List<string> names)
-        {
-            bool ok = true;
-
-            foreach (int id in idList)
-            {
-                if (id <= 0)
-                    ok = false;
-            }
-
-            if (!ok || idList.Count <= 0)
-                return new("Il existe une entrée incorrecte", false);
-
-            else
-            {
-                for (int i = 0; i < emails.Count; i++)
-                    _authService!.SendActivationEmail(emails[i], names[i]);
-                return await DAL_ContratAgence.ActivateRange(idList);
-            }
-        }
-
         public async Task<Message> CreateContract(ContratAgence contrat) => ContratAgenceHelper.EvaluateContract(contrat) ?
             new("Les valeurs données sont incorrectes", false)
                 : await DAL_ContratAgence.CreateContract(contrat);

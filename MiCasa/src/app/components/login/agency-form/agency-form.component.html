@@ -35,7 +35,7 @@
             maxlength="45"
             name="Nom"
             #Nom="ngModel"
-            [(ngModel)]="agency!.Nom"
+            [(ngModel)]="agency!.Compte!.Nom"
           />
           <label for="nameInput">Nom de l'agence</label>
         </span>
@@ -71,7 +71,7 @@
             #Mail="ngModel"
             maxlength="45"
             required
-            [(ngModel)]="agency!.Mail"
+            [(ngModel)]="agency!.Compte!.Mail"
           />
           <label for="emailInput">Adresse email</label>
         </span>
@@ -107,7 +107,7 @@
             required
             minlength="8"
             maxlength="13"
-            [(ngModel)]="agency!.NumeroTelephone"
+            [(ngModel)]="agency!.Compte!.NumeroTelephone"
           />
           <label for="phoneNumberInput">Numero de téléphone</label>
         </span>
@@ -264,7 +264,7 @@
             autocomplete
             name="Username"
             #Username="ngModel"
-            [(ngModel)]="agency!.Username"
+            [(ngModel)]="agency!.Compte!.Username"
             required
             minlength="5"
             maxlength="20"
@@ -302,7 +302,7 @@
             maxlength="15"
             required
             #Password="ngModel"
-            [(ngModel)]="agency!.Password"
+            [(ngModel)]="agency!.Compte!.Password"
             name="Password"
           />
 

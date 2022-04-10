@@ -1,5 +1,6 @@
 ﻿using SendGrid;
 using SendGrid.Helpers.Mail;
+using Serilog;
 
 namespace MiCasa.Services
 {
@@ -17,6 +18,12 @@ namespace MiCasa.Services
             throw new NotImplementedException();
         }
 
+
+        /// <summary>
+        /// Sends an to a user with a confirmation token
+        /// </summary>
+        /// <param name="_email"></param>
+        /// <param name="_name"></param>
         public async void SendActivationEmail(string _email, string _name)
         {
             try
@@ -28,8 +35,7 @@ namespace MiCasa.Services
                 sendGridMessage.AddTo(_email);
                 sendGridMessage.SetTemplateId("d-7509b8198ba1479ea0d702ff2e272029");
                 sendGridMessage.SetSubject("Activation de compte");
-                sendGridMessage.SetTemplateData(new
-                {
+                sendGridMessage.SetTemplateData(new {
                     name = _name,
                 });
 
@@ -37,18 +43,22 @@ namespace MiCasa.Services
             }
             catch (Exception ex)
             {
-                throw;
+                Log.Error(ex.Message);
             }
 
         }
 
-        public void SendWelcomeEmail<T>()
+        public void SendWelcomeEmail(string _email, string _name)
         {
-            throw new NotImplementedException();
+            int a = 1;
         }
 
 
-
+        /// <summary>
+        /// Sends an email to a given user when one deletes it's account.
+        /// </summary>
+        /// <param name="_email"></param>
+        /// <param name="_name"></param>
         public async void OnDeleteEmail(string _email, string _name)
         {
 
@@ -62,8 +72,7 @@ namespace MiCasa.Services
                 sendGridMessage.AddTo(_email);
                 sendGridMessage.SetTemplateId("d-6d9394f9967d47f889d1a0ea16735e9e");
                 sendGridMessage.SetSubject("Suppression de compte");
-                sendGridMessage.SetTemplateData(new
-                {
+                sendGridMessage.SetTemplateData(new {
                     name = _name,
                 });
 
@@ -71,7 +80,7 @@ namespace MiCasa.Services
             }
             catch (Exception ex)
             {
-                throw;
+                Log.Error(ex.Message);
             }
         }
     }

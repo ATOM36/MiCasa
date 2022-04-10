@@ -2,8 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
-import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
-import { AgencyStoreService } from '@services/stores/agency/agency-store.service';
+import { getSweetAlert } from '@utility/js-libraries';
 import {
   ConfirmationService,
   ConfirmEventType,
@@ -12,6 +11,8 @@ import {
 } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
+var Swal = getSweetAlert();
+
 @Component({
   selector: 'app-agency-form',
   templateUrl: './agency-form.component.html',
@@ -19,19 +20,24 @@ import { Subscription } from 'rxjs';
   providers: [ConfirmationService, MessageService],
 })
 export class AgencyFormComponent implements OnInit {
-  @Input() agency: Agence | null = {
-    AgenceId: null,
-    Username: null,
-    Password: null,
-    Signalement: null,
-    NumeroTelephone: null,
-    Mail: null,
-    Nom: null,
-    Latitude: null,
-    Longitude: null,
-    DateInscription: null,
+  @Input() agency: Agence = {
+    AgenceId: 0,
     Adresse: null,
-    IsBlocked: null,
+    Signalement: 0,
+    Latitude: 0,
+    Longitude: 0,
+    Compte: {
+      CompteId: 0,
+      DateInscription: null,
+      IsBlocked: 0,
+      IsConnected: 0,
+      Mail: null,
+      Nom: null,
+      NumeroTelephone: null,
+      Password: null,
+      Prenom: null,
+      Username: null,
+    },
   };
 
   @Input() decoyAgency!: Agence | null;
@@ -45,12 +51,10 @@ export class AgencyFormComponent implements OnInit {
 
   constructor(
     private _service: AgencyService,
-    private _agencyStore: AgencyStoreService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _confirmationService: ConfirmationService,
-    private _messageService: MessageService,
-    private _agencyFire: AgencyFireService
+    private _messageService: MessageService
   ) {}
 
   ngOnInit(): void {}
@@ -62,27 +66,21 @@ export class AgencyFormComponent implements OnInit {
    */
   register() {
     let date = new Date();
-    this.agency!.DateInscription = `${date.getFullYear()}/${date.getMonth()}/${date.getDay()}`;
-    this.agency!.IsBlocked = 0;
-    this.agency!.Signalement = 0;
+    this.agency!.Compte!.DateInscription = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 
-    this._agencyFire.registerAgency(this.agency!).then(() => {
-      this._confirmationService.confirm({
-        header: 'Inscription',
-
-        message: 'Votre compte a été créé avec succès !',
-
-        acceptLabel: 'Explorer MiCasa',
-
-        acceptIcon: PrimeIcons.ARROW_RIGHT,
-
-        rejectLabel: 'Plus tard',
-
-        rejectIcon: PrimeIcons.CLOCK,
-
-        accept: () =>
-          this._router.navigate([`/agency/${this.agency?.Nom}/account}`]),
-      });
+    this._service.creerCompte(this.agency!).subscribe(async ($response) => {
+      if ($response.State)
+        Swal.fire({
+          title: 'Inscription',
+          icon: 'success',
+          html: `<p>${$response.Content}</p>`,
+        });
+      else
+        Swal.fire({
+          title: 'Inscription',
+          icon: 'error',
+          html: `<p>${$response.Content}</p>`,
+        });
     });
   }
 
@@ -100,22 +98,24 @@ export class AgencyFormComponent implements OnInit {
    */
   updateAgency() {
     this._confirmationService.confirm({
-      message: `Êtes-vous sûr de vouloir modifier les informations de ${this.agency?.Nom} ?`,
+      message: `Êtes-vous sûr de vouloir modifier les informations de ${this.agency?.Compte?.Nom} ?`,
 
       header: 'Confirmation en attente !',
 
       icon: 'pi pi-question-circle',
 
       accept: () => {
-        this._agencyFire.update(this.agency!).then(() => {
-          this._messageService.add({
-            severity: 'success',
-            summary: 'Succès',
-            detail: `${this.agency?.Nom} mis à jour avec succès`,
-            key: 'message',
-            life: 2000,
+        this._service
+          .updateProfile(this.agency!)
+          .subscribe(async ($response) => {
+            this._messageService.add({
+              severity: $response.State ? 'success' : 'danger',
+              summary: 'Mise à jour',
+              detail: `${$response.Content}`,
+              key: 'message',
+              life: 2000,
+            });
           });
-        });
       },
 
       reject: (type: ConfirmEventType) => {
@@ -128,7 +128,7 @@ export class AgencyFormComponent implements OnInit {
               key: 'message',
               life: 2000,
             });
-            this.agency = this.decoyAgency;
+            this.agency = this.decoyAgency!;
             break;
 
           case ConfirmEventType.CANCEL:
@@ -139,7 +139,7 @@ export class AgencyFormComponent implements OnInit {
               key: 'message',
               life: 2000,
             });
-            this.agency = this.decoyAgency;
+            this.agency = this.decoyAgency!;
         }
       },
     });

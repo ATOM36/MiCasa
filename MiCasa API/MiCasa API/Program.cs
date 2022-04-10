@@ -18,16 +18,20 @@ NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
 
 // Builder configuration
 ApiConfiguration config = new(builder.Services, builder.Configuration);
-config.RegisterInterfacesServices()
+config.ConfigureInterfacesRegistration()
     .ConfigureLogging()
     .ConfigureEmailService()
     .ConfigureCors()
-    .ConfigureJsonSerialization();
+    .ConfigureJsonSerialization()
+    .ConfigureDbContext();
 
 
 
 // Adding response caching
 builder.Services.AddControllers();
+
+DbConnection.Init(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -56,5 +60,6 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller}/{action}/{id?}");
 });
+
 
 app.Run();

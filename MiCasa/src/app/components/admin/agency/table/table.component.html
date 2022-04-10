@@ -26,12 +26,12 @@
   (onHide)="selectedAgency = null"
 >
   <ng-template pTemplate="header"
-    >Modification de {{ selectedAgency?.Nom }}</ng-template
+    >Modification de {{ selectedAgency?.Compte?.Nom }}</ng-template
   >
 
   <ng-template pTemplate="content">
     <app-agency-form
-      [agency]="selectedAgency"
+      [agency]="selectedAgency!"
       [decoyAgency]="selectedAgency"
       formAction="edition"
     ></app-agency-form>
@@ -94,9 +94,7 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <!--
       <th pSortableColumn="Id">
-
         <div class="flex justify-content-center align-items-center">
           Id
           <p-sortIcon field="Id"></p-sortIcon>
@@ -108,7 +106,6 @@
           ></p-columnFilter>
         </div>
       </th>
--->
       <th pSortableColumn="Nom">
         <div class="flex justify-content-center align-items-center">
           Nom
@@ -193,32 +190,30 @@
 
   <ng-template pTemplate="body" let-agency>
     <tr>
-      <!--
       <td>
         {{ agency.AgenceId | number }}
       </td>
--->
       <td>
-        {{ agency.Nom }}
+        {{ agency.Compte.Nom }}
       </td>
 
       <td>
-        {{ agency.Mail }}
+        {{ agency.Compte.Mail }}
       </td>
 
       <td>
-        {{ agency.NumeroTelephone }}
+        {{ agency.Compte.NumeroTelephone }}
       </td>
 
       <td>
-        {{ agency.DateInscription }}
+        {{ agency.Compte.DateInscription }}
       </td>
 
       <td>
         {{ agency.Signalement }}
       </td>
 
-      <td *ngIf="agency.IsBlocked === 0">
+      <td *ngIf="agency.Compte.IsBlocked === 0">
         <button
           pButton
           pRipple
@@ -228,7 +223,7 @@
         ></button>
       </td>
 
-      <td *ngIf="agency.IsBlocked === 1">
+      <td *ngIf="agency.Compte.IsBlocked === 1">
         <button
           pButton
           pRipple

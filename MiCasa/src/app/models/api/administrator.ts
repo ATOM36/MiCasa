@@ -1,9 +1,7 @@
+import { Compte } from './compte';
+
 export interface Administrateur {
-  AdministratorId: number;
-  Nom: string;
-  Prenom: string;
-  Mail: string;
-  Password: string;
-  NumeroTelephone: string;
-  DateInscription: Date;
+  AdministratorId: number | null;
+  IsActive: number | null;
+  Compte: Compte | null;
 }

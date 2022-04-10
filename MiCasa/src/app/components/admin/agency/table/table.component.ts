@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
-import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
 import {
   ConfirmationService,
   ConfirmEventType,
@@ -36,18 +35,14 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _agencyService: AgencyService,
-    private _agencyFire: AgencyFireService
+    private _agencyService: AgencyService
   ) {}
 
   ngOnInit(): void {
     this.startIndex = 0;
     this.stopIndex = 10;
     this.loadData();
-    // this._agencyFire.getAllAgencies().subscribe(async (response: Agence[]) => {
-    //   this.agencies = await response;
-    // });
-    // this.setIndexes();
+
     this.recordsNumber = this.getRecordsNumber();
   }
 
@@ -59,22 +54,13 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * @summary
-   * @returns
-   */
-  setIndexes() {
-    for (let i = 0; i < this.agencies.length; i++)
-      this.agencies[i].AgenceId = i + 1;
-  }
-
-  /**
-   * @summary
    */
   loadData = () => {
     this.isLoading = true;
     this._agencyService
       .getAgencies(this.startIndex, this.stopIndex)
       .subscribe(async ($response) => {
-        this.agencies = $response.Data;
+        this.agencies = $response.Data as Agence[];
       });
     this.isLoading = false;
   };
@@ -91,7 +77,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       this._agencyService
         .getAgencies(this.startIndex, this.stopIndex)
         .subscribe(async ($response) => {
-          this.agencies = this.agencies.concat($response.Data);
+          this.agencies = this.agencies.concat($response.Data as Agence[]);
         });
     });
 
@@ -107,27 +93,15 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   deleteSelectedAgency(agence: Agence) {
     this._confirmationService.confirm({
-      message: `Êtes-vous sûr de vouloir supprimer ${agence.Nom} ?`,
+      message: `Êtes-vous sûr de vouloir supprimer ${agence.Compte?.Nom} ?`,
 
       header: 'Confirmation en attente !',
 
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        /* this._agencyFire
-          .delete(agence)
-          .then(() => console.log('Bye bye'))
-          .then(() => {
-            this._messageService.add({
-              severity: 'success',
-              summary: 'Succès',
-              detail: `Compte supprimé avec succès !`,
-              key: 'message',
-              life: 2000,
-            });
-          });*/
         this._agencyService
-          .supprimerCompte(agence.AgenceId!)
+          .supprimerCompte(agence)
           .subscribe(async ($response) => {
             this._messageService.add({
               severity: $response.State == true ? 'success' : 'danger',
@@ -171,25 +145,16 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   changeAgencyStatus(agence: Agence) {
     this._confirmationService.confirm({
-      message: agence.IsBlocked
-        ? `Êtes-vous sûr de vouloir débloquer ${agence.Nom} ?`
-        : `Êtes-vous sûr de vouloir bloquer ${agence.Nom} ?`,
+      message: agence.Compte?.IsBlocked
+        ? `Êtes-vous sûr de vouloir débloquer ${agence.Compte.Nom} ?`
+        : `Êtes-vous sûr de vouloir bloquer ${agence.Compte?.Nom} ?`,
 
       header: 'Confirmation en attente !',
 
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-        if (agence.IsBlocked) {
-          /* this._agencyFire.unblockAgency(agence.id!).then(() => {
-            this._messageService.add({
-              severity: 'success',
-              summary: 'Statut',
-              detail: `${agence.Nom} débloquée avec succès !`,
-              key: 'message',
-            });
-          });*/
-
+        if (agence.Compte?.IsBlocked) {
           this._agencyService
             .debloquerCompte(agence.AgenceId!)
             .subscribe(async ($response) => {
@@ -201,18 +166,8 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               });
             });
 
-          agence.IsBlocked = 0;
+          agence.Compte.IsBlocked = 0;
         } else {
-          /* this._agencyFire.blockAgency(agence.id!).then(() => {
-            this._messageService.add({
-              severity: 'success',
-              summary: 'Statut',
-              detail: `${agence.Nom} bloquée avec succès !`,
-              key: 'message',
-            });
-          });
-          */
-
           this._agencyService
             .bloquerCompteAgence(agence.AgenceId!)
             .subscribe(async ($response) => {
@@ -224,7 +179,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               });
             });
 
-          agence.IsBlocked = 1;
+          agence.Compte!.IsBlocked = 1;
         }
       },
 

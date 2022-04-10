@@ -25,7 +25,7 @@
             ></button>
           </div>
           <div class="ms-3 details" style="margin-top: 130px">
-            <h5>{{ agency?.Nom }}</h5>
+            <h5>{{ agency?.Compte?.Nom }}</h5>
             <p>{{ agency?.Adresse }}</p>
           </div>
         </div>
@@ -40,7 +40,7 @@
               <p class="small text-muted mb-0">Clients</p>
             </div>
             <div>
-              <p class="mb-1 h5">{{ agency.Signalement }}</p>
+              <p class="mb-1 h5">{{ agency.Signalement! }}</p>
               <p class="small text-muted mb-0">Singalements</p>
             </div>
           </div>
@@ -63,7 +63,7 @@
   (onHide)="displayEditModal = false"
 >
   <ng-template pTemplate="header"
-    >Modification de {{ agency?.Nom }}</ng-template
+    >Modification de {{ agency?.Compte?.Nom }}</ng-template
   >
 
   <ng-template pTemplate="content">
