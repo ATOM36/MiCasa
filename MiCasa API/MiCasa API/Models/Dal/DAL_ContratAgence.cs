@@ -88,11 +88,10 @@ public class DAL_ContratAgence
             using (_connection = DbConnection.GetConnection())
             {
                 await _connection.OpenAsync();
-                string query = "INSERT INTO ContratAgence VALUES(@Id, @Admin, @Agence, @IsActive, @DateCreation);";
+                string query = "INSERT INTO ContratAgence VALUES(@Id, @Agence, @IsActive, @DateCreation);";
 
                 NpgsqlCommand command = new(query, _connection);
                 command.Parameters.AddWithValue("@Id", contrat.ContratId);
-                command.Parameters.AddWithValue("@Admin", contrat.AdministrateurId);
                 command.Parameters.AddWithValue("@Agence", contrat.AgenceId);
                 command.Parameters.AddWithValue("@IsActive", 1);
                 command.Parameters.AddWithValue("@DateCreation", DateTime.Now.ToShortDateString());

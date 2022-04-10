@@ -5,6 +5,7 @@ import { Administrateur } from '@models/api/administrator';
 import { Observable } from 'rxjs';
 import { header } from '../api-header';
 import { Message } from '@models/api/message';
+import { QueryData } from '@models/api/query-data';
 
 @Injectable({
   providedIn: 'root',
@@ -20,12 +21,13 @@ export class AdministratorService {
    * @param password the administrator's password
    * @returns All data related to a given administrator
    */
-  logIn = (username: string, password: string): Observable<Administrateur> =>
-    this.http.get<Administrateur>(
+  logIn = (
+    username: string,
+    password: string
+  ): Observable<QueryData<Administrateur | Message>> =>
+    this.http.get<QueryData<Administrateur | Message>>(
       `${environment.apiUrl}Administrateur/LogIn?username=${username}&password=${password}`,
-      {
-        headers: header,
-      }
+      { headers: header }
     );
 
   /**
@@ -35,11 +37,9 @@ export class AdministratorService {
    */
   updateProfile = (administrator: Administrateur): Observable<Message> =>
     this.http.post<Message>(
-      `${environment.apiUrl}Administrateur/ModifierProfil?administrateurId=${administrator.AdministratorId}`,
+      `${environment.apiUrl}Administrateur/ModifierProfile`,
       administrator,
-      {
-        headers: header,
-      }
+      { headers: header }
     );
 
   /**
@@ -50,9 +50,7 @@ export class AdministratorService {
   deleteAccount = (administrateurId: number): Observable<Message> =>
     this.http.post<Message>(
       `${environment.apiUrl}administrator/SupprimerCompte?administrateurId=${administrateurId}`,
-      {
-        headers: header,
-      }
+      { headers: header }
     );
 
   /**
@@ -60,35 +58,23 @@ export class AdministratorService {
    * @param administratorId A given administrator's id
    * @returns A message that describes the operation's state
    */
-  logOut(administratorId: number): Message {
-    let response: Message;
-    try {
-      sessionStorage.removeItem(`a-${administratorId}`);
-      response = {
-        Content: 'A la prochaine fois sur MiCasa',
-        State: true,
-      };
-
-      return response;
-    } catch (error) {
-      response = {
-        Content: 'Erreur lors de la déconnexion',
-        State: false,
-      };
-    }
-    return response;
-  }
-
-  //? ********************************* OPERATIONS RELATED TO AGENCIES *********************************
+  logOut = (administratorId: number): Observable<Message> =>
+    this.http.get<Message>(
+      `${environment.apiUrl}Administrateur/LogOut?adminId=${administratorId}`,
+      { headers: header }
+    );
 
   /**
-   * @summary Blocks the specified agency's account
-   * @param agenceId A given agency's id
+   * @summary Creates a new `Administrateur` account.
+   * @param admin The administrator that will be registered
    * @returns A message that describes the operation's state
    */
-  blockAgency = (agenceId: number): Observable<Message> =>
+  createAccount = (admin: Administrateur): Observable<Message> =>
     this.http.post<Message>(
-      `${environment.apiUrl}Administrateur/BloquerCompteAgence?agenceId=${agenceId}`,
-      { headers: header }
+      `${environment.apiUrl}Administrateur/CreerCompte`,
+      admin,
+      {
+        headers: header,
+      }
     );
 }

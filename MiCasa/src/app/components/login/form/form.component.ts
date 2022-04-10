@@ -10,10 +10,12 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
+import { Administrateur } from '@models/api/administrator';
 import { Agence } from '@models/api/agency';
+import { Message } from '@models/api/message';
+import { AdministratorService } from '@services/api/admin/administrator.service';
 import { AgencyService } from '@services/api/agency/agency.service';
-import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
-import { getSweetAlert } from '@utility/js-libraries';
+import { getJquery, getSweetAlert } from '@utility/js-libraries';
 import { isSmallScreen } from '@utility/screen-size';
 import {
   ConfirmationService,
@@ -23,6 +25,8 @@ import {
 import { Observable, of, Subscription, switchMap } from 'rxjs';
 
 var Swal = getSweetAlert();
+
+var $ = getJquery();
 
 @Component({
   selector: 'app-form',
@@ -52,24 +56,9 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   greenColor: string = '#007200ff';
 
-  userIsBlocked: boolean = false;
-
   isSmall!: boolean;
 
-  agency: Agence = {
-    AgenceId: null,
-    NumeroTelephone: null,
-    Mail: null,
-    Nom: null,
-    Latitude: null,
-    Longitude: null,
-    DateInscription: null,
-    IsBlocked: null,
-    Adresse: null,
-    Password: null,
-    Username: null,
-    Signalement: null,
-  };
+  agency!: Agence | null;
 
   subscription!: Subscription;
 
@@ -82,9 +71,9 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private _router: Router,
     private _agencyService: AgencyService,
+    private _adminService: AdministratorService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _agencyFire: AgencyFireService,
     private _update: SwUpdate
   ) {}
 
@@ -97,7 +86,11 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     this._messageService.clear();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    window.screen.width <= 896
+      ? $('button').addClass('w-100')
+      : $('button').addClass('w-75');
+  }
 
   /**
    * @summary If the two entries have a value, then the login button can be called
@@ -114,50 +107,71 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   lezgo(): void {
     let emailEntry = String(this.myForm.get('email')?.value);
 
-    if (emailEntry.endsWith('agence')) {
+    //? Agency login case
+    if (emailEntry.endsWith('@agence')) {
       this.subscription = this._agencyService
         .logIn(
           this.myForm.get('email')?.value,
           this.myForm.get('password')?.value
         )
         .subscribe(async ($response) => {
+          //? Displaying an error message
+
           if ($response.State == false) {
-            this._messageService.add({
-              severity: 'danger',
-              summary: 'Echec !',
-              detail: `${$response.Data}`,
-              key: 'message',
+            Swal.fire({
+              title: 'Connection',
+              icon: 'error',
+              html: `<p>Email ou mot de passe incorrect</p>\n<p>Veuillez réessayer.</p>`,
             });
+
+            //? If no error occured then....
           } else {
-            this.loadData($response.Data);
-            if (this.agency.IsBlocked) this.userIsBlocked = true;
-            else {
+            this.agency = $response.Data as Agence;
+
+            if (this.agency?.Compte?.IsBlocked) {
+              Swal.fire({
+                title: 'Connection',
+                icon: 'error',
+                html:
+                  "<p>Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus" +
+                  "d'informations</p>",
+              });
+            } else {
               localStorage.setItem('a-x', JSON.stringify(this.agency));
-              this._router.navigate([`agency/${this.agency.Nom}/account`]);
+              this._router.navigate([
+                `agency/${this.agency?.Compte?.Nom}/account`,
+              ]);
             }
           }
         });
 
-      /* console.log('Is agency');
-      this._agencyFire
+      //? Admin login case
+    } else if (emailEntry.endsWith('@admin')) {
+      this.subscription = this._adminService
         .logIn(
-          //? removing useless data
-          emailEntry.replace('agence', '').trim(),
+          this.myForm.get('email')?.value,
           this.myForm.get('password')?.value
         )
-        .subscribe(async ($response: Agence) => {
-          console.log($response);
-          //? Controlling the user's state after the request has been sent
-          //? If the account is blocked, then display an error message
-          if (await $response.IsBlocked) this.userIsBlocked = true;
-          //? If not, then save user's data in the session storage and it's done
-          else {
-            sessionStorage.setItem('a-x', JSON.stringify($response));
-            this._router.navigate([`agency/${$response.Nom}/account`]);
+        .subscribe(async ($response) => {
+          if ($response.State == false) {
+            Swal.fire({
+              title: 'Connection',
+              icon: 'error',
+              html: `<p>${($response.Data as Message).Content}</p>`,
+            });
           }
-        });*/
-    } else if (emailEntry.endsWith('admin'))
-      this._router.navigate(['/admin/dashboard']);
+
+          //? If no error occured then ....
+          else {
+            localStorage.setItem(
+              'ad-x',
+              JSON.stringify($response.Data as Administrateur)
+            );
+
+            this._router.navigate(['/admin/dashboard']);
+          }
+        });
+    }
   }
 
   /**
@@ -197,26 +211,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.displayRegistration = false;
     this.displayOptions = false;
   }
-
-  /**
-   *@summary Initialize the agency property with some values that will be used during the whole session
-  of an agency
-   * @param Data
-   */
-  loadData = (Data: any[]) => {
-    this.agency.AgenceId = Data[0];
-    this.agency.Username = Data[1];
-    this.agency.Password = Data[2];
-    this.agency.Signalement = Data[3];
-    this.agency.NumeroTelephone = Data[4];
-    this.agency.Mail = Data[5];
-    this.agency.Nom = Data[6];
-    this.agency.Latitude = Data[7];
-    this.agency.Longitude = Data[8];
-    this.agency.DateInscription = Data[9];
-    this.agency.Adresse = Data[10];
-    this.agency.IsBlocked = Data[11];
-  };
 
   /**
    * @summary Checks whether or not a `new version` of the app has been deployed.

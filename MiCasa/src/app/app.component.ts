@@ -1,9 +1,16 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ChildrenOutletContexts, Router } from '@angular/router';
+import {
+  ChildrenOutletContexts,
+  NavigationEnd,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
-import { getAos } from '@utility/js-libraries';
+import { Agence } from '@models/api/agency';
+import { AgencyService } from '@services/api/agency/agency.service';
 
-var AOS = getAos();
+import * as AOS from 'aos';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +22,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private _agencyService: AgencyService
   ) {}
 
   ngOnInit(): void {
@@ -65,4 +73,25 @@ export class AppComponent implements OnInit, AfterViewInit {
    */
   getRouteAnimationData = () =>
     this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+
+  trackNavigation = () =>
+    this.router.events.subscribe((event) => {
+      let fromAgency, isOut;
+      let agency!: Agence;
+
+      if (event instanceof NavigationStart) {
+        fromAgency = event.url.includes('agency');
+
+        if (fromAgency) {
+          agency = JSON.parse(localStorage.getItem('a-x')!);
+        }
+      }
+
+      if (event instanceof NavigationEnd) {
+        isOut = event.url.includes('login');
+
+        if (fromAgency && isOut)
+          this._agencyService.logOut(agency.Compte?.CompteId!);
+      }
+    });
 }

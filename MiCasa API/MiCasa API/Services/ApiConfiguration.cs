@@ -1,5 +1,7 @@
-﻿using Serilog;
+﻿using Microsoft.EntityFrameworkCore;
+using Serilog;
 using Serilog.Events;
+using System.Net;
 
 namespace MiCasa.Services
 {
@@ -11,6 +13,12 @@ namespace MiCasa.Services
     {
         private readonly IServiceCollection? _services;
         private readonly IConfiguration? _configuration;
+
+        private string GetLocaleIpAdresse()
+        {
+            string hostName = Dns.GetHostName();
+            return Dns.GetHostEntry(hostName).AddressList[0].ToString();
+        }
 
         public ApiConfiguration(IServiceCollection services, IConfiguration configuration)
         {
@@ -43,7 +51,9 @@ namespace MiCasa.Services
                 {
                     opt.WithOrigins("http://localhost:4200",
                         "https://inquisitive-snickerdoodle-f9acf7.netlify.app",
-                        "http://localhost:8080")
+                        "http://localhost:8080",
+                        GetLocaleIpAdresse()
+                        )
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 }));
@@ -54,11 +64,12 @@ namespace MiCasa.Services
         /// <summary>
         /// Registering services in the DI container
         /// </summary>
-        public ApiConfiguration RegisterInterfacesServices()
+        public ApiConfiguration ConfigureInterfacesRegistration()
         {
             _services?.AddScoped<IAgence, BLL_Agence>()
-                .AddScoped<IAuthService,AuthService>()
-                .AddScoped<IContratAgence, BLL_ContratAgence>();
+                .AddScoped<IAuthService, AuthService>()
+                .AddScoped<IContratAgence, BLL_ContratAgence>()
+                .AddScoped<IAdministrateur, BLL_Administrateur>();
 
             return this;
         }
@@ -78,9 +89,25 @@ namespace MiCasa.Services
             return this;
         }
 
+        /// <summary>
+        /// Registers <see cref="IAuthService"/> in the DI container so that it can be used.
+        /// </summary>
+        /// <returns></returns>
         public ApiConfiguration ConfigureEmailService()
         {
             _services!.AddScoped<IAuthService, AuthService>();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Registers <see cref="AppDbContext"/> as the database context.
+        /// </summary>
+        /// <returns></returns>
+        public ApiConfiguration ConfigureDbContext()
+        {
+            _services?.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(_configuration.GetConnectionString("MiCasaDB")));
 
             return this;
         }
