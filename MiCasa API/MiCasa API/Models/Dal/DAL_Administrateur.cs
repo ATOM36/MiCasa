@@ -6,10 +6,12 @@ public class DAL_Administrateur
 {
     private readonly AppDbContext? _context = null;
     private static NpgsqlConnection? _connection = null;
+    private readonly IAuthService? _authService = null;
 
-    public DAL_Administrateur(AppDbContext context)
+    public DAL_Administrateur(AppDbContext context, IAuthService authService)
     {
         _context = context;
+        _authService = authService;
     }
 
 
@@ -61,6 +63,7 @@ public class DAL_Administrateur
                                          CompteId = _admin.CompteId
                                      }).FirstOrDefault();
 
+            admin.Compte.Token = _authService!.GenerateToken(admin.Compte.Username, admin.Compte.Mail, "Administrateur");
             // Indiquer qu'il est connecter
             if (admin is not null)
                 admin.Compte.IsConnected = 1;

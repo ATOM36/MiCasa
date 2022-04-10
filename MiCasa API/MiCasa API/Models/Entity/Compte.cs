@@ -53,4 +53,8 @@ public class Compte
     [JsonProperty("IsConnected")]
     [Required]
     public byte IsConnected { get; set; }
+
+    [Column("Token")]
+    [JsonProperty("Token")]
+    public string? Token { get; set; }
 }

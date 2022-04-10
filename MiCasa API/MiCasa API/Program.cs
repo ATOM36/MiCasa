@@ -23,7 +23,8 @@ config.ConfigureInterfacesRegistration()
     .ConfigureEmailService()
     .ConfigureCors()
     .ConfigureJsonSerialization()
-    .ConfigureDbContext();
+    .ConfigureDbContext()
+    .ConfigureJwt();
 
 
 
@@ -46,7 +47,7 @@ if (app.Environment.IsDevelopment())
 //Also OpenApi will be able to redirect  the different calls
 app.UseRouting();
 
-
+app.UseAuthentication();
 
 app.UseAuthorization();
 

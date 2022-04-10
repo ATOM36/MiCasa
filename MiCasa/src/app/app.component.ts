@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     AOS.init();
-
+    this.removeToken();
     this.hasRefreshed = this.checkRefresh();
     sessionStorage.setItem('reload-loc', 'yes');
 
@@ -94,4 +94,9 @@ export class AppComponent implements OnInit, AfterViewInit {
           this._agencyService.logOut(agency.Compte?.CompteId!);
       }
     });
+
+  removeToken = () =>
+    window.location.href.includes('login')
+      ? localStorage.removeItem('token')
+      : null;
 }

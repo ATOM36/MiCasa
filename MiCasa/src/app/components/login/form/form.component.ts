@@ -133,11 +133,12 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
                 title: 'Connection',
                 icon: 'error',
                 html:
-                  "<p>Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus" +
+                  "<p>Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus " +
                   "d'informations</p>",
               });
             } else {
               localStorage.setItem('a-x', JSON.stringify(this.agency));
+              localStorage.setItem('token', this.agency.Compte?.Token!);
               this._router.navigate([
                 `agency/${this.agency?.Compte?.Nom}/account`,
               ]);
@@ -163,12 +164,20 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
           //? If no error occured then ....
           else {
-            localStorage.setItem(
-              'ad-x',
-              JSON.stringify($response.Data as Administrateur)
-            );
+            const admin = $response.Data as Administrateur;
+            localStorage.setItem('token', admin.Compte?.Token!);
 
-            this._router.navigate(['/admin/dashboard']);
+            if (localStorage.getItem('token')) {
+              localStorage.setItem('ad-x', JSON.stringify(admin));
+
+              this._router.navigate(['/admin/dashboard']);
+            } else {
+              Swal.fire({
+                title: 'Connection',
+                icon: 'error',
+                html: `<p>Vous n'êtes pas autorisé à acceder à cette ressource</p>`,
+              });
+            }
           }
         });
     }

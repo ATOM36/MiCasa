@@ -5,12 +5,11 @@ namespace MiCasa.Models.Bll;
 public class BLL_Administrateur : IAdministrateur
 {
     private readonly DAL_Administrateur? _dal = null;
-    private readonly IAuthService? _authService = null;
-
+    private readonly AppDbContext? _context;
     public BLL_Administrateur(AppDbContext context, IAuthService authService)
     {
-        _dal = new(context);
-        _authService = authService;
+        _context = context;
+        _dal = new(context, authService);
     }
 
 
@@ -20,8 +19,6 @@ public class BLL_Administrateur : IAdministrateur
 
         if (result.State)
         {
-            _authService?.SendWelcomeEmail(administrateur.Compte.Mail, administrateur.Compte.Nom);
-
             Log.Information($"Création d'un compte pour {administrateur.Compte.Username} {administrateur.Compte.Mail}");
 
             return result;
@@ -44,6 +41,7 @@ public class BLL_Administrateur : IAdministrateur
             if (result.Data is null)
             {
                 Log.Information("Aucune entrée trouvée");
+
                 return new(new Message("Informations incorrectes", false), false);
             }
 

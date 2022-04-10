@@ -1,6 +1,10 @@
-﻿using SendGrid;
+﻿using Microsoft.IdentityModel.Tokens;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using Serilog;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace MiCasa.Services
 {
@@ -13,9 +17,24 @@ namespace MiCasa.Services
             _configuration = configuration;
         }
 
-        public string GenerateToken<T>(T user)
+        public string GenerateToken(string username, string email, string role)
         {
-            throw new NotImplementedException();
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("JwtKey")));
+
+            var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+            var tokenOptions = new JwtSecurityToken(
+                issuer: "http://localhost:5000",
+                audience: "http://localhost:5000",
+                claims: new List<Claim> {
+                    new Claim(ClaimTypes.Name,username),
+                    new Claim(ClaimTypes.Role,role)
+                },
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: signinCredentials
+                );
+
+            var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return token;
         }
 
 

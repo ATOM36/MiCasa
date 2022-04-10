@@ -5,14 +5,13 @@ namespace MiCasa.Models.Bll;
 public class BLL_Agence : IAgence
 {
     private readonly DAL_Agence? _dal = null;
-    private readonly IAuthService? _authService = null;
+
     private readonly AppDbContext? _context;
 
     public BLL_Agence(AppDbContext dbContext, IAuthService authService)
     {
         _context = dbContext;
-        _dal = new(dbContext);
-        _authService = authService;
+        _dal = new(dbContext, authService);
     }
 
     public async Task<Message> DebloquerCompte(int agenceId)
@@ -163,7 +162,6 @@ public class BLL_Agence : IAgence
             if (result.State)
             {
                 Log.Information("Compte créé avec succès");
-                _authService!.SendActivationEmail(agence.Compte.Mail, agence.Compte.Nom);
                 return result;
             }
             else
@@ -247,6 +245,7 @@ public class BLL_Agence : IAgence
                 if (result.Data is not null)
                 {
                     Log.Information("Connection autorisée");
+
                     return result;
                 }
                 else
@@ -280,7 +279,6 @@ public class BLL_Agence : IAgence
             if (result.State)
             {
                 Log.Information("Compte supprimé avec succès");
-                _authService!.OnDeleteEmail(email, name);
                 return result;
             }
             else

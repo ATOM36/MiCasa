@@ -9,4 +9,5 @@ export interface Compte {
   DateInscription: string | null;
   IsConnected: number | null;
   IsBlocked: number | null;
+  Token?: string | null;
 }
