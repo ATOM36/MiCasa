@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
 using System.Net;
+using System.Text;
 
 namespace MiCasa.Services
 {
@@ -108,6 +111,42 @@ namespace MiCasa.Services
         {
             _services?.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(_configuration.GetConnectionString("MiCasaDB")));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the JWT generation in order to protect ressources
+        /// </summary>
+        /// <returns></returns>
+        public ApiConfiguration ConfigureJwt()
+        {
+            _services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    // The token is going to be valid if =>
+                    options.TokenValidationParameters = new TokenValidationParameters {
+                        // The issuer is the actual server that created the server
+                        ValidateIssuer = true,
+
+                        // The receiver of the token is a valid recipient
+                        ValidateAudience = true,
+
+                        // The token has not expired
+                        ValidateLifetime = true,
+                        // The signin key is valid and trusted by the server
+
+                        ValidIssuer = "http://localhost:5000",
+                        ValidAudience = "http://localhost:5000",
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                            _configuration.GetValue<string>("JwtKey")))
+                    };
+                });
+
 
             return this;
         }

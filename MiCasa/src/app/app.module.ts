@@ -26,6 +26,9 @@ import { SharedModule } from '@modules/shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
+import { JwtModule } from '@auth0/angular-jwt';
+import { tokenGetter } from '@utility/auth';
+import { AuthGuard } from '@guards/auth-guard.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -51,13 +54,20 @@ import { reducers, metaReducers } from './reducers';
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
     StoreModule.forRoot(reducers, {
-      metaReducers
+      metaReducers,
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: [],
+      },
     }),
   ],
-
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

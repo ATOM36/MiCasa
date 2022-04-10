@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Label="" LastModificationDate="1649416320" Name="diagrams" Objects="189" Symbols="29" Target="C# 2.0" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.7.3.6726"?>
+<?PowerDesigner AppLocale="UTF16" ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Label="" LastModificationDate="1649594282" Name="diagrams" Objects="188" Symbols="29" Target="C# 2.0" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="16.7.3.6726"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1579,7 +1579,7 @@ Shadow=0</a:DisplayPreferences>
 <o:AssociationSymbol Id="o7">
 <a:CreationDate>1646992215</a:CreationDate>
 <a:ModificationDate>1649345947</a:ModificationDate>
-<a:Rect>((-4980,-12730), (8189,6281))</a:Rect>
+<a:Rect>((-4980,-12730), (8099,6281))</a:Rect>
 <a:ListOfPoints>((-4580,-12330),(6209,-12330),(6209,5881))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>0</a:ArrowStyle>
@@ -1600,7 +1600,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o11">
 <a:CreationDate>1649325978</a:CreationDate>
 <a:ModificationDate>1649345260</a:ModificationDate>
-<a:Rect>((17880,13278), (25699,15055))</a:Rect>
+<a:Rect>((17880,13207), (25699,15126))</a:Rect>
 <a:ListOfPoints>((18280,14167),(25299,14167))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>2048</a:ArrowStyle>
@@ -1621,8 +1621,8 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o14">
 <a:CreationDate>1649325998</a:CreationDate>
 <a:ModificationDate>1649346245</a:ModificationDate>
-<a:Rect>((-26160,-5561), (-21960,7406))</a:Rect>
-<a:ListOfPoints>((-24060,-5161),(-24060,7006))</a:ListOfPoints>
+<a:Rect>((-26160,-5561), (-21960,6926))</a:Rect>
+<a:ListOfPoints>((-24060,-5161),(-24060,6526))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>16744448</a:LineColor>
@@ -1642,8 +1642,8 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o17">
 <a:CreationDate>1649326000</a:CreationDate>
 <a:ModificationDate>1649346245</a:ModificationDate>
-<a:Rect>((-18023,12202), (-5462,14187))</a:Rect>
-<a:ListOfPoints>((-5862,13195),(-17623,13195))</a:ListOfPoints>
+<a:Rect>((-18023,12231), (-5462,14150))</a:Rect>
+<a:ListOfPoints>((-5862,13194),(-17623,13194))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>16744448</a:LineColor>
@@ -1733,7 +1733,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:CreationDate>1649325927</a:CreationDate>
 <a:ModificationDate>1649346245</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-30497,7006), (-17623,19424))</a:Rect>
+<a:Rect>((-30497,6526), (-17623,19904))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:FillColor>16770222</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -3145,7 +3145,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Compte</a:Code>
 <a:CreationDate>1649325927</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649416312</a:ModificationDate>
+<a:ModificationDate>1649594282</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
@@ -3235,10 +3235,9 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>isConnected</a:Code>
 <a:CreationDate>1649344921</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649344985</a:ModificationDate>
+<a:ModificationDate>1649594282</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:DataType>byte</a:DataType>
-<a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
 <o:Attribute Id="o119">
 <a:ObjectID>08F642BC-0390-455D-B378-FCF65E235E88</a:ObjectID>
@@ -3246,10 +3245,19 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>isBlocked</a:Code>
 <a:CreationDate>1649416302</a:CreationDate>
 <a:Creator>tchio</a:Creator>
-<a:ModificationDate>1649416312</a:ModificationDate>
+<a:ModificationDate>1649594282</a:ModificationDate>
 <a:Modifier>tchio</a:Modifier>
 <a:DataType>byte</a:DataType>
-<a:Attribute.Visibility>-</a:Attribute.Visibility>
+</o:Attribute>
+<o:Attribute Id="o120">
+<a:ObjectID>E9C87599-DF34-4E34-B058-7AE2EABF94C6</a:ObjectID>
+<a:Name>Token</a:Name>
+<a:Code>token</a:Code>
+<a:CreationDate>1649594250</a:CreationDate>
+<a:Creator>tchio</a:Creator>
+<a:ModificationDate>1649594282</a:ModificationDate>
+<a:Modifier>tchio</a:Modifier>
+<a:DataType>string</a:DataType>
 </o:Attribute>
 </c:Attributes>
 </o:Class>
@@ -3621,7 +3629,7 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Area>
 </c:ArchitectureAreas>
 <c:TargetModels>
-<o:TargetModel Id="o120">
+<o:TargetModel Id="o121">
 <a:ObjectID>9464220A-0BA3-4320-9597-8208F9DEF050</a:ObjectID>
 <a:Name>C# 2.0</a:Name>
 <a:Code>C# 2</a:Code>
@@ -3637,7 +3645,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:Shortcut Ref="o4"/>
 </c:SessionShortcuts>
 </o:TargetModel>
-<o:TargetModel Id="o121">
+<o:TargetModel Id="o122">
 <a:ObjectID>59ED30EE-E699-4EE9-9D2D-2F5521D05C55</a:ObjectID>
 <a:Name>WSDL for .NET</a:Name>
 <a:Code>WSDLDotNet</a:Code>

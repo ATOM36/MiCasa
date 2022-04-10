@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MiCasa.Controllers;
@@ -16,6 +17,7 @@ public class AdministrateurController : ControllerBase
 
 
     [HttpPost, Route("CreerCompte")]
+    [Authorize]
     public async Task<JsonResult> CreerCompte([FromBody] Administrateur administrateur) => new(await _bll!.CreerCompte(administrateur));
 
 
@@ -27,7 +29,9 @@ public class AdministrateurController : ControllerBase
     public async Task<JsonResult> LogIn([FromQuery] string username, [FromQuery] string password) => new(await _bll!.LogIn(
         username.Replace("@admin", "").Trim(), password));
 
+
     [HttpPost, Route("ModifierProfile")]
+    [Authorize]
     public async Task<JsonResult> ModifierProfile([FromBody] Administrateur admin) => new(await _bll!.ModifierProfile(admin));
 
 }

@@ -3,10 +3,11 @@ public class DAL_Agence
 {
     private static NpgsqlConnection? _connection;
     private readonly AppDbContext? _context = null;
-
-    public DAL_Agence(AppDbContext context)
+    private readonly IAuthService? _authService = null;
+    public DAL_Agence(AppDbContext context, IAuthService authService)
     {
         _context = context;
+        _authService = authService;
     }
 
 
@@ -36,6 +37,7 @@ public class DAL_Agence
                                   Signalement = agence.Signalement
                               }).SingleOrDefault();
 
+            result.Compte.Token = _authService!.GenerateToken(result.Compte.Username, result.Compte.Mail, "Agence");
             result.Compte.IsConnected = 1;
             return new(result, true);
         }
