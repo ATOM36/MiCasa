@@ -15,6 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
@@ -37,6 +38,7 @@ import { LoadingComponent } from '@pages/loading/loading.component';
     InputTextModule,
     MatStepperModule,
     ButtonModule,
+    ProgressSpinnerModule,
   ],
   exports: [
     FooterComponent,

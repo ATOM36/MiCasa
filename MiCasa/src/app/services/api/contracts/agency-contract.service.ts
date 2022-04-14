@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { header } from '../api-header';
 
 @Injectable({
+  providedIn: 'root',
 })
 export class AgencyContractService {
   constructor(private http: HttpClient) {}
@@ -77,4 +78,16 @@ export class AgencyContractService {
       }
     );
 
+  /**
+   *
+   * @param contratId
+   * @returns
+   */
+  deleteContract = (contratId: number): Observable<Message> =>
+    this.http.delete<Message>(
+      `${environment.apiUrl}ContratAgence/Delete/${contratId}`,
+      {
+        headers: header,
+      }
+    );
 }

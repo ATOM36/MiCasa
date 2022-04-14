@@ -1,1 +1,1 @@
-export const isSmallScreen = () => window.screen.width <= 900;
+export const isSmallScreen = () => window.screen.width <= 896;
