@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?PowerDesigner signature="Workspace" version="16.7.3.6726"?>
+<!-- Veuillez ne pas modifier ce fichier -->
+
+<Workspace>
+	<Local Expanded="Yes">
+		<Model ID="{DB3F4363-D667-4E79-B170-F74372A93716}" Loaded="No" Name="diagrams" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="use case.moo"/>
+		<Model Expanded="Yes" ID="{B95956BF-5F34-4497-BE5C-D4161FB4209E}" Loaded="No" Name="AD Nations artefacts" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="../../../AD Project/AD Nations artefacts/AD Nations.prj"/>
+		<Model Expanded="Yes" ID="{B95956BF-5F34-4497-BE5C-D4161FB4209E}" Loaded="No" Name="AD Nations artefacts" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="../../../AD Project/AD Nations artefacts/AD Nations.prj"/>
+		<Model Expanded="Yes" ID="{B95956BF-5F34-4497-BE5C-D4161FB4209E}" Name="AD Nations artefacts" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="../../../AD Project/AD Nations artefacts/AD Nations.prj"/>
+	</Local>
+	<BrowserModule Name="Repository"/>
+</Workspace>

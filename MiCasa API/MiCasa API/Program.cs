@@ -1,6 +1,5 @@
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using MiCasa.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,28 +13,26 @@ builder.Services.AddSwaggerGen();
 // Antiforgery config
 builder.Services.AddAntiforgery(opt => opt.HeaderName = "XSRF-TOKEN");
 
-//JSON responses configuration
-//With this configuration, we ensure that every given response by the API will be in JSON format
-//Using the AddControllersWithViews allows OpenApi and the whole program to add services for pages
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(opt =>
-        opt.SerializerSettings.ContractResolver = new DefaultContractResolver()).AddNewtonsoftJson(opt =>
-            opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+// Postgres JSON config
+NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
 
-//Enabling cors for services
-builder.Services.AddCors(options =>
-    options.AddPolicy(name: "AllowOrigin", opt =>
-    {
-        opt.WithOrigins("http://localhost:4200")
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-    }));
+// Builder configuration
+ApiConfiguration config = new(builder.Services, builder.Configuration);
+config.ConfigureInterfacesRegistration()
+    .ConfigureLogging()
+    .ConfigureEmailService()
+    .ConfigureCors()
+    .ConfigureJsonSerialization()
+    .ConfigureDbContext()
+    .ConfigureJwt();
 
-// Registering services in the DI container
-builder.Services.AddScoped<IAgency, BLL_Agency>();
+
 
 // Adding response caching
 builder.Services.AddControllers();
+
+DbConnection.Init(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -50,7 +47,7 @@ if (app.Environment.IsDevelopment())
 //Also OpenApi will be able to redirect  the different calls
 app.UseRouting();
 
-
+app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -64,5 +61,6 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller}/{action}/{id?}");
 });
+
 
 app.Run();

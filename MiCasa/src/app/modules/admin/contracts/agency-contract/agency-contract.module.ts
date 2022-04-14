@@ -3,9 +3,6 @@ import { AgencyContractComponent } from '@pages/admin/contracts/agency-contract/
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
 import { SharedModule } from '@modules/shared/shared.module';
 
-//? Declarations
-import { TableComponent } from '@components/admin/contracts/agence/table/table.component';
-
 //? PrimeNg
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
@@ -15,7 +12,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
-  declarations: [AgencyContractComponent, TableComponent],
+  declarations: [AgencyContractComponent],
   imports: [
     SharedModule,
     DashboardModule,

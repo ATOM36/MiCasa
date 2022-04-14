@@ -36,7 +36,6 @@ import { ToastModule } from 'primeng/toast';
 //? Material Design
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -56,7 +55,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     ToastModule,
     ConfirmDialogModule,
     ReactiveFormsModule,
-    MatDialogModule,
     FormsModule,
     DividerModule,
     PasswordModule,

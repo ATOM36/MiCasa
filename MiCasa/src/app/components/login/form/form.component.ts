@@ -8,7 +8,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { Administrateur } from '@models/api/administrator';
@@ -18,8 +17,11 @@ import { AdministratorService } from '@services/api/admin/administrator.service'
 import { AgencyService } from '@services/api/agency/agency.service';
 import { getJquery, getSweetAlert } from '@utility/js-libraries';
 import { isSmallScreen } from '@utility/screen-size';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { ProgressSpinner } from 'primeng/progressspinner';
+import {
+  ConfirmationService,
+  ConfirmEventType,
+  MessageService,
+} from 'primeng/api';
 import { Observable, of, Subscription, switchMap } from 'rxjs';
 
 var Swal = getSweetAlert();
@@ -30,7 +32,7 @@ var $ = getJquery();
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  providers: [ConfirmationService, MessageService, MatDialog],
+  providers: [ConfirmationService, MessageService],
 })
 export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   myForm = new FormGroup({
@@ -72,8 +74,7 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     private _adminService: AdministratorService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _update: SwUpdate,
-    private _matDialog: MatDialog
+    private _update: SwUpdate
   ) {}
 
   ngOnInit(): void {
@@ -85,7 +86,11 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     this._messageService.clear();
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    window.screen.width <= 896
+      ? $('button').addClass('w-100')
+      : $('button').addClass('w-75');
+  }
 
   /**
    * @summary If the two entries have a value, then the login button can be called
@@ -100,8 +105,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
    * @summary Gets all data of a given agency, does some control and then redirect it to its account page
    */
   lezgo(): void {
-    this._matDialog.open(ProgressSpinner, {});
-
     let emailEntry = String(this.myForm.get('email')?.value);
 
     //? Agency login case
@@ -113,7 +116,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
         )
         .subscribe(async ($response) => {
           //? Displaying an error message
-          this._matDialog.closeAll();
 
           if ($response.State == false) {
             Swal.fire({
@@ -125,7 +127,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
             //? If no error occured then....
           } else {
             this.agency = $response.Data as Agence;
-            // this._dialogRef.close();
 
             if (this.agency?.Compte?.IsBlocked) {
               Swal.fire({
@@ -138,9 +139,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
             } else {
               localStorage.setItem('a-x', JSON.stringify(this.agency));
               localStorage.setItem('token', this.agency.Compte?.Token!);
-
-              // this._dialogRef.close();
-
               this._router.navigate([
                 `agency/${this.agency?.Compte?.Nom}/account`,
               ]);
@@ -156,9 +154,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
           this.myForm.get('password')?.value
         )
         .subscribe(async ($response) => {
-          // this._dialogRef.close();
-          this._matDialog.closeAll();
-
           if ($response.State == false) {
             Swal.fire({
               title: 'Connection',
@@ -174,12 +169,9 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
             if (localStorage.getItem('token')) {
               localStorage.setItem('ad-x', JSON.stringify(admin));
-              // this._dialogRef.close();
 
               this._router.navigate(['/admin/dashboard']);
             } else {
-              // this._dialogRef.close();
-
               Swal.fire({
                 title: 'Connection',
                 icon: 'error',
