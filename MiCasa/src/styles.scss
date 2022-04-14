@@ -3,6 +3,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
   margin: 0;
 }
 
@@ -11,14 +12,37 @@ body {
   font-family: "Amiri", "Helvetica Neue", sans-serif;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import "~bootstrap/scss/bootstrap";
-
-// Importing AOS styles
-@import "../node_modules/aos/dist/aos.css";
-
 // Importing the colors palettes
 @import "./app/scss/colors";
 
 // Custom fonts
 @import "./app/scss/fonts";
+
+// Confirm dialog buttons styles
+:root {
+  .confirm {
+    background: var(--green-yellow-green-color-wheel);
+  }
+
+  .confirm-radio {
+    accent-color: var(--green-yellow-green-color-wheel);
+  }
+
+  .reject {
+    background: var(--red-cardinal);
+  }
+}
+
+//? cross browser configs
+body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+//? End cross browser config

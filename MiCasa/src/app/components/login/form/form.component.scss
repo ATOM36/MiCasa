@@ -7,3 +7,31 @@
 .password-reset {
   margin-top: 10px;
 }
+
+#hide-options {
+  margin-top: 15px;
+  text-align: center;
+}
+
+button {
+  margin-top: 10px;
+  font-size: large;
+}
+
+@media screen and (min-width: 900px) {
+  .update-choice {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// Update modal text
+p {
+  color: var(--green-pakistan-green);
+}
+
+.option {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}

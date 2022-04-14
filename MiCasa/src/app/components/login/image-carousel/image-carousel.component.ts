@@ -11,27 +11,27 @@ export class ImageCarouselComponent implements OnInit, AfterViewInit {
   assetImages = [
     /* {
       id: 1,
-      path: 'assets/img/login/first.jpg',
+      path: 'assets/img/login/first.webp',
     },
     {
       id: 2,
-      path: 'assets/img/login/second.jpg',
+      path: 'assets/img/login/second.webp',
     },*/
     {
       id: 3,
-      path: 'assets/img/login/third.jpg',
+      path: 'assets/img/login/third.webp',
     },
     {
       id: 4,
-      path: 'assets/img/login/fourth.jpg',
+      path: 'assets/img/login/fourth.webp',
     },
     {
       id: 5,
-      path: 'assets/img/login/fifth.jpg',
+      path: 'assets/img/login/fifth.webp',
     },
     {
       id: 6,
-      path: 'assets/img/login/sixth.jpg',
+      path: 'assets/img/login/sixth.webp',
     },
   ];
 
@@ -46,6 +46,6 @@ export class ImageCarouselComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.carouselState = 'image';
       this.showSkeleton = false;
-    }, 500);
+    }, 2000);
   }
 }

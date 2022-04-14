@@ -1,5 +1,12 @@
+button {
+  font-family: "Amiri";
+}
+
+// The update button
 :host ::ng-deep {
-  & button {
-    font-family: "Amiri";
+  & .update-choice {
+    & button {
+      margin-top: 15px;
+    }
   }
 }

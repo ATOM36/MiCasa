@@ -1,11 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgencyComponent } from './agency.component';
+import { AgencyDashboardComponent } from '@pages/agency/dashboard/agency-dashboard.component';
 
-const routes: Routes = [{ path: '', component: AgencyComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    component: AgencyDashboardComponent,
+  },
+
+  {
+    path: 'agency/:name/account',
+    loadChildren: () =>
+      import('./agency-account/agency-account.module').then(
+        (m) => m.AgencyAccountModule
+      ),
+    data: {
+      origin: 'agency/',
+    },
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AgencyRoutingModule { }
+export class AgencyRoutingModule {}

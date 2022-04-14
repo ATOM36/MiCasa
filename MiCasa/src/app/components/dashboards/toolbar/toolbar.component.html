@@ -1,0 +1,55 @@
+<mat-toolbar
+  data-aos="fade-down"
+  data-aos-duration="1200"
+  data-aos-easing="ease-in-out"
+  class="sticky-top d-block mat-elevation-z6"
+>
+  <button
+    pButton
+    pRipple
+    type="button"
+    class="toggler-left p-button p-button-raised p-button-text p-button-success p-button-rounded mt-lg-2 mt-md-5"
+    icon="pi pi-bars"
+    (click)="isToggled = true"
+  ></button>
+
+  <span
+    *ngIf="location?.includes('home')"
+    class="brand d-inline-block mt-2 mt-md-3"
+    >MiCasa</span
+  >
+
+  <span
+    *ngIf="location?.includes('admin')"
+    class="brand d-inline-block mt-2 mt-md-3"
+    >MiCasa Admin</span
+  >
+
+  <span
+    *ngIf="location?.includes('agency')"
+    class="brand d-inline-block mt-2 mt-md-3"
+    >MiCasa Agence</span
+  >
+
+  <button
+    pButton
+    pRipple
+    type="button"
+    class="toggler-right p-button p-button-raised p-button-text p-button-success p-button-rounded"
+    icon="pi pi-bars"
+    (click)="isToggled = true"
+  ></button>
+</mat-toolbar>
+
+<app-sidebar
+  [isVisible]="isToggled"
+  [location]="location"
+  [agency]="agency"
+  [admin]="admin"
+  (closeNotifier)="listenToClosing(isToggled)"
+></app-sidebar>
+
+<p-scrollTop
+  [threshold]="200"
+  [style]="{ 'background-color': '#38b000ff' }"
+></p-scrollTop>

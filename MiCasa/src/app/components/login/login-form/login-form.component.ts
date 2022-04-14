@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { SwUpdate } from '@angular/service-worker';
+import { isSmallScreen } from '@utility/screen-size';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss'],
-  providers: [MessageService],
 })
 export class LoginFormComponent implements OnInit {
   authLinks = [
@@ -33,19 +32,12 @@ export class LoginFormComponent implements OnInit {
     },
   ];
 
-  loginImage: string = 'assets/img/static/pexels-taryn-elliott-4112234.jpg';
+  wantsAuth: boolean = false;
 
-  constructor(private messageService: MessageService) {}
+  isSmall = isSmallScreen();
+  constructor() {}
 
   ngOnInit(): void {}
 
-  trial = () => {
-    this.messageService.add({
-      severity: 'Primary',
-      summary: 'Good',
-      detail: 'welcome dear user',
-    });
-  };
-
-  isMobile = (): boolean => window.screen.width <= 896;
+  isMobile = (): boolean => window.screen.width <= 900;
 }

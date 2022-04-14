@@ -9,8 +9,8 @@ import {
 } from '@angular/animations';
 
 export const routerAnimation = trigger('routing', [
-  // from login to home
-  transition('login => home', [
+  //? from login to home || admin to login
+  transition('login => home, admin-dashboard => login', [
     //! During a transition, a new view is inserted directly after the old one and both elements appear on screen at the same time.
     //! To prevent this behavior, update the host view to use relative positioning.
     style({ position: 'relative' }),
@@ -37,32 +37,8 @@ export const routerAnimation = trigger('routing', [
     ]),
   ]),
 
-  //?from home to login
-  transition('home => login', [
-    style({ position: 'relative' }),
-
-    query(':enter, :leave', [
-      style({
-        position: 'absoulte',
-        top: 0,
-        left: 0,
-        width: '100%',
-      }),
-    ]),
-
-    query(':enter', [style({ right: '-100%' })]),
-
-    query(':leave', animateChild()),
-
-    group([
-      query(':leave', [animate('600ms ease-out', style({ right: '100%' }))]),
-
-      query(':enter', animate('600ms ease-out', style({ right: '0%' }))),
-    ]),
-  ]),
-
-  //? from login to admin
-  transition('login => admin', [
+  //? from login to admin || home to login
+  transition('login => admin-dashboard,home => login', [
     style({ position: 'relative' }),
 
     query(':enter, :leave', [
@@ -82,6 +58,28 @@ export const routerAnimation = trigger('routing', [
       query(':leave', [animate('600ms ease-out', style({ right: '100%' }))]),
 
       query(':enter', [animate('600ms ease-out', style({ right: '0%' }))]),
+    ]),
+  ]),
+
+  //? from login to an agency's space
+  transition('login => agency', [
+    style({ position: 'relative' }),
+
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        width: '100%',
+      }),
+    ]),
+
+    query(':enter', [style({ top: '-100%' })]),
+
+    query(':leave', animateChild()),
+
+    group([
+      query(':leave', [animate('600ms ease-out', style({ top: '100%' }))]),
+
+      query(':enter', [animate('600ms ease-out', style({ top: '0%' }))]),
     ]),
   ]),
 ]);

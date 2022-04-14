@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  HashLocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 
+//? Custom modules
+import { DashboardModule } from '@modules/dashboard/dashboard.module';
 import { AgencyRoutingModule } from './agency-routing.module';
-import { AgencyComponent } from './agency.component';
 
+//? Declarations
+import { AgencyDashboardComponent } from '@pages/agency/dashboard/agency-dashboard.component';
+import { AgencyAccountModule } from './agency-account/agency-account.module';
 
 @NgModule({
-  declarations: [
-    AgencyComponent
-  ],
-  imports: [
-    CommonModule,
-    AgencyRoutingModule
-  ]
+  declarations: [AgencyDashboardComponent],
+  imports: [CommonModule, DashboardModule, AgencyRoutingModule],
 })
-export class AgencyModule { }
+export class AgencyModule {}

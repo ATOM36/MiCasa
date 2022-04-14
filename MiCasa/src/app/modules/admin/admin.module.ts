@@ -5,15 +5,15 @@ import {
   PathLocationStrategy,
 } from '@angular/common';
 
+// Custom modules
+import { SharedModule } from '@modules/shared/shared.module';
+import { DashboardModule } from '@modules/dashboard/dashboard.module';
+import { AgencyContractModule } from './contracts/agency-contract/agency-contract.module';
+
+// Declarations
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from '@pages/admin/dashboard/admin-dashboard.component';
-import { TopCardsComponent } from '@components/admin/dashboard/top-cards/top-cards.component';
-import { BlogCardsComponent } from '@components/admin/dashboard/blog-cards/blog-cards.component';
-import { FeedsComponent } from '@components/admin/dashboard/feeds/feeds.component';
-import { SalesRatioComponent } from '@components/admin/dashboard/sales-ratio/sales-ratio.component';
-import { TopSellingComponent } from '@components/admin/dashboard/top-selling/top-selling.component';
-import { NavbarComponent } from '@components/admin/dashboard/navbar/navbar.component';
-import { ToolbarComponent } from '@components/admin/dashboard/toolbar/toolbar.component';
+import { DashboardComponent } from '@components/admin/dashboard/dashboard.component';
 
 // PrimeNg
 import { ChartModule } from 'primeng/chart';
@@ -22,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TooltipModule } from 'primeng/tooltip';
+import { AccordionModule } from 'primeng/accordion';
 
 // Material Design
 import { MatCardModule } from '@angular/material/card';
@@ -30,41 +31,30 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
+import { AccountComponent } from '../../pages/admin/account/account.component';
+import { HeaderComponent } from '../../pages/admin/header/header.component';
 
 @NgModule({
-  declarations: [
-    AdminDashboardComponent,
-    TopCardsComponent,
-    BlogCardsComponent,
-    FeedsComponent,
-    SalesRatioComponent,
-    TopSellingComponent,
-    NavbarComponent,
-    ToolbarComponent,
-  ],
+  declarations: [AdminDashboardComponent, DashboardComponent, AccountComponent, HeaderComponent],
   imports: [
     CommonModule,
+    AccordionModule,
+    DashboardModule,
     TooltipModule,
     SplitButtonModule,
-    MatButtonModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
     MatListModule,
     CardModule,
     AvatarModule,
-    AdminRoutingModule,
+    AgencyContractModule,
     ChartModule,
     MatCardModule,
     ButtonModule,
     MatGridListModule,
-  ],
-  providers: [
-    {
-      provide: HashLocationStrategy,
-      useClass: PathLocationStrategy,
-    },
+    SharedModule,
+    AdminRoutingModule,
   ],
 })
 export class AdminModule {}

@@ -13,17 +13,6 @@ img {
   height: 100%;
 }
 
-.registration-text,
-.text-muted {
-  color: var(--black-eerie-black);
-  transition: all 1s;
-  margin-top: 10px;
-
-  &:hover {
-    color: var(--blue-navy-blue);
-  }
-}
-
 .password-reset {
   margin-top: 10px;
 }
@@ -37,35 +26,10 @@ i {
   font-size: medium;
 }
 
-#auth-login {
-  & button {
-    margin-top: 10px;
-  }
-}
-
 button {
   &:hover {
     color: #fff;
   }
-}
-
-button.facebook {
-  background: var(--blue-azure);
-}
-button.facebook:hover {
-  background: linear-gradient(var(--blue-midnight-blue), var(--blue-azure));
-}
-button.twitter {
-  background: #1da1f2;
-}
-button.twitter:hover {
-  background: #0d95e8;
-}
-button.google {
-  background: #ea4335;
-}
-button.google:hover {
-  background: #e82e1e;
 }
 
 input {
@@ -75,4 +39,19 @@ input {
 // for error messages
 p-message {
   margin-top: 15px;
+}
+
+.choices {
+  padding: 10px;
+  margin-top: 200px;
+
+  & .option {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 896px) {
+  .choices {
+    margin-left: 120px;
+  }
 }
