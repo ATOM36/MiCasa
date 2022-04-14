@@ -53,7 +53,7 @@ export class SidebarComponent implements OnInit {
         tooltip: 'Section des agences',
       },
       {
-        routerLink: '/admin/agence/contracts',
+        routerLink: '/admin/contracts/agence',
         label: "Contrats d'agence",
         icon: PrimeIcons.BOOK,
         tooltip: 'Les contrats relatifs aux agences',

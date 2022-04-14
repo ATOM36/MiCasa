@@ -8,6 +8,7 @@ import {
 // Custom modules
 import { SharedModule } from '@modules/shared/shared.module';
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
+import { AgencyContractModule } from './contracts/agency-contract/agency-contract.module';
 
 // Declarations
 import { AdminRoutingModule } from './admin-routing.module';
@@ -30,10 +31,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AgencyContractModule } from './contracts/agency-contract/agency-contract.module';
+import { AccountComponent } from '../../pages/admin/account/account.component';
+import { HeaderComponent } from '../../pages/admin/header/header.component';
 
 @NgModule({
-  declarations: [AdminDashboardComponent, DashboardComponent],
+  declarations: [AdminDashboardComponent, DashboardComponent, AccountComponent, HeaderComponent],
   imports: [
     CommonModule,
     AccordionModule,
@@ -46,13 +48,13 @@ import { AgencyContractModule } from './contracts/agency-contract/agency-contrac
     MatListModule,
     CardModule,
     AvatarModule,
-    AdminRoutingModule,
+    AgencyContractModule,
     ChartModule,
     MatCardModule,
     ButtonModule,
     MatGridListModule,
     SharedModule,
-    AgencyContractModule,
+    AdminRoutingModule,
   ],
 })
 export class AdminModule {}

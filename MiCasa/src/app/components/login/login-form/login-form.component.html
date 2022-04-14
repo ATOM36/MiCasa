@@ -22,7 +22,19 @@
             <div class="card-body p-4 p-lg-5 text-black">
               <app-login-form-text></app-login-form-text>
 
-              <app-form></app-form>
+              <div *ngIf="wantsAuth; else choices">
+                <app-form> </app-form>
+
+                <button
+                  pButton
+                  pRipple
+                  label="Retour"
+                  class="p-button-outlined p-button-rounded p-button-secondary p-button-raised"
+                  icon="pi pi-arrow-left"
+                  (click)="wantsAuth = false"
+                  data-aos="zoom-out"
+                ></button>
+              </div>
             </div>
           </div>
         </div>
@@ -30,3 +42,36 @@
     </div>
   </div>
 </div>
+
+<ng-template #choices>
+  <div class="pt-1 mb-4 choices">
+    <button
+      pButton
+      pRipple
+      data-aos="fade-down"
+      data-aos-delay="300"
+      data-aos-easing="ease-in-out"
+      routerLink="/home"
+      type="button"
+      label="Explorer notre catalogue"
+      icon="pi pi-book"
+      class="p-button-raised p-button-rounded p-button-success p-button-outlined option"
+      [class]="isSmall ? 'w-100' : 'w-75'"
+      [style]="{ color: '#007200ff' }"
+    ></button>
+
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="S'authentifier"
+      icon="pi pi-user"
+      (click)="wantsAuth = true"
+      class="p-button-raised p-button-rounded p-button-secondary p-button-outlined option"
+      [class]="isSmall ? 'w-100' : 'w-75'"
+      data-aos="fade-up"
+      data-aos-delay="300"
+      data-aos-easing="ease-in-out"
+    ></button>
+  </div>
+</ng-template>

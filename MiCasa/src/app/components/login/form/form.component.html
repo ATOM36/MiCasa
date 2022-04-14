@@ -96,24 +96,25 @@
       pButton
       pRipple
       type="button"
-      label="Se connecter"
-      icon="pi pi-sign-in"
-      class="p-button-raised p-button-rounded p-button-success p-button-outlined btn-block"
-      (click)="lezgo()"
-      [style]="{ color: '#007200ff' }"
-      id="goButton"
-    ></button>
-
-    <button
-      pButton
-      pRipple
-      type="button"
       class="p-button-text password-reset"
       aria-label="Login in MiCasa"
       (click)="displayResetModal = true"
     >
       Mot de passe oublié ?
     </button>
+
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Se connecter"
+      icon="pi pi-sign-in"
+      class="p-button-raised p-button-rounded p-button-success p-button-outlined option"
+      [class]="isSmall ? 'w-100' : 'w-75'"
+      (click)="lezgo()"
+      [style]="{ color: '#007200ff' }"
+      id="goButton"
+    ></button>
 
     <!--Alternatives-->
 
@@ -123,22 +124,12 @@
         pButton
         pRipple
         type="button"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-primary option"
+        [class]="isSmall ? 'w-100' : 'w-75'"
         label="Nous rejoindre"
         icon="pi pi-user-plus"
         aria-label="join MiCasa"
         (click)="displayOptions = true"
-      ></button>
-
-      <button
-        pButton
-        pRipple
-        type="button"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block"
-        label="Explorer notre catalogue"
-        icon="pi pi-book"
-        aria-label="browse MiCasa's content"
-        (click)="browseContent()"
       ></button>
     </div>
 
@@ -148,7 +139,8 @@
         pButton
         pRipple
         label="Vous êtes une agence"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-primary btn-block option"
+        [class]="isSmall ? 'w-100' : 'w-75'"
         icon="pi pi-building"
         data-aos="fade-down"
         data-aos-duration="500"
@@ -159,7 +151,8 @@
         pButton
         pRipple
         label="Vous êtes un particulier"
-        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block"
+        class="p-button-raised p-button-rounded p-button-outlined p-button-secondary btn-block option"
+        [class]="isSmall ? 'w-100' : 'w-75'"
         icon="pi pi-user"
         data-aos="fade-up"
         data-aos-duration="500"
