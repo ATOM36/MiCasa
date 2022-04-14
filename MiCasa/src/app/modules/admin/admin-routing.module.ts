@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountComponent } from '@pages/admin/account/account.component';
+import { AgencyContractComponent } from '@pages/admin/contracts/agency-contract/agency-contract.component';
 import { AdminDashboardComponent } from '@pages/admin/dashboard/admin-dashboard.component';
 
 const routes: Routes = [
@@ -7,7 +9,6 @@ const routes: Routes = [
     path: '',
     component: AdminDashboardComponent,
   },
-
   {
     path: 'admin/agence',
     loadChildren: () =>
@@ -19,6 +20,18 @@ const routes: Routes = [
       //? Data to notify the kind of action that will be done with form (edition | registration | consultation)
       action: 'edtion',
     },
+  },
+  {
+    path: 'admin/contracts/agence',
+    component: AgencyContractComponent,
+    data: {
+      // ? origin so that the right message is displayed
+      origin: 'admin/',
+    },
+  },
+  {
+    path: 'admin/account',
+    component: AccountComponent,
   },
 ];
 

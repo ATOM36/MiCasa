@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { isSmallScreen } from '@utility/screen-size';
 
 @Component({
   selector: 'app-login-form',
@@ -31,8 +32,9 @@ export class LoginFormComponent implements OnInit {
     },
   ];
 
-  loginImage: string = 'assets/img/static/pexels-taryn-elliott-4112234.jpg';
+  wantsAuth: boolean = false;
 
+  isSmall = isSmallScreen();
   constructor() {}
 
   ngOnInit(): void {}

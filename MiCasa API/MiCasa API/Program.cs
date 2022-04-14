@@ -18,15 +18,21 @@ NpgsqlConnection.GlobalTypeMapper.UseJsonNet();
 
 // Builder configuration
 ApiConfiguration config = new(builder.Services, builder.Configuration);
-config.ConfigureLogging()
+config.ConfigureInterfacesRegistration()
+    .ConfigureLogging()
     .ConfigureEmailService()
     .ConfigureCors()
-    .ConfigureJsonSerialization();
+    .ConfigureJsonSerialization()
+    .ConfigureDbContext()
+    .ConfigureJwt();
 
 
 
 // Adding response caching
 builder.Services.AddControllers();
+
+DbConnection.Init(builder.Configuration);
+
 
 var app = builder.Build();
 
@@ -41,7 +47,7 @@ if (app.Environment.IsDevelopment())
 //Also OpenApi will be able to redirect  the different calls
 app.UseRouting();
 
-
+app.UseAuthentication();
 
 app.UseAuthorization();
 
@@ -55,5 +61,6 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller}/{action}/{id?}");
 });
+
 
 app.Run();

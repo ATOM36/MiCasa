@@ -12,7 +12,8 @@
       "@pages/*": ["src/app/pages/*"],
       "@services/*": ["src/app/services/*"],
       "@assets/*": ["src/assets/*"],
-      "@utility/*": ["src/app/utility/*"]
+      "@utility/*": ["src/app/utility/*"],
+      "@guards/*": ["src/app/guards/*"]
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

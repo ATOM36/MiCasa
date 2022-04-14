@@ -8,32 +8,33 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
+import { Administrateur } from '@models/api/administrator';
 import { Agence } from '@models/api/agency';
+import { Message } from '@models/api/message';
+import { AdministratorService } from '@services/api/admin/administrator.service';
 import { AgencyService } from '@services/api/agency/agency.service';
-import { AgencyFireService } from '@services/firebase/agency/agency-fire.service';
-import { getSweetAlert } from '@utility/js-libraries';
+import { getJquery, getSweetAlert } from '@utility/js-libraries';
 import { isSmallScreen } from '@utility/screen-size';
-import {
-  ConfirmationService,
-  ConfirmEventType,
-  MessageService,
-} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ProgressSpinner } from 'primeng/progressspinner';
 import { Observable, of, Subscription, switchMap } from 'rxjs';
 
 var Swal = getSweetAlert();
+
+var $ = getJquery();
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
-  providers: [ConfirmationService, MessageService],
+  providers: [ConfirmationService, MessageService, MatDialog],
 })
 export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
   myForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required]),
 
     password: new FormControl('', [
       Validators.required,
@@ -53,24 +54,9 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   greenColor: string = '#007200ff';
 
-  userIsBlocked: boolean = false;
-
   isSmall!: boolean;
 
-  agency: Agence = {
-    AgenceId: null,
-    NumeroTelephone: null,
-    Mail: null,
-    Nom: null,
-    Latitude: null,
-    Longitude: null,
-    DateInscription: null,
-    IsBlocked: null,
-    Adresse: null,
-    Password: null,
-    Username: null,
-    Signalement: null,
-  };
+  agency!: Agence | null;
 
   subscription!: Subscription;
 
@@ -78,17 +64,16 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   wantsUpdate!: boolean;
 
-  errorMatcher = new ErrorStateMatcher();
-
   @Output() registrationModalController = new EventEmitter<boolean>();
 
   constructor(
     private _router: Router,
     private _agencyService: AgencyService,
+    private _adminService: AdministratorService,
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _agencyFire: AgencyFireService,
-    private _update: SwUpdate
+    private _update: SwUpdate,
+    private _matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -115,66 +100,95 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
    * @summary Gets all data of a given agency, does some control and then redirect it to its account page
    */
   lezgo(): void {
+    this._matDialog.open(ProgressSpinner, {});
+
     let emailEntry = String(this.myForm.get('email')?.value);
 
-    console.log('Request sent');
-
-    if (emailEntry.endsWith('agence')) {
-      this._router.navigate([`agency/lelo/account`]);
-      /* console.log('Is agency');
-      this._agencyFire
+    //? Agency login case
+    if (emailEntry.endsWith('@agence')) {
+      this.subscription = this._agencyService
         .logIn(
-          //? removing useless data
-          emailEntry.replace('agence', '').trim(),
+          this.myForm.get('email')?.value,
           this.myForm.get('password')?.value
         )
-        .subscribe(async ($response: Agence) => {
-          console.log($response);
-          //? Controlling the user's state after the request has been sent
-          //? If the account is blocked, then display an error message
-          if (await $response.IsBlocked) this.userIsBlocked = true;
-          //? If not, then save user's data in the session storage and it's done
-          else {
-            sessionStorage.setItem('a-x', JSON.stringify($response));
-            this._router.navigate([`agency/${$response.Nom}/account`]);
-          }
-        });*/
-    } else if (emailEntry.endsWith('admin'))
-      this._router.navigate(['/admin/dashboard']);
+        .subscribe(async ($response) => {
+          //? Displaying an error message
+          this._matDialog.closeAll();
 
-    /* this.subscription = this._agencyService
-      .logIn(
-        this.myForm.get('email')?.value,
-        this.myForm.get('password')?.value
-      )
-      .subscribe(async ($response) => {
-        if ($response.State == false) {
-          this._messageService.add({
-            severity: 'danger',
-            summary: 'Echec !',
-            detail: `${$response.Data}`,
-            key: 'message',
-          });
-        } else {
-          // const keys: string[] = [
-          //   'AgenceId',
-          //   'Username',
-          //   'Password',
-          //   'Signalement',
-          //   'NumeroTelephone',
-          //   'Mail',
-          //   'Nom',
-          //   'Latitude',
-          //   'Longitude',
-          //   'DateInscription',
-          //   'Adresse',
-          //   'IsBlocked',
-          // ];
-          this.loadData($response.Data);
-          sessionStorage.setItem('a-x', JSON.stringify(this.agency));
-          this.router.navigate(['/agency/account']);
-        }
-      });*/
+          if ($response.State == false) {
+            Swal.fire({
+              title: 'Connection',
+              icon: 'error',
+              html: `<p>Email ou mot de passe incorrect</p>\n<p>Veuillez réessayer.</p>`,
+            });
+
+            //? If no error occured then....
+          } else {
+            this.agency = $response.Data as Agence;
+            // this._dialogRef.close();
+
+            if (this.agency?.Compte?.IsBlocked) {
+              Swal.fire({
+                title: 'Connection',
+                icon: 'error',
+                html:
+                  "<p>Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus " +
+                  "d'informations</p>",
+              });
+            } else {
+              localStorage.setItem('a-x', JSON.stringify(this.agency));
+              localStorage.setItem('token', this.agency.Compte?.Token!);
+
+              // this._dialogRef.close();
+
+              this._router.navigate([
+                `agency/${this.agency?.Compte?.Nom}/account`,
+              ]);
+            }
+          }
+        });
+
+      //? Admin login case
+    } else if (emailEntry.endsWith('@admin')) {
+      this.subscription = this._adminService
+        .logIn(
+          this.myForm.get('email')?.value,
+          this.myForm.get('password')?.value
+        )
+        .subscribe(async ($response) => {
+          // this._dialogRef.close();
+          this._matDialog.closeAll();
+
+          if ($response.State == false) {
+            Swal.fire({
+              title: 'Connection',
+              icon: 'error',
+              html: `<p>${($response.Data as Message).Content}</p>`,
+            });
+          }
+
+          //? If no error occured then ....
+          else {
+            const admin = $response.Data as Administrateur;
+            localStorage.setItem('token', admin.Compte?.Token!);
+
+            if (localStorage.getItem('token')) {
+              localStorage.setItem('ad-x', JSON.stringify(admin));
+              // this._dialogRef.close();
+
+              this._router.navigate(['/admin/dashboard']);
+            } else {
+              // this._dialogRef.close();
+
+              Swal.fire({
+                title: 'Connection',
+                icon: 'error',
+                html: `<p>Vous n'êtes pas autorisé à acceder à cette ressource</p>`,
+              });
+            }
+          }
+        });
+    }
   }
 
   /**
@@ -214,26 +228,6 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     this.displayRegistration = false;
     this.displayOptions = false;
   }
-
-  /**
-   *@summary Initialize the agency property with some values that will be used during the whole session
-  of an agency
-   * @param Data
-   */
-  loadData = (Data: any[]) => {
-    this.agency.AgenceId = Data[0];
-    this.agency.Username = Data[1];
-    this.agency.Password = Data[2];
-    this.agency.Signalement = Data[3];
-    this.agency.NumeroTelephone = Data[4];
-    this.agency.Mail = Data[5];
-    this.agency.Nom = Data[6];
-    this.agency.Latitude = Data[7];
-    this.agency.Longitude = Data[8];
-    this.agency.DateInscription = Data[9];
-    this.agency.Adresse = Data[10];
-    this.agency.IsBlocked = Data[11];
-  };
 
   /**
    * @summary Checks whether or not a `new version` of the app has been deployed.

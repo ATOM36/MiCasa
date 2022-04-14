@@ -24,26 +24,23 @@ import { AdminModule } from '@modules/admin/admin.module';
 import { AgencyModule } from '@modules/agency/agency.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { DashboardModule } from '@modules/dashboard/dashboard.module';
-import { TooltipModule } from 'primeng/tooltip';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { JwtModule } from '@auth0/angular-jwt';
+import { tokenGetter } from '@utility/auth';
+import { AuthGuard } from '@guards/auth-guard.guard';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    LoginModule,
     HomeModule,
     AdminModule,
     AgencyModule,
     CommonModule,
-    LoginModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatListModule,
-    DashboardModule,
-    TooltipModule,
     SharedModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -59,8 +56,18 @@ import { TooltipModule } from 'primeng/tooltip';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: [],
+      },
+    }),
   ],
-
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

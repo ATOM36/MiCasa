@@ -1,122 +1,295 @@
-﻿namespace MiCasa.Models.Dal
+﻿namespace MiCasa.Models.Dal;
+public class DAL_Agence
 {
-    public class DAL_Agence
+    private static NpgsqlConnection? _connection;
+    private readonly AppDbContext? _context = null;
+    private readonly IAuthService? _authService = null;
+    public DAL_Agence(AppDbContext context, IAuthService authService)
     {
-        private static NpgsqlConnection? _connection;
+        _context = context;
+        _authService = authService;
+    }
 
-        public static JsonResult LogIn(string username, string password)
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="password"></param>
+    /// <returns></returns>
+    public async Task<QueryData<object>> LogIn(string username, string password)
+    {
+        try
         {
-            try
-            {
-                using (_connection = DbConnection.GetConnection())
-                {
-                    string query = "SELECT * FROM \"Agence\" WHERE \"Username\" = @username AND \"Password\" = @password;";
-                    _connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand(query, _connection);
-                    command.Parameters.AddWithValue("@username", username);
-                    command.Parameters.AddWithValue("@password", password);
-                    NpgsqlDataReader reader = command.ExecuteReader();
-                    DataTable table = new();
-                    table.Load(reader);
-                    reader.Close();
-                    DataRow dr = table.Rows[0];
 
-                    return new JsonResult(new QueryData<Array>(dr.ItemArray, true));
-                }
-            }
+            Agence? result = (from compte in _context!.Comptes
+                              where compte.Username == username &&
+                              compte.Password == password
+                              join agence in _context!.Agences on
+                              compte.CompteId equals agence.Compte.CompteId
+                              select new Agence {
+                                  Compte = compte,
+                                  AgenceId = agence.AgenceId,
+                                  Adresse = agence.Adresse,
+                                  CompteId = agence.CompteId,
+                                  Latitude = agence.Latitude,
+                                  Longitude = agence.Longitude,
+                                  Signalement = agence.Signalement
+                              }).SingleOrDefault();
 
-            catch (Exception e)
-            {
-                return new JsonResult(new Message(e.Message, false));
-
-            }
-            finally
-            {
-                _connection!.Close();
-            }
+            result.Compte.Token = _authService!.GenerateToken(result.Compte.Username, result.Compte.Mail, "Agence");
+            result.Compte.IsConnected = 1;
+            return new(result, true);
         }
 
-        public static JsonResult SupprimerCompte(int agenceId)
+        catch (Exception e)
         {
-            try
-            {
-                using (_connection = DbConnection.GetConnection())
-                {
-                    string query = "DELETE from \"Agence\" Where \"AgenceId\" =@agenceId ";
-                    _connection.Open();
-                    NpgsqlCommand command = new(query, _connection);
-                    command.Parameters.AddWithValue("@agenceId", agenceId);
-                    command.ExecuteNonQuery();
+            return new(new Message(e.Message, false), false);
+        }
+        finally
+        {
+            await _context!.SaveChangesAsync();
+        }
+    }
 
-                    return new JsonResult(
-                        new Message("le compte est supprimé avec succès", true));
-                }
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(new Message(e.Message, false));
 
-            }
-            finally
+    /// <summary>
+    /// p
+    /// </summary>
+    /// <param name="agenceId"></param>
+    /// <returns></returns>
+    public async Task<Message> SupprimerCompte(int agenceId)
+    {
+        try
+        {
+            using (_connection = DbConnection.GetConnection())
             {
-                _connection!.Close();
+                string query = "DELETE from \"Agence\" Where \"AgenceId\" =@agenceId ";
+                await _connection.OpenAsync();
+                NpgsqlCommand command = new(query, _connection);
+                command.Parameters.AddWithValue("@agenceId", agenceId);
+                await command.ExecuteNonQueryAsync();
+
+                return new Message("le compte a été supprimé avec succès", true);
             }
         }
-
-        public static JsonResult BloquerCompteAgence(int agenceId)
+        catch (Exception e)
         {
-            try
-            {
-                using (_connection = DbConnection.GetConnection())
-                {
-                    string query = "update \"Agence\" set \"IsBlocked\" = 1 where \"AgenceId\" = @agenceId ";
-                    _connection.Open();
-                    NpgsqlCommand command = new(query, _connection);
-                    command.Parameters.AddWithValue("@agenceId", agenceId);
-                    command.ExecuteNonQuery();
-                    return new JsonResult(new Message("le compte a été bloqué avec succès", true));
+            return new(e.Message, false);
 
-                }
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(new Message(e.Message, false));
+        }
+        finally
+        {
+            await _connection!.CloseAsync();
+        }
+    }
 
-            }
-            finally
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="agenceId"></param>
+    /// <returns></returns>
+    public async Task<Message> BloquerCompteAgence(int agenceId)
+    {
+        try
+        {
+            using (_connection = DbConnection.GetConnection())
             {
-                _connection!.Close();
+                string query = "UPDATE \"Comptes\" SET \"IsBlocked\" = 1 FROM \"Agence\" WHERE " +
+                    " \"Comptes\".\"CompteId\" = \"Agence\".\"CompteId\" AND \"Agence\".\"AgenceId\" = @Id";
+                await _connection.OpenAsync();
+
+                NpgsqlCommand command = new(query, _connection);
+                command.Parameters.AddWithValue("@Id", agenceId);
+                await command.ExecuteNonQueryAsync();
+
+                return new("le compte a été bloqué avec succès", true);
             }
         }
-
-        public static JsonResult GetAgence(int startIndex, int stopIndex)
+        catch (Exception e)
         {
-            try
-            {
-                using (_connection = DbConnection.GetConnection())
-                {
-                    string query = "SELECT * FROM \"Agence\" offset @startIndex fetch next @stopIndex rows only;";
+            return new Message(e.Message, false);
 
-                    _connection.Open();
-                    NpgsqlCommand command = new(query, _connection);
-                    command.Parameters.AddWithValue("@startIndex", startIndex);
-                    command.Parameters.AddWithValue("@stopIndex", stopIndex);
-                    NpgsqlDataReader reader = command.ExecuteReader();
-                    DataTable table = new();
-                    table.Load(reader);
-                    reader.Close();
-                    return new JsonResult(new QueryData<DataTable>(table, true));
-                }
-            }
-            catch (Exception e)
-            {
-                return new JsonResult(new Message(e.Message, false));
+        }
+        finally
+        {
+            await _connection!.CloseAsync();
+        }
+    }
 
-            }
-            finally
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="startIndex"></param>
+    /// <param name="stopIndex"></param>
+    /// <returns></returns>
+    public async Task<QueryData<object>> GetAgence(int startIndex, int stopIndex)
+    {
+        try
+        {
+            IEnumerable<Agence> result = (from compte in _context!.Comptes
+                                          join agence in _context!.Agences on
+                                          compte.CompteId equals agence.Compte.CompteId
+
+                                          select new Agence {
+                                              Compte = compte,
+                                              AgenceId = agence.AgenceId,
+                                              Adresse = agence.Adresse,
+                                              CompteId = agence.CompteId,
+                                              Latitude = agence.Latitude,
+                                              Longitude = agence.Longitude,
+                                              Signalement = agence.Signalement,
+                                          })
+                                            .Skip(startIndex)
+                                            .Take(stopIndex)
+                                            .OrderBy(e => e.AgenceId)
+                                            .ToList();
+
+            return new(result, true);
+        }
+        catch (Exception e)
+        {
+            return new(new Message(e.Message, false), false);
+        }
+
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
+    public async Task<Message> logout(int agenceId)
+    {
+        try
+        {
+            using (_connection = DbConnection.GetConnection())
             {
-                _connection!.Close();
+                string sql = "UPDATE \"Comptes\" SET \"IsConnected\" = 0 FROM \"Agence\" WHERE " +
+                    " \"Comptes\".\"CompteId\" = \"Agence\".\"CompteId\" AND \"Agence\".\"Agence\" = @Id";
+                await _connection.OpenAsync();
+                NpgsqlCommand cmd = new(sql, _connection);
+                cmd.Parameters.AddWithValue("@Id", agenceId);
+                await cmd.ExecuteNonQueryAsync();
+                return new("Aurevoir!", true);
             }
+        }
+        catch (Exception e)
+        {
+            return new(e.Message, false);
+        }
+        finally
+        {
+            await _connection!.CloseAsync();
+        }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="agenceId"></param>
+    /// <returns></returns>
+    public async Task<Message> DebloquerCompte(int agenceId)
+    {
+        try
+        {
+            using (_connection = DbConnection.GetConnection())
+            {
+                string sql = "UPDATE \"Comptes\" SET \"IsBlocked\" = 0 FROM \"Agence\" WHERE " +
+                    " \"Comptes\".\"CompteId\" = \"Agence\".\"CompteId\" AND \"Agence\".\"AgenceId\" = @Id";
+                await _connection.OpenAsync();
+                NpgsqlCommand command = new(sql, _connection);
+                command.Parameters.AddWithValue("@Id", agenceId);
+                await command.ExecuteNonQueryAsync();
+                return new Message("le compte est débloqué", true);
+            }
+        }
+        catch (Exception e)
+        {
+            return new Message(e.Message, false);
+        }
+        finally
+        {
+            await _connection!.CloseAsync();
+        }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="agence"></param>
+    /// <returns></returns>
+    public async Task<Message> creerCompte(Agence agence)
+    {
+        try
+        {
+            await _context!.Agences.AddAsync(agence);
+            await _context!.SaveChangesAsync();
+
+            return new Message("le compte est cree", true);
+        }
+        catch (Exception e)
+        {
+            return new Message(e.Message, false);
+        }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="agence"></param>
+    /// <returns></returns>
+    public async Task<Message> modifierprofil(Agence agence)
+    {
+        try
+        {
+            _context!.Agences.Update(agence);
+            await _context.SaveChangesAsync();
+            return new Message("le compte est modifier", true);
+
+        }
+        catch (Exception e)
+        {
+            return new Message(e.Message, false);
+        }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="agenceId"></param>
+    /// <returns></returns>
+    public async Task<QueryData<object>> Get(int agenceId)
+    {
+        try
+        {
+            Agence? result = (from compte in _context!.Comptes
+                              join agence in _context!.Agences on
+                              compte.CompteId equals agence.Compte.CompteId
+                              where agence.AgenceId == agenceId
+
+                              select new Agence {
+                                  Compte = compte,
+                                  AgenceId = agence.AgenceId,
+                                  Adresse = agence.Adresse,
+                                  CompteId = agence.CompteId,
+                                  Latitude = agence.Latitude,
+                                  Longitude = agence.Longitude,
+                                  Signalement = agence.Signalement,
+                              }).SingleOrDefault();
+
+            return new(result, true);
+        }
+        catch (Exception e)
+        {
+            return new(new Message(e.Message, false), false);
         }
     }
 }

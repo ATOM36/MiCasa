@@ -22,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
+import { LoginModule } from '@modules/login/login.module';
 
 @NgModule({
   declarations: [
@@ -33,10 +34,14 @@ import { DividerModule } from 'primeng/divider';
   imports: [
     CommonModule,
     AvatarModule,
+    ButtonModule,
     DashboardModule,
     SharedModule,
     CardModule,
+    DialogModule,
+    DividerModule,
     AgencyAccountRoutingModule,
+    LoginModule,
   ],
 })
 export class AgencyAccountModule {}
