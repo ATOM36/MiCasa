@@ -1,6 +1,7 @@
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@guards/auth-guard.guard';
 import { LoadingComponent } from '@pages/loading/loading.component';
 import { NotFoundComponent } from '@pages/not-found/not-found.component';
 
@@ -40,6 +41,7 @@ const routes: Routes = [
       animation: 'admin-dashboard',
       origin: 'admin/',
     },
+    canActivate: [AuthGuard],
   },
 
   {
@@ -50,6 +52,7 @@ const routes: Routes = [
       animation: 'agency',
       origin: 'agency/',
     },
+    canActivate: [AuthGuard],
   },
 
   {

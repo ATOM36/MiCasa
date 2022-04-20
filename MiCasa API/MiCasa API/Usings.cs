@@ -17,6 +17,8 @@ global using System.Data;
 global using Microsoft.AspNetCore.Mvc;
 
 // OData usings
-global using Microsoft.AspNetCore.OData;
-global using Microsoft.AspNetCore.OData.Extensions;
-global using Microsoft.AspNetCore.OData.Query;
+
+
+// Annontation usings
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;

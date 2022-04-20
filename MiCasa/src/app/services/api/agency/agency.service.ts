@@ -19,8 +19,11 @@ export class AgencyService {
    * @param password the agency's password
    * @returns All data related to a given agency
    */
-  logIn = (username: string, password: string): Observable<QueryData<any[]>> =>
-    this.http.get<QueryData<any[]>>(
+  logIn = (
+    username: string,
+    password: string
+  ): Observable<QueryData<Agence | Message>> =>
+    this.http.get<QueryData<Agence | Message>>(
       `${environment.apiUrl}Agence/LogIn?username=${username}&password=${password}`,
       {
         headers: header,
@@ -36,8 +39,8 @@ export class AgencyService {
   getAgencies = (
     startIndex: number,
     stopIndex: number
-  ): Observable<QueryData<Agence[]>> =>
-    this.http.get<QueryData<Agence[]>>(
+  ): Observable<QueryData<Agence[] | Message>> =>
+    this.http.get<QueryData<Agence[] | Message>>(
       `${environment.apiUrl}Agence/GetAgence?startIndex=${startIndex}&stopIndex=${stopIndex}`,
       { headers: header }
     );
@@ -49,7 +52,7 @@ export class AgencyService {
    */
   updateProfile = (agency: Agence): Observable<Message> =>
     this.http.post<Message>(
-      `${environment.apiUrl}Agence/ModifierProfil?agenceId=${agency.AgenceId}`,
+      `${environment.apiUrl}Agence/ModifierProfile`,
       agency,
       {
         headers: header,
@@ -57,13 +60,23 @@ export class AgencyService {
     );
 
   /**
+   *
+   * @param agency
+   * @returns
+   */
+  creerCompte = (agency: Agence): Observable<Message> =>
+    this.http.post<Message>(`${environment.apiUrl}Agence/CreerCompte`, agency, {
+      headers: header,
+    });
+
+  /**
    * @summary Deletes a given agency's account
    * @param agenceId A given agency's id
    * @returns A message that describes the operation's state
    */
-  supprimerCompte = (agenceId: number): Observable<Message> =>
+  supprimerCompte = (agence: Agence): Observable<Message> =>
     this.http.delete<Message>(
-      `${environment.apiUrl}Agence/SupprimerCompte?agenceId=${agenceId}`,
+      `${environment.apiUrl}Agence/SupprimerCompte?agenceId=${agence.AgenceId}&email=${agence.Compte?.Mail}&name=${agence.Compte?.Nom}`,
       {
         headers: header,
       }
@@ -88,34 +101,21 @@ export class AgencyService {
    * @returns A message that describes the operation's state
    */
   debloquerCompte = (agenceId: number): Observable<Message> =>
-    this.http.get<Message>(
-      `${environment.apiUrl}Agence/DebloquerCompte?agenceId=${agenceId}`,
-      {
-        headers: header,
-      }
-    );
+    this.http.get<Message>(`${environment.apiUrl}Agence/DebloquerCompte`, {
+      headers: header,
+      params: {
+        agenceId: agenceId,
+      },
+    });
 
   /**
    * @summary Terminates a given agency's session
    * @param agencyId A given agency's id
    * @returns A message that describes the operation's state
    */
-  logOut(agencyId: number): Message {
-    let response: Message;
-    try {
-      sessionStorage.removeItem(`a-${agencyId}`);
-      response = {
-        Content: 'A la prochaine fois sur MiCasa',
-        State: true,
-      };
-
-      return response;
-    } catch (error) {
-      response = {
-        Content: 'Erreur lors de la déconnexion',
-        State: false,
-      };
-    }
-    return response;
-  }
+  logOut = (agenceId: number): Observable<Message> =>
+    this.http.get<Message>(
+      `${environment.apiUrl}Agence/LogOut?agenceId=${agenceId}`,
+      { headers: header }
+    );
 }

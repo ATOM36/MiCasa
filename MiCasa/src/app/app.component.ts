@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import {
   ChildrenOutletContexts,
   NavigationEnd,
@@ -13,10 +6,10 @@ import {
   Router,
 } from '@angular/router';
 import { routerAnimation } from '@animations/router.animation';
-import { getAos } from '@utility/js-libraries';
-import { loadAdminLinks, loadAgencyLinks } from '@utility/sidenav-links';
+import { Agence } from '@models/api/agency';
+import { AgencyService } from '@services/api/agency/agency.service';
 
-var AOS = getAos();
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -24,23 +17,18 @@ var AOS = getAos();
   styleUrls: ['./app.component.scss'],
   animations: [routerAnimation],
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit, AfterViewInit {
   hasRefreshed!: boolean;
-  links: any;
-  location!: string;
-  displayWeather: boolean = false;
-  @ViewChild('sidenav') sidenav!: MatSidenav;
 
   constructor(
     private router: Router,
-    private contexts: ChildrenOutletContexts
+    private contexts: ChildrenOutletContexts,
+    private _agencyService: AgencyService
   ) {}
 
   ngOnInit(): void {
     AOS.init();
-    this.getLocation();
-    this.setLocationLinks();
-
+    this.removeToken();
     this.hasRefreshed = this.checkRefresh();
     sessionStorage.setItem('reload-loc', 'yes');
 
@@ -50,22 +38,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     } else this.router.navigate(['/login']);
   }
 
-  ngOnDestroy(): void {}
-
-  ngAfterViewInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) this.location = event.url;
-
-      if (event instanceof NavigationEnd) {
-        if (this.location !== event.url) this.location = event.url;
-
-        this.setLocationLinks();
-
-        if (event.url.includes('login') || event.url.includes('not-found'))
-          this.sidenav.close();
-      }
-    });
-  }
+  ngAfterViewInit(): void {}
 
   /**
    *@summary
@@ -101,36 +74,29 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   getRouteAnimationData = () =>
     this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
 
-  /**
-   *
-   * @param routerLink
-   */
-  lezgo(routerLink: string) {
-    if (routerLink === '/login') {
-      sessionStorage.clear();
-      this.router.navigate([`${routerLink}`]);
-    } else this.router.navigate([`${routerLink}`]);
-  }
+  trackNavigation = () =>
+    this.router.events.subscribe((event) => {
+      let fromAgency, isOut;
+      let agency!: Agence;
 
-  /**
-   *
-   * @returns
-   */
-  checkLocation = () =>
-    this.isInApp().includes('login') || this.isInApp().includes('not-found');
+      if (event instanceof NavigationStart) {
+        fromAgency = event.url.includes('agency');
 
-  /**
-   *
-   * @returns
-   */
-  getLocation = () => (this.location = localStorage.getItem('loc')!);
+        if (fromAgency) {
+          agency = JSON.parse(localStorage.getItem('a-x')!);
+        }
+      }
 
-  setLocationLinks() {
-    if (this.location.includes('admin')) this.links = loadAdminLinks();
-    else if (this.location.includes('agency')) this.links = loadAgencyLinks();
-  }
+      if (event instanceof NavigationEnd) {
+        isOut = event.url.includes('login');
 
-  isSmallScreen = () => window.screen.width <= 896;
+        if (fromAgency && isOut)
+          this._agencyService.logOut(agency.Compte?.CompteId!);
+      }
+    });
 
-  isInApp = (): string => window.location.href;
+  removeToken = () =>
+    window.location.href.includes('login')
+      ? localStorage.removeItem('token')
+      : null;
 }

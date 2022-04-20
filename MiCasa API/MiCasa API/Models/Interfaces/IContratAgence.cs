@@ -11,8 +11,6 @@
 
         Task<Message> Activate(int id, string email, string name);
 
-        Task<Message> ActivateRange(List<int> idList, List<string> emails, List<string> names);
-
         Task<Message> Delete(int id);
 
         Task<Message> DeleteRange(List<int> idList);

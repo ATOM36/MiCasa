@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Agence } from '@models/api/agency';
-import { AgencyStoreService } from '@services/stores/agency/agency-store.service';
 import { setLocation } from '@utility/location-handler';
 import { Subscription } from 'rxjs';
 
@@ -16,7 +15,6 @@ export class AgencyAccountComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   constructor(
-    private $agencyStore: AgencyStoreService,
     private _router: Router
   ) {}
 
@@ -24,7 +22,7 @@ export class AgencyAccountComponent implements OnInit, OnDestroy {
     //? Saving the current location's path
     setLocation(this._router.url);
 
-    this.agency = JSON.parse(sessionStorage.getItem('a-x')!);
+    this.agency = JSON.parse(localStorage.getItem('a-x')!);
   }
 
   ngOnDestroy(): void {

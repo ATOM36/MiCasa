@@ -8,7 +8,7 @@ import { Agence } from '@models/api/agency';
 })
 export class HeaderComponent implements OnInit {
   @Input() agency!: Agence;
-
+  displayEditModal: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
