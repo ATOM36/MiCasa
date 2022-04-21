@@ -26,6 +26,8 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@angular/service-worker": "~13.2.0",
+    "@auth0/angular-jwt": "^5.0.2",
+    "@ngrx/store": "^13.1.0",
     "@types/aos": "^3.0.4",
     "@types/jquery": "^3.5.14",
     "aos": "^2.3.4",

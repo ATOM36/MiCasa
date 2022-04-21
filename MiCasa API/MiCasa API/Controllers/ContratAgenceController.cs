@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MiCasa.Controllers;
 
-[Route("api/ContratAgence")]
+[Route("api/[controller]")]
 [ApiController]
 public class ContratAgenceController : ControllerBase
 {
@@ -17,11 +17,6 @@ public class ContratAgenceController : ControllerBase
     [HttpGet, Route("activateContract")]
     public async Task<JsonResult> Activate([FromRoute] int id, [FromRoute] string email, [FromRoute] string name)
         => new(await _bll!.Activate(id, email, name));
-
-
-    [HttpGet, Route("activateRangeContract")]
-    public async Task<JsonResult> ActivateRange(List<int> idList, List<string> emails, List<string> names) =>
-        new(await _bll!.ActivateRange(idList, emails, names));
 
 
     [HttpPost, Route("createContract")]

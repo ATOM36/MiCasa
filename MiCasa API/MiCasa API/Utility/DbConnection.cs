@@ -12,7 +12,7 @@
         /// du <strong>port</strong> par <strong>5432</strong> au lieu de <strong>5433</strong>
         /// </summary>
         /// <returns>Returns a pre-configured <paramref name="NpgsqlConnection"></paramref> object.</returns>
-        public static NpgsqlConnection GetConnection() => new("Server=localhost;Port=5432;User Id=postgres;Password=postgres;Database = MiCasaDB;");
+        public static NpgsqlConnection GetConnection() => new(_configuration.GetConnectionString("MiCasaDB"));
 
     }
 }

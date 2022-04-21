@@ -40,3 +40,18 @@ input {
 p-message {
   margin-top: 15px;
 }
+
+.choices {
+  padding: 10px;
+  margin-top: 200px;
+
+  & .option {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 896px) {
+  .choices {
+    margin-left: 120px;
+  }
+}

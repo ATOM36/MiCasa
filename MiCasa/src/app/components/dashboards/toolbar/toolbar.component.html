@@ -10,7 +10,7 @@
     type="button"
     class="toggler-left p-button p-button-raised p-button-text p-button-success p-button-rounded mt-lg-2 mt-md-5"
     icon="pi pi-bars"
-    (click)="sidenav.toggle()"
+    (click)="isToggled = true"
   ></button>
 
   <span
@@ -37,9 +37,17 @@
     type="button"
     class="toggler-right p-button p-button-raised p-button-text p-button-success p-button-rounded"
     icon="pi pi-bars"
-    (click)="sidenav.toggle()"
+    (click)="isToggled = true"
   ></button>
 </mat-toolbar>
+
+<app-sidebar
+  [isVisible]="isToggled"
+  [location]="location"
+  [agency]="agency"
+  [admin]="admin"
+  (closeNotifier)="listenToClosing(isToggled)"
+></app-sidebar>
 
 <p-scrollTop
   [threshold]="200"
