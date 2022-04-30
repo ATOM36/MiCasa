@@ -24,11 +24,18 @@ import { AdminModule } from '@modules/admin/admin.module';
 import { AgencyModule } from '@modules/agency/agency.module';
 import { SharedModule } from '@modules/shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
 import { JwtModule } from '@auth0/angular-jwt';
 import { tokenGetter } from '@utility/auth';
 import { AuthGuard } from '@guards/auth-guard.guard';
+import { ClientModule } from '@modules/client/client.module';
+
+//? NGXS
+import { NgxsModule } from '@ngxs/store';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { AppState } from './store/index.state';
+import { MessageState } from './store/states/message.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,6 +45,7 @@ import { AuthGuard } from '@guards/auth-guard.guard';
     HomeModule,
     AdminModule,
     AgencyModule,
+    ClientModule,
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -56,9 +64,6 @@ import { AuthGuard } from '@guards/auth-guard.guard';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -66,6 +71,23 @@ import { AuthGuard } from '@guards/auth-guard.guard';
         disallowedRoutes: [],
       },
     }),
+
+    //? Ngxs
+    //? Ngxs Module
+    NgxsModule.forRoot([...AppState, MessageState], {
+      developmentMode: !environment.production,
+    }),
+
+    //? Logger
+    NgxsLoggerPluginModule.forRoot({}),
+
+    //? Storage
+    NgxsStoragePluginModule.forRoot({
+      key: [...AppState],
+    }),
+
+    //? Devtools
+    NgxsReduxDevtoolsPluginModule.forRoot({}),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

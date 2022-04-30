@@ -33,6 +33,14 @@ const routes: Routes = [
     path: 'admin/account',
     component: AccountComponent,
   },
+  {
+    path: 'admin/user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    data: {
+      origin: 'admin/',
+      action: 'edition',
+    },
+  },
 ];
 
 @NgModule({

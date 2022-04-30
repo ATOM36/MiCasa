@@ -1,5 +1,14 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Agence } from '@models/api/agency';
+import { Message } from '@models/api/message';
+import { Store } from '@ngxs/store';
 import { AgencyService } from '@services/api/agency/agency.service';
 import {
   ConfirmationService,
@@ -7,7 +16,9 @@ import {
   MessageService,
 } from 'primeng/api';
 import { Paginator } from 'primeng/paginator';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
+import { AgenciesActions } from 'src/app/store/actions/agencies.action';
+import { MessageActions } from 'src/app/store/actions/message.action';
 
 @Component({
   selector: 'app-table',
@@ -18,7 +29,7 @@ import { Subscription } from 'rxjs';
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   agencies: Agence[] = [];
 
-  loading!: boolean;
+  loading: boolean = true;
 
   selectedAgency!: Agence | null;
 
@@ -26,44 +37,76 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayEditModal!: boolean;
 
-  startIndex!: number;
-  stopIndex!: number;
+  @ViewChild('refresher') refresher?: ElementRef;
+
+  startIndex: number = 0;
+  stopIndex: number = 10;
   subscription!: Subscription;
-  isLoading!: boolean;
+  isLoading: boolean = true;
   recordsNumber: number = 0;
+
+  columns = [
+    'AgenceId',
+    'Compte.Nom',
+    'Compte.Mail',
+    'Compte.NumeroTelephone',
+    'Compte.DateInscription',
+    'Signalement',
+    'Compte.IsBlocked',
+  ];
 
   constructor(
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
-    private _agencyService: AgencyService
+    private _agencyService: AgencyService,
+    private _store: Store
   ) {}
 
   ngOnInit(): void {
-    this.startIndex = 0;
-    this.stopIndex = 10;
+    this.initState();
+
     this.loadData();
 
+    this.initState();
+
+    this.isLoading = false;
     this.recordsNumber = this.getRecordsNumber();
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this._store.dispatch(new AgenciesActions.ClearState());
+  }
 
   ngAfterViewInit(): void {}
 
   //TODO: Le template pour visualiser les données d'une agence
 
   /**
+   * @summary Loads all retrieved agencies data to
+   */
+  initState = () =>
+    (this.agencies = this._store.selectSnapshot<Agence[]>(
+      (state) => state.agencies
+    ));
+
+  /**
    * @summary
    */
-  loadData = () => {
-    this.isLoading = true;
-    this._agencyService
-      .getAgencies(this.startIndex, this.stopIndex)
-      .subscribe(async ($response) => {
-        this.agencies = $response.Data as Agence[];
-      });
-    this.isLoading = false;
-  };
+  loadData = () =>
+    this.agencies.length <= 0
+      ? this._agencyService
+          .getAgencies(this.startIndex, this.stopIndex)
+          .subscribe(($response) => {
+            if ($response.State)
+              this._store.dispatch(
+                new AgenciesActions.LoadAgencies($response.Data as Agence[])
+              );
+            else
+              this._store.dispatch(
+                new MessageActions.AddMessage($response.Data as Message)
+              );
+          })
+      : null;
 
   /**
    * @summary
@@ -76,8 +119,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       this.stopIndex += 10;
       this._agencyService
         .getAgencies(this.startIndex, this.stopIndex)
-        .subscribe(async ($response) => {
-          this.agencies = this.agencies.concat($response.Data as Agence[]);
+        .subscribe(($response) => {
+          this._store.dispatch(
+            new AgenciesActions.LoadAgencies($response.Data as Agence[])
+          );
+
+          this.initState();
         });
     });
 
@@ -111,7 +158,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
               life: 2000,
             });
           });
-        this.agencies.splice(this.agencies.indexOf(agence), 1);
+
+        this._store.dispatch(
+          new AgenciesActions.DeleteAccount(agence.AgenceId!)
+        );
+        this.initState();
+        // this.agencies.splice(this.agencies.indexOf(agence), 1);
       },
 
       reject: (type: ConfirmEventType) => {

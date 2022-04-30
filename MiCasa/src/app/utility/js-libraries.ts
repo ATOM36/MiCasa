@@ -1,6 +1,7 @@
 //? JS types
 
 import * as Aos from 'aos';
+import { LoDashStatic } from 'lodash';
 
 //? jquery
 declare const $: JQueryStatic;
@@ -13,6 +14,9 @@ declare const Swal: any;
 
 //? AOS
 declare const AOS: any;
+
+//? Lodash
+declare const _: LoDashStatic;
 
 //? Helper functions
 /**
@@ -38,3 +42,9 @@ export const getSweetAlert = () => Swal;
  * @see https://michalsnik.github.io/aos/
  */
 export const getAos = () => AOS;
+
+/**
+ * @returns A reference to `LoDashStatic` interface
+ * @see https://lodash.com/docs/
+ */
+export const getLodash = () => _;

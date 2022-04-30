@@ -39,6 +39,7 @@
 
   <ng-template pTemplate="footer">
     <button
+      #refresher
       pButton
       pRipple
       label="Annuler"
@@ -56,15 +57,15 @@
   label="Recharger la table"
   styleClass="p-button-text p-button-success"
   [style]="{ 'margin-top': '10px' }"
+  (onClick)="initState()"
 ></p-button>
 
 <p-table
   #table
-  sortMode="multiple"
-  dataKey="Id"
+  dataKey="AgenceId"
   responsiveLayout="scroll"
   sortMode="multiple"
-  sortField="Id"
+  sortField="AgenceId"
   responsiveLayout="scroll"
   currentPageReportTemplate="{first} sur {last} de {totalRecords} agences"
   (onPage)="loadMoreData($event)"
@@ -78,15 +79,8 @@
   [paginator]="true"
   [filterDelay]="0"
   [resizableColumns]="true"
-  [globalFilterFields]="[
-    'Id',
-    'Nom',
-    'Mail',
-    'Téléphone',
-    'Date',
-    'Signalement',
-    'Statut'
-  ]"
+  [columns]="columns"
+  [globalFilterFields]="columns"
   [style]="{ 'margin-top': '20px' }"
 >
   <!-- Table caption -->
@@ -94,66 +88,53 @@
 
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="Id">
+      <th pSortableColumn="AgenceId">
         <div class="flex justify-content-center align-items-center">
-          Id
-          <p-sortIcon field="Id"></p-sortIcon>
+          ID de l'agence
+          <p-sortIcon field="AgenceId"></p-sortIcon>
 
-          <p-columnFilter
-            type="numeric"
-            field="Id"
-            display="menu"
-          ></p-columnFilter>
+          <p-columnFilter field="AgenceId" display="menu"></p-columnFilter>
         </div>
       </th>
-      <th pSortableColumn="Nom">
+      <th pSortableColumn="Compte.Nom">
         <div class="flex justify-content-center align-items-center">
           Nom
-          <p-sortIcon field="Nom"></p-sortIcon>
+          <p-sortIcon field="Compte.Nom"></p-sortIcon>
 
-          <p-columnFilter
-            type="text"
-            field="Nom"
-            display="menu"
-          ></p-columnFilter>
+          <p-columnFilter field="Compte.Nom" display="menu"></p-columnFilter>
         </div>
       </th>
 
-      <th pSortableColumn="Email">
+      <th pSortableColumn="Compte.Mail">
         <div class="d-inline justify-content-center align-items-center">
           Mail
-          <p-sortIcon field="Mail"></p-sortIcon>
+          <p-sortIcon field="Compte.Mail"></p-sortIcon>
+
+          <p-columnFilter field="Compte.Mail" display="menu"></p-columnFilter>
+        </div>
+      </th>
+
+      <th pSortableColumn="Compte.NumeroTelephone">
+        <div class="d-inline justify-content-center align-items-center">
+          Numero de téléphone
+          <p-sortIcon field="Compte.NumeroTelephone"></p-sortIcon>
         </div>
 
         <p-columnFilter
-          type="text"
-          field="Mail"
+          field="Compte.NumeroTelephone"
           display="menu"
         ></p-columnFilter>
       </th>
 
-      <th pSortableColumn="Téléphone">
+      <th pSortableColumn="Compte.DateInscription">
         <div class="d-inline justify-content-center align-items-center">
-          Téléphone
-          <p-sortIcon field="Téléphone"></p-sortIcon>
-        </div>
-
-        <p-columnFilter
-          type="text"
-          field="Téléphone"
-          display="menu"
-        ></p-columnFilter>
-      </th>
-
-      <th pSortableColumn="Date">
-        <div class="d-inline justify-content-center align-items-center">
-          Date
-          <p-sortIcon field="Date"></p-sortIcon>
+          Date d'inscription
+          <p-sortIcon field="Compte.DateInscription"></p-sortIcon>
         </div>
 
         <p-columnFilter
           type="date"
-          field="Date"
+          field="Compte.DateInscription"
           display="menu"
         ></p-columnFilter>
       </th>
@@ -164,21 +145,17 @@
           <p-sortIcon field="Signalement"></p-sortIcon>
         </div>
 
-        <p-columnFilter
-          type="numeric"
-          field="Signalement"
-          display="menu"
-        ></p-columnFilter>
+        <p-columnFilter field="Signalement" display="menu"></p-columnFilter>
       </th>
 
-      <th pSortableColumn="Statut">
+      <th pSortableColumn="Compte.Isblocked">
         <div class="d-inline justify-content-center align-items-center">
           Statut
-          <p-sortIcon field="Statut"></p-sortIcon>
+          <p-sortIcon field="Compte.Isblocked"></p-sortIcon>
         </div>
 
         <p-columnFilter
-          type="text"
+          type="numeric"
           field="Statut"
           display="menu"
         ></p-columnFilter>
@@ -193,6 +170,7 @@
       <td>
         {{ agency.AgenceId | number }}
       </td>
+
       <td>
         {{ agency.Compte.Nom }}
       </td>
@@ -206,7 +184,7 @@
       </td>
 
       <td>
-        {{ agency.Compte.DateInscription }}
+        {{ agency.Compte.DateInscription | date: "dd/MM/yyyy" }}
       </td>
 
       <td>
