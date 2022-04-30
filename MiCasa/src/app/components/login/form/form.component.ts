@@ -14,17 +14,22 @@ import { SwUpdate } from '@angular/service-worker';
 import { Administrateur } from '@models/api/administrator';
 import { Agence } from '@models/api/agency';
 import { Message } from '@models/api/message';
+import { Store } from '@ngxs/store';
 import { AdministratorService } from '@services/api/admin/administrator.service';
 import { AgencyService } from '@services/api/agency/agency.service';
-import { getJquery, getSweetAlert } from '@utility/js-libraries';
+import { getLodash, getSweetAlert } from '@utility/js-libraries';
 import { isSmallScreen } from '@utility/screen-size';
+import { fireError, fireInfo } from '@utility/swal.utility';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { Observable, of, Subscription, switchMap } from 'rxjs';
+import { AdminActions } from 'src/app/store/actions/admin.action';
+import { AgencyActions } from 'src/app/store/actions/agency.action';
+import { MessageActions } from 'src/app/store/actions/message.action';
 
 var Swal = getSweetAlert();
 
-var $ = getJquery();
+var _ = getLodash();
 
 @Component({
   selector: 'app-form',
@@ -73,7 +78,8 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
     private _messageService: MessageService,
     private _confirmationService: ConfirmationService,
     private _update: SwUpdate,
-    private _matDialog: MatDialog
+    private _matDialog: MatDialog,
+    private _store: Store
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +89,8 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this._messageService.clear();
+
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {}
@@ -112,34 +120,32 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
           this.myForm.get('password')?.value
         )
         .subscribe(async ($response) => {
-          //? Displaying an error message
           this._matDialog.closeAll();
 
-          if ($response.State == false) {
-            Swal.fire({
-              title: 'Connection',
-              icon: 'error',
-              html: `<p>Email ou mot de passe incorrect</p>\n<p>Veuillez réessayer.</p>`,
-            });
+          //? Displaying an error message
+          if ($response.State === false) {
+            fireError(
+              'Connection',
+              `<p>Email ou mot de passe incorrect</p>\n<p>Veuillez réessayer.</p>`
+            );
 
-            //? If no error occured then....
-          } else {
+            this._store.dispatch(
+              new MessageActions.AddMessage($response.Data as Message)
+            );
+          }
+
+          //? If no error occured then....
+          else {
             this.agency = $response.Data as Agence;
-            // this._dialogRef.close();
 
-            if (this.agency?.Compte?.IsBlocked) {
-              Swal.fire({
-                title: 'Connection',
-                icon: 'error',
-                html:
-                  "<p>Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus " +
-                  "d'informations</p>",
-              });
-            } else {
-              localStorage.setItem('a-x', JSON.stringify(this.agency));
-              localStorage.setItem('token', this.agency.Compte?.Token!);
-
-              // this._dialogRef.close();
+            if (this.agency?.Compte?.IsBlocked)
+              fireError(
+                'Connection',
+                "<p>Votre compte a été bloqué! <br />Veuillez contacter l'administrateur pour plus " +
+                  "d'informations</p>"
+              );
+            else {
+              this._store.dispatch(new AgencyActions.LogIn(this.agency));
 
               this._router.navigate([
                 `agency/${this.agency?.Compte?.Nom}/account`,
@@ -150,44 +156,59 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
 
       //? Admin login case
     } else if (emailEntry.endsWith('@admin')) {
+      // this.subscription = this._store
+      //   .dispatch(
+      //     new AdminActions.LogIn(
+      //       this.myForm.get('email')?.value,
+      //       this.myForm.get('password')?.value
+      //     )
+      //   )
+      //   .subscribe(() => {
+      //     setTimeout(() => {
+      //       const $message = _.last(
+      //         this._store.selectSnapshot<Message[]>((state) => state.messages)
+      //       );
+
+      //       this._matDialog.closeAll();
+
+      //       if ($message?.State) this._router.navigate(['/admin/dashboard']);
+      //       else fireError('Connection', $message?.Content);
+      //     }, 350);
+      //   });
+
       this.subscription = this._adminService
         .logIn(
           this.myForm.get('email')?.value,
           this.myForm.get('password')?.value
         )
         .subscribe(async ($response) => {
-          // this._dialogRef.close();
           this._matDialog.closeAll();
 
           if ($response.State == false) {
-            Swal.fire({
-              title: 'Connection',
-              icon: 'error',
-              html: `<p>${($response.Data as Message).Content}</p>`,
-            });
+            const $message = $response.Data as Message;
+            fireError('Connection', `<p>${$message.Content}</p>`);
+
+            this._store.dispatch(new MessageActions.AddMessage($message));
           }
 
           //? If no error occured then ....
           else {
-            const admin = $response.Data as Administrateur;
-            localStorage.setItem('token', admin.Compte?.Token!);
+            this._store.dispatch(
+              new AdminActions.LogIn($response.Data as Administrateur)
+            );
 
-            if (localStorage.getItem('token')) {
-              localStorage.setItem('ad-x', JSON.stringify(admin));
-              // this._dialogRef.close();
-
+            if (localStorage.getItem('token'))
               this._router.navigate(['/admin/dashboard']);
-            } else {
-              // this._dialogRef.close();
-
-              Swal.fire({
-                title: 'Connection',
-                icon: 'error',
-                html: `<p>Vous n'êtes pas autorisé à acceder à cette ressource</p>`,
-              });
-            }
+            else
+              fireError(
+                'Connection',
+                "<p>Vous n'êtes pas autorisé à acceder à cette ressource</p>"
+              );
           }
         });
+    } else {
+      this._matDialog.closeAll();
+      fireInfo('Connection', '<p>Fonction en cours de développement</p>');
     }
   }
 
@@ -269,24 +290,20 @@ export class FormComponent implements OnInit, OnDestroy, AfterViewInit {
             .then((response: boolean) =>
               response
                 ? location.reload()
-                : Swal.fire({
-                    title: 'Mise à jour',
-                    icon: 'error',
-                    html:
-                      '<p>Erreur lors de la mise à jour!</p><br/>' +
-                      '<p>Vous pourrez réesayer plus tard',
-                  })
+                : fireError(
+                    'Mise à jour',
+                    '<p>Erreur lors de la mise à jour!</p><br/>' +
+                      '<p>Vous pourrez réesayer plus tard'
+                  )
             );
         },
 
-        reject: () => {
-          Swal.fire({
-            title: 'Annulation',
-            icon: 'info',
-            html: '<p>Vous pourrez effectuer la mise à jour plus </p>',
-            showCloseButton: true,
-          });
-        },
+        reject: () =>
+          fireInfo(
+            'Mise à jour',
+            '<p>Vous pourrez effectuer la mise à jour plus </p>',
+            true
+          ),
       })
     );
 }

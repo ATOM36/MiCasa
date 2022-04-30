@@ -19,6 +19,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(private _router: Router, private _update: SwUpdate) {}
 
   ngOnInit(): void {
+    this.removeToken();
+
     //? Saving the current location's path
     setLocation('/login');
 
@@ -44,4 +46,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       return true;
     }
   };
+
+  removeToken = () =>
+    localStorage.getItem('token') ? localStorage.removeItem('token') : null;
 }

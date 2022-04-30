@@ -56,6 +56,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'user/:name/account',
+    loadChildren: () =>
+      import('@modules/client/client.module').then((m) => m.ClientModule),
+  },
+
+  {
     path: 'not-found',
     component: NotFoundComponent,
   },

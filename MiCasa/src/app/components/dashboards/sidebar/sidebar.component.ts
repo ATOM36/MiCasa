@@ -2,7 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Administrateur } from '@models/api/administrator';
 import { Agence } from '@models/api/agency';
+import { Store } from '@ngxs/store';
 import { MenuItem, PrimeIcons } from 'primeng/api';
+import { AdminActions } from 'src/app/store/actions/admin.action';
+import { AgencyActions } from 'src/app/store/actions/agency.action';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +27,7 @@ export class SidebarComponent implements OnInit {
 
   displayWeather: boolean = false;
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _store: Store) {}
 
   ngOnInit(): void {
     // Loading links depending on the context
@@ -59,7 +62,13 @@ export class SidebarComponent implements OnInit {
         tooltip: 'Les contrats relatifs aux agences',
       },
       {
-        routerLink: '/admin/users',
+        routerLink: '/admin/contracts/clients',
+        label: 'Contrats de clients',
+        icon: PrimeIcons.BOOK,
+        tooltip: 'Les contrats relatifs aux clients',
+      },
+      {
+        routerLink: '/admin/user',
         label: 'Utilisateurs',
         icon: PrimeIcons.USERS,
         tooltip: 'Section des utilisateurs',
@@ -111,6 +120,12 @@ export class SidebarComponent implements OnInit {
         tooltip: 'Ajouter une nouvelle annonce sur la plateforme',
       },
       {
+        routerLink: '/agency/:name/contracts',
+        label: 'Vos contrats',
+        icon: PrimeIcons.BOOK,
+        tooltip: 'Consulter vos contrats',
+      },
+      {
         routerLink: '/agency/publications',
         label: 'Vos annonces',
         icon: PrimeIcons.IMAGES,
@@ -133,6 +148,14 @@ export class SidebarComponent implements OnInit {
 
   lezgo(routerLink: string) {
     if (routerLink === '/login') {
+      if (this.admin !== null)
+        this._store.dispatch(
+          new AdminActions.LogOut(this.admin?.AdministratorId!)
+        );
+
+      if (this.agency !== null)
+        this._store.dispatch(new AgencyActions.LogOut(this.agency?.AgenceId!));
+
       sessionStorage.clear();
       this._router.navigate([`${routerLink}`]);
     } else this._router.navigate([`${routerLink}`]);

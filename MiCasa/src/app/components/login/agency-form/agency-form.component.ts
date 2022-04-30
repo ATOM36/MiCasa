@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agence } from '@models/api/agency';
 import { AgencyService } from '@services/api/agency/agency.service';
@@ -9,6 +16,7 @@ import {
   MessageService,
   PrimeIcons,
 } from 'primeng/api';
+import { ProgressSpinner } from 'primeng/progressspinner';
 import { Subscription } from 'rxjs';
 
 var Swal = getSweetAlert();
@@ -19,7 +27,7 @@ var Swal = getSweetAlert();
   styleUrls: ['./agency-form.component.scss'],
   providers: [ConfirmationService, MessageService],
 })
-export class AgencyFormComponent implements OnInit {
+export class AgencyFormComponent implements OnInit, AfterViewInit {
   @Input() agency: Agence = {
     AgenceId: 0,
     Adresse: null,
@@ -54,10 +62,13 @@ export class AgencyFormComponent implements OnInit {
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _confirmationService: ConfirmationService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private _matDialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {}
 
   showState = () => console.table(this.agency);
 
@@ -65,22 +76,19 @@ export class AgencyFormComponent implements OnInit {
    * @summary
    */
   register() {
+    this._matDialog.open(ProgressSpinner);
+
     let date = new Date();
-    this.agency!.Compte!.DateInscription = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    this.agency!.Compte!.DateInscription = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
 
     this._service.creerCompte(this.agency!).subscribe(async ($response) => {
-      if ($response.State)
-        Swal.fire({
-          title: 'Inscription',
-          icon: 'success',
-          html: `<p>${$response.Content}</p>`,
-        });
-      else
-        Swal.fire({
-          title: 'Inscription',
-          icon: 'error',
-          html: `<p>${$response.Content}</p>`,
-        });
+      this._matDialog.closeAll();
+
+      Swal.fire({
+        title: 'Inscription',
+        icon: $response.State ? 'success' : 'error',
+        html: `<p>${$response.Content}</p>`,
+      });
     });
   }
 
@@ -105,13 +113,17 @@ export class AgencyFormComponent implements OnInit {
       icon: 'pi pi-question-circle',
 
       accept: () => {
+        this._matDialog.open(ProgressSpinner);
+
         this._service
           .updateProfile(this.agency!)
           .subscribe(async ($response) => {
+            this._matDialog.closeAll();
+
             this._messageService.add({
-              severity: $response.State ? 'success' : 'danger',
+              severity: $response.State ? 'success' : 'warn',
               summary: 'Mise à jour',
-              detail: `${$response.Content}`,
+              detail: $response.Content,
               key: 'message',
               life: 2000,
             });
