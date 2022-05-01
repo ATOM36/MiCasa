@@ -41,6 +41,13 @@ const routes: Routes = [
       action: 'edition',
     },
   },
+  {
+    path: 'admin/contracts/clients',
+    loadChildren: () =>
+      import(
+        '@modules/admin/contracts/client-contract/client-contract.module'
+      ).then((m) => m.ClientContractModule),
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import {
-  CommonModule,
-  HashLocationStrategy,
-  PathLocationStrategy,
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 // Custom modules
 import { SharedModule } from '@modules/shared/shared.module';
@@ -14,6 +10,8 @@ import { AgencyContractModule } from './contracts/agency-contract/agency-contrac
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from '@pages/admin/dashboard/admin-dashboard.component';
 import { DashboardComponent } from '@components/admin/dashboard/dashboard.component';
+import { AccountComponent } from '@pages/admin/account/account.component';
+import { HeaderComponent } from '@pages/admin/header/header.component';
 
 // PrimeNg
 import { ChartModule } from 'primeng/chart';
@@ -25,17 +23,16 @@ import { TooltipModule } from 'primeng/tooltip';
 import { AccordionModule } from 'primeng/accordion';
 
 // Material Design
-import { MatCardModule } from '@angular/material/card';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { AccountComponent } from '../../pages/admin/account/account.component';
-import { HeaderComponent } from '../../pages/admin/header/header.component';
 
 @NgModule({
-  declarations: [AdminDashboardComponent, DashboardComponent, AccountComponent, HeaderComponent],
+  declarations: [
+    AdminDashboardComponent,
+    DashboardComponent,
+    AccountComponent,
+    HeaderComponent,
+  ],
   imports: [
     CommonModule,
     AccordionModule,
@@ -44,15 +41,11 @@ import { HeaderComponent } from '../../pages/admin/header/header.component';
     SplitButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatSidenavModule,
-    MatListModule,
     CardModule,
     AvatarModule,
     AgencyContractModule,
     ChartModule,
-    MatCardModule,
     ButtonModule,
-    MatGridListModule,
     SharedModule,
     AdminRoutingModule,
   ],
