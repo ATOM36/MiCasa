@@ -11,7 +11,7 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminDashboardComponent } from '@pages/admin/dashboard/admin-dashboard.component';
 import { DashboardComponent } from '@components/admin/dashboard/dashboard.component';
 import { AccountComponent } from '@pages/admin/account/account.component';
-import { HeaderComponent } from '@pages/admin/header/header.component';
+import { HeaderComponent } from '@components/admin/account/header/header.component';
 
 // PrimeNg
 import { ChartModule } from 'primeng/chart';

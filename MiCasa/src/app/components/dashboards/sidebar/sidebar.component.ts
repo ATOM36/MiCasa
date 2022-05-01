@@ -51,6 +51,19 @@ export class SidebarComponent implements OnInit {
     } else this._router.navigate([`${routerLink}`]);
   }
 
+  agencyRouting(routerLink: string) {
+    if (routerLink === '/login') {
+      if (this.agency !== null)
+        this._store.dispatch(new AgencyActions.LogOut(this.agency?.AgenceId!));
+
+      sessionStorage.clear();
+      this._router.navigate([`${routerLink}`]);
+    } else {
+      routerLink = routerLink.replace(':name', this.agency?.Compte?.Nom!);
+      this._router.navigate([`${routerLink}`]);
+    }
+  }
+
   displayWeatherDialog = () => (this.displayWeather = true);
 
   notifyClosing = () => this.closeNotifier.emit(false);

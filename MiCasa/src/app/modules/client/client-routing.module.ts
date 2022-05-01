@@ -11,6 +11,11 @@ const routes: Routes = [
         (m) => m.ClientDashboardModule
       ),
   },
+  {
+    path: 'user/:name/contracts',
+    loadChildren: () =>
+      import('./contracts/contracts.module').then((m) => m.ContractsModule),
+  },
 ];
 
 @NgModule({

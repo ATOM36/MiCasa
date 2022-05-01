@@ -92,7 +92,7 @@ export const getAdminLinks = () => [
  */
 export const getAgencyLinks = () => [
   {
-    routerLink: '/agency/dashboard',
+    routerLink: '/agency/:name/dashboard',
     label: 'Dashboard',
     icon: PrimeIcons.CHART_LINE,
     tooltip: 'Consulter votre dashboard',
@@ -104,13 +104,13 @@ export const getAgencyLinks = () => [
     tooltip: "Aller à l'accueil",
   },
   {
-    routerLink: '/agency/account',
+    routerLink: '/agency/:name/account',
     label: 'Votre compte',
     icon: PrimeIcons.USER,
     tooltip: "Consulter les données relatives à l'agence",
   },
   {
-    routerLink: '/agency/create',
+    routerLink: '/agency/:name/create',
     label: 'Publier une annonce',
     icon: PrimeIcons.PLUS_CIRCLE,
     tooltip: 'Ajouter une nouvelle annonce sur la plateforme',
@@ -122,7 +122,7 @@ export const getAgencyLinks = () => [
     tooltip: 'Consulter vos contrats',
   },
   {
-    routerLink: '/agency/publications',
+    routerLink: '/agency/:name/publications',
     label: 'Vos annonces',
     icon: PrimeIcons.IMAGES,
     tooltip: 'Consulter toutes les annonces que vous avez publié',
