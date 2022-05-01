@@ -1,4 +1,4 @@
-<mat-stepper orientation="vertical" [linear]="true">
+<mat-stepper orientation="vertical">
   <mat-step>
     <form
       #generalForm="ngForm"
@@ -173,7 +173,7 @@
     </form>
   </mat-step>
 
-  <mat-step *ngIf="generalForm">
+  <mat-step *ngIf="generalForm.valid">
     <form #securityForm="ngForm">
       <ng-template matStepLabel>Sécurité</ng-template>
 
@@ -284,7 +284,7 @@
           </p-message>
 
           <p-message
-            *ngIf="confirmPassword.value != Password.value"
+            *ngIf="confirmPassword.value !== Password.value"
             severity="error"
             text="Valeur différente du mot de passe donné"
           >
@@ -307,7 +307,7 @@
           pRipple
           matStepperNext
           class="p-button-outlined p-button-rounded p-button-success next-button"
-          [hidden]="generalForm.invalid || securityForm.invalid"
+          [hidden]="securityForm.invalid"
           (click)="register()"
         >
           Créer le compte
@@ -320,7 +320,7 @@
           pRipple
           matStepperNext
           class="p-button-outlined p-button-rounded p-button-success next-button"
-          [hidden]="generalForm.invalid || securityForm.invalid"
+          [hidden]="securityForm.invalid"
         >
           Mettre à jour
         </button>

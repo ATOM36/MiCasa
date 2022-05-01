@@ -18,6 +18,13 @@ const routes: Routes = [
       origin: 'agency/',
     },
   },
+  {
+    path: 'agency/:name/contracts',
+    loadChildren: () =>
+      import('@modules/agency/contracts/contracts.module').then(
+        (m) => m.ContractsModule
+      ),
+  },
 ];
 
 @NgModule({

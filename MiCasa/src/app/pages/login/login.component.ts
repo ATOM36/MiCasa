@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
+import { Store } from '@ngxs/store';
 import { setLocation } from '@utility/location-handler';
 import { Observable, of, switchMap } from 'rxjs';
+import { LocationActions } from 'src/app/store/actions/location.action';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +18,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   wantsUpdate: boolean = false;
 
-  constructor(private _router: Router, private _update: SwUpdate) {}
+  constructor(private _router: Router, private _store: Store) {}
 
   ngOnInit(): void {
     this.removeToken();
 
     //? Saving the current location's path
-    setLocation('/login');
+    setLocation(this._router.url);
+    this._store.dispatch(new LocationActions.SetLocation(this._router.url));
 
     this.isLoading = this.checkRefresh();
     sessionStorage.setItem('reloaded', 'yes');

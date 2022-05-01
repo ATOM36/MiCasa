@@ -5,6 +5,7 @@ import { Action, State, StateContext, Store } from '@ngxs/store';
 import { AdministratorService } from '@services/api/admin/administrator.service';
 import { Observable, of, tap } from 'rxjs';
 import { AdminActions } from '../actions/admin.action';
+import { AuthActions } from '../actions/auth.action';
 import { MessageActions } from '../actions/message.action';
 
 @State<Administrateur>({
@@ -25,6 +26,8 @@ export class AdminState {
   @Action(AdminActions.LogIn)
   logIn(ctx: StateContext<Administrateur>, action: AdminActions.LogIn) {
     ctx.setState(action.payload);
+    ctx.dispatch(new AuthActions.SetToken(action.payload.Compte?.Token!));
+
     localStorage.setItem('token', action.payload.Compte?.Token!);
   }
 

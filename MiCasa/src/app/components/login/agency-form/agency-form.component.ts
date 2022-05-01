@@ -120,12 +120,10 @@ export class AgencyFormComponent implements OnInit, AfterViewInit {
           .subscribe(async ($response) => {
             this._matDialog.closeAll();
 
-            this._messageService.add({
-              severity: $response.State ? 'success' : 'warn',
-              summary: 'Mise à jour',
-              detail: $response.Content,
-              key: 'message',
-              life: 2000,
+            Swal.fire({
+              title: 'Mise à jour',
+              icon: $response.State ? 'success' : 'error',
+              html: `<p>${$response.Content}</p>`,
             });
           });
       },

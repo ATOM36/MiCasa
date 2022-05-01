@@ -1,6 +1,6 @@
 import { Compte } from './compte';
 
 export interface Client {
-  ClientId: number;
-  Compte: Compte;
+  ClientId: number | null;
+  Compte: Compte | null;
 }
