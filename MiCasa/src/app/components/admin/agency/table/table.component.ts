@@ -74,7 +74,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._store.dispatch(new AgenciesActions.ClearState());
+    // this._store.dispatch(new AgenciesActions.ClearState());
   }
 
   ngAfterViewInit(): void {}
