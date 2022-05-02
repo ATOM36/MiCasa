@@ -11,6 +11,8 @@ import { TableComponent } from '@components/agency/contracts/table/table.compone
 import { DashboardModule } from '@modules/dashboard/dashboard.module';
 import { SharedModule } from '@modules/shared/shared.module';
 
+//? PrimeNG
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [ContractsComponent, TableComponent],
   imports: [
@@ -18,6 +20,9 @@ import { SharedModule } from '@modules/shared/shared.module';
     ContractsRoutingModule,
     DashboardModule,
     SharedModule,
+
+    //? PrimeNG
+    TableModule,
   ],
 })
 export class ContractsModule {}

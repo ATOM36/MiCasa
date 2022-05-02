@@ -24,6 +24,9 @@ const routes: Routes = [
       import('@modules/agency/contracts/contracts.module').then(
         (m) => m.ContractsModule
       ),
+    data: {
+      origin: 'agency/',
+    },
   },
 ];
 

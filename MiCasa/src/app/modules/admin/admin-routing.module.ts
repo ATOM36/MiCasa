@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'admin/account',
     component: AccountComponent,
+    data: {
+      // ? origin so that the right message is displayed
+      origin: 'admin/',
+    },
   },
   {
     path: 'admin/user',
