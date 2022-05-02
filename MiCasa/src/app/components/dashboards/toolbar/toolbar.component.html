@@ -14,7 +14,7 @@
   ></button>
 
   <span
-    *ngIf="!location?.includes('admin') || !location.includes('agency')"
+    *ngIf="!(location?.includes('admin') || location.includes('agency'))"
     class="brand d-inline-block mt-2 mt-md-3"
     >MiCasa</span
   >
