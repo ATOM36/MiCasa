@@ -8,6 +8,7 @@ global using MiCasa.Models.Interfaces;
 global using MiCasa.Models.Dal;
 global using MiCasa.Models.Entity;
 global using MiCasa.Models.Bll;
+global using MiCasa_API.Models.Entity;
 
 // Data usings
 global using Npgsql;
