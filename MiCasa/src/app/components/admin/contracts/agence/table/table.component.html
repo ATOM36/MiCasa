@@ -1,128 +1,95 @@
+<p-button
+  type="button"
+  icon="pi pi-refresh"
+  label="Recharger la table"
+  styleClass="p-button-text p-button-success"
+  (onClick)="loadBackupData(stopIndex)"
+  [style]="{ 'margin-top': '10px' }"
+></p-button>
+
 <p-table
-  #table
-  sortMode="multiple"
-  dataKey="Id"
-  responsiveLayout="scroll"
-  sortMode="multiple"
-  sortField="Id"
-  responsiveLayout="scroll"
-  currentPageReportTemplate="{first} sur {last} de {contracts.length} agences"
-  (onPage)="loadMore($event)"
+  [columns]="columns"
   [value]="contracts"
+  #table
+  dataKey="ContratId"
+  responsiveLayout="scroll"
+  sortMode="multiple"
+  sortField="ContratId"
+  responsiveLayout="scroll"
+  (onPage)="loadMore($event)"
+  currentPageReportTemplate="{first} sur {last} de {totalRecords} contrats d'agence"
   [rowHover]="true"
   [rows]="10"
   [loading]="isLoading"
-  [totalRecords]="contracts.length"
+  [totalRecords]="recordsNumber"
   [showCurrentPageReport]="true"
   [rowsPerPageOptions]="[10, 25, 50]"
   [paginator]="true"
   [filterDelay]="0"
   [resizableColumns]="true"
-  [globalFilterFields]="[
-    'Id',
-    'Nom',
-    'Mail',
-    'Téléphone',
-    'Date',
-    'Signalement',
-    'Statut'
-  ]"
+  [globalFilterFields]="columns"
   [style]="{ 'margin-top': '20px' }"
 >
-  <!-- Table caption -->
-  <ng-template pTemplate="caption"> Liste des contrats </ng-template>
-
+  <ng-template pTemplate="caption"> Liste des contrats d'agences </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="Id">
+      <th pSortableColumn="ContratId">
         <div class="flex justify-content-center align-items-center">
-          Id
-          <p-sortIcon field="Id"></p-sortIcon>
+          ID du contrat
+          <p-sortIcon field="ContratId"></p-sortIcon>
 
-          <p-columnFilter
-            type="numeric"
-            field="Id"
-            display="menu"
-          ></p-columnFilter>
-        </div>
-      </th>
-      <th pSortableColumn="Date">
-        <div class="flex justify-content-center align-items-center">
-          Date
-          <p-sortIcon field="Date"></p-sortIcon>
-
-          <p-columnFilter
-            type="text"
-            field="Date"
-            display="menu"
-          ></p-columnFilter>
+          <p-columnFilter field="ContratId" display="menu"></p-columnFilter>
         </div>
       </th>
 
       <th pSortableColumn="AgenceId">
-        <div class="d-inline justify-content-center align-items-center">
-          AgenceId
+        <div class="flex justify-content-center align-items-center">
+          ID de l'agence
           <p-sortIcon field="AgenceId"></p-sortIcon>
-        </div>
 
-        <p-columnFilter
-          type="text"
-          field="AgenceId"
-          display="menu"
-        ></p-columnFilter>
+          <p-columnFilter field="AgenceId" display="menu"></p-columnFilter>
+        </div>
       </th>
 
-      <th pSortableColumn="Statut">
-        <div class="d-inline justify-content-center align-items-center">
+      <th pSortableColumn="IsActive">
+        <div class="flex justify-content-center align-items-center">
           Statut
-          <p-sortIcon field="Statut"></p-sortIcon>
+          <p-sortIcon field="IsActive"></p-sortIcon>
         </div>
-
-        <p-columnFilter
-          type="text"
-          field="Statut"
-          display="menu"
-        ></p-columnFilter>
       </th>
 
+      <th pSortableColumn="DateCreation">
+        <div class="flex justify-content-center align-items-center">
+          Date de création
+          <p-sortIcon field="DateCreation"></p-sortIcon>
+
+          <p-columnFilter
+            type="date"
+            field="ContratId"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
       <th>Actions</th>
     </tr>
   </ng-template>
-
   <ng-template pTemplate="body" let-contract>
     <tr>
-      <td>
-        {{ contract.ContratId }}
-      </td>
-      <td>
-        {{ contract.DateCreation }}
-      </td>
+      <td>{{ contract.ContratId }}</td>
+
+      <td>{{ contract.AgenceId }}</td>
 
       <td>
-        {{ contract.AgenceId }}
-      </td>
-
-      <td>
-        {{ contract.IsActive }}
-      </td>
-
-      <td *ngIf="contract.IsActive === 0">
         <button
           pButton
           pRipple
-          label="Désactivé"
-          class="p-button-outlined p-button-success p-button-rounded p-button-text"
+          [label]="contract.IsActive ? 'Activer' : 'Désactiver'"
+          class="p-button-outlined p-button-rounded p-button-text"
+          [class]="contract.IsActive ? 'p-button-success' : 'p-button-danger'"
         ></button>
       </td>
 
-      <td *ngIf="contract.IsActive === 1">
-        <button
-          pButton
-          pRipple
-          label="Activé"
-          class="p-button-outlined p-button-danger p-button-rounded p-button-text"
-        ></button>
-      </td>
+      <td>{{ contract.DateCreation }}</td>
 
       <td>
         <button

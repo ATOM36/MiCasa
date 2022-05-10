@@ -6472,11 +6472,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
       "projectName": "MiCasa API",
       "projectPath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
       "packagesPath": "C:\\Users\\ykhal\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+      "projectName": "MiCasa API",
+      "projectPath": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+      "packagesPath": "C:\\Users\\tchio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+>>>>>>> 51f2b9956b62527af91a40eff264374ed6eda4b6
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

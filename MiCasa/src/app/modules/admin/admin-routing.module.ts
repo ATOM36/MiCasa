@@ -32,6 +32,25 @@ const routes: Routes = [
   {
     path: 'admin/account',
     component: AccountComponent,
+    data: {
+      // ? origin so that the right message is displayed
+      origin: 'admin/',
+    },
+  },
+  {
+    path: 'admin/user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    data: {
+      origin: 'admin/',
+      action: 'edition',
+    },
+  },
+  {
+    path: 'admin/contracts/clients',
+    loadChildren: () =>
+      import(
+        '@modules/admin/contracts/client-contract/client-contract.module'
+      ).then((m) => m.ClientContractModule),
   },
 ];
 

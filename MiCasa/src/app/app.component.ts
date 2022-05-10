@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     AOS.init();
-    this.removeToken();
+
     this.hasRefreshed = this.checkRefresh();
     sessionStorage.setItem('reload-loc', 'yes');
 
@@ -95,8 +95,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     });
 
-  removeToken = () =>
-    window.location.href.includes('login')
-      ? localStorage.removeItem('token')
-      : null;
+  trackLocation = () =>
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd)
+        sessionStorage.setItem('test', event.url);
+    });
 }

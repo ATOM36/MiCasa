@@ -360,7 +360,7 @@
           </p-message>
 
           <p-message
-            *ngIf="confirmPassword.value != Password.value"
+            *ngIf="confirmPassword.value !== Password.value"
             severity="error"
             text="Valeur différente du mot de passe donné"
           >

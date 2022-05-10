@@ -45,6 +45,7 @@ import { LoadingComponent } from '@pages/loading/loading.component';
     AgencyTemplateComponent,
     AgencyEditTemplateComponent,
     LoadingComponent,
+    ButtonModule,
   ],
 })
 export class SharedModule {}

@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "L0f9BprzKWqQ6bZLauUhJCx/wRg9wpTfMK3tDO/ETkOZIkYc1VMif6HfrMSQQl0OR8rGktBY5nLmC6LOx2JSuw==",
   "success": true,
   "projectFilePath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+=======
+  "dgSpecHash": "ZQiGjRbQkOESTMvsj29k1bDtBfTXGOG58VBOXTcotHm8rlw0oG4v3klAjRKwXt8kVEfxIK5i+VQnOVmkn3V5jg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+>>>>>>> 51f2b9956b62527af91a40eff264374ed6eda4b6
   "expectedPackageFiles": [
     "C:\\Users\\ykhal\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ykhal\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.4\\microsoft.aspnetcore.authentication.jwtbearer.6.0.4.nupkg.sha512",
