@@ -23,6 +23,9 @@ import { DialogModule } from 'primeng/dialog';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 
+//? Material Design
+import { MatTableModule } from '@angular/material/table';
+
 @NgModule({
   declarations: [AgenceComponent, TableComponent],
   imports: [
@@ -40,6 +43,9 @@ import { MessagesModule } from 'primeng/messages';
     TableModule,
     InputTextModule,
     LoginModule,
+
+    //? Material Design
+    MatTableModule,
   ],
 })
 export class AgenceModule {}

@@ -1,6 +1,10 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {}
+=======
+<<<<<<< HEAD
     "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {}
   },
   "projects": {
@@ -12,6 +16,24 @@
         "projectPath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
         "packagesPath": "C:\\Users\\ykhal\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+=======
+    "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {}
+>>>>>>> ac0837ffeb8942460de66e3d2410431fdcee7d54
+  },
+  "projects": {
+    "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+        "projectName": "MiCasa API",
+        "projectPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+        "packagesPath": "C:\\Users\\tchio\\.nuget\\packages\\",
+<<<<<<< HEAD
+        "outputPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+=======
+        "outputPath": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+>>>>>>> 51f2b9956b62527af91a40eff264374ed6eda4b6
+>>>>>>> ac0837ffeb8942460de66e3d2410431fdcee7d54
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

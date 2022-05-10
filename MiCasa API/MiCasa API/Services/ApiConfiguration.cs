@@ -72,7 +72,8 @@ namespace MiCasa.Services
             _services?.AddScoped<IAgence, BLL_Agence>()
                 .AddScoped<IAuthService, AuthService>()
                 .AddScoped<IContratAgence, BLL_ContratAgence>()
-                .AddScoped<IAdministrateur, BLL_Administrateur>();
+                .AddScoped<IAdministrateur, BLL_Administrateur>()
+                .AddScoped<IContratClient, BllContratClient>();
 
             return this;
         }
