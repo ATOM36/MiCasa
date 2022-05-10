@@ -8000,11 +8000,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+      "projectUniqueName": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
       "projectName": "MiCasa API",
-      "projectPath": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+      "projectPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
       "packagesPath": "C:\\Users\\tchio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tchio\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+      "outputPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
