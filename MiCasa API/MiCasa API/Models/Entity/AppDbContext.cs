@@ -13,4 +13,5 @@ public class AppDbContext : DbContext
     public DbSet<Administrateur> Administrateurs { get; set; }
     public DbSet<ContratAgence> ContratAgences { get; set; }
     public DbSet<Compte> Comptes { get; set; }
+    public DbSet<Client> Clients { get; set; }
 }

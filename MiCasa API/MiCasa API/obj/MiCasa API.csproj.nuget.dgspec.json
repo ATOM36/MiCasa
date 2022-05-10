@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {}
+    "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {
+    "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+        "projectUniqueName": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
         "projectName": "MiCasa API",
-        "projectPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
-        "packagesPath": "C:\\Users\\tchio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
+        "projectPath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\MiCasa API.csproj",
+        "packagesPath": "C:\\Users\\ykhal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ykhal\\Downloads\\MiCasa\\MiCasa API\\MiCasa API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\tchio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ykhal\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\tchio\\Documents\\Local Nuget Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -47,41 +46,35 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[6.0.3, )"
-            },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[6.0.3, )"
-            },
-            "Microsoft.AspNetCore.OData": {
-              "target": "Package",
-              "version": "[8.0.8, )"
-            },
-            "Microsoft.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.1.0, )"
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
               "target": "Package",
@@ -89,11 +82,15 @@
             },
             "Npgsql.Json.NET": {
               "target": "Package",
-              "version": "[6.0.3, )"
+              "version": "[6.0.4, )"
             },
             "SendGrid": {
               "target": "Package",
               "version": "[9.27.0, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.11.0, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
@@ -101,7 +98,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.2.3, )"
             }
           },
           "imports": [
@@ -122,7 +119,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
