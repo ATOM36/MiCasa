@@ -17,7 +17,7 @@ public class AdministrateurController : ControllerBase
 
 
     [HttpPost, Route("CreerCompte")]
-    [Authorize]0
+    [Authorize]
     public async Task<JsonResult> CreerCompte([FromBody] Administrateur administrateur) => new(await _bll!.CreerCompte(administrateur));
 
 
