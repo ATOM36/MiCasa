@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Administrateur } from '@models/api/administrator';
+import { Store } from '@ngxs/store';
+import { setLocation } from '@utility/location-handler';
+import { LocationActions } from 'src/app/store/actions/location.action';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
-
-  constructor() { }
+  admin!: Administrateur;
+  constructor(private _router: Router, private _store: Store) {}
 
   ngOnInit(): void {
+    setLocation(this._router.url);
+    this._store.dispatch(new LocationActions.SetLocation(this._router.url));
+    this.initState();
   }
 
+  initState = () =>
+    (this.admin = this._store.selectSnapshot<Administrateur>(
+      (state) => state.admin
+    ));
 }

@@ -10,6 +10,18 @@ const routes: Routes = [
       import('@modules/client/dashboard/client-dashboard.module').then(
         (m) => m.ClientDashboardModule
       ),
+
+    data: {
+      origin: 'client',
+    },
+  },
+  {
+    path: 'user/:name/contracts',
+    loadChildren: () =>
+      import('./contracts/contracts.module').then((m) => m.ContractsModule),
+    data: {
+      origin: 'client',
+    },
   },
 ];
 

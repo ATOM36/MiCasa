@@ -27,9 +27,9 @@ import { MessageActions } from 'src/app/store/actions/message.action';
   providers: [ConfirmationService, MessageService],
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
-  agencies: Agence[] = [];
+  agencies!: Agence[];
 
-  loading: boolean = true;
+  loading?: boolean;
 
   selectedAgency!: Agence | null;
 
@@ -63,13 +63,15 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.initState();
-
     this.loadData();
 
-    this.initState();
+    setTimeout(() => {
+      this.initState();
+      this.isLoading = false;
+    }, 350);
 
-    this.isLoading = false;
     this.recordsNumber = this.getRecordsNumber();
   }
 

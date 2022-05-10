@@ -3,6 +3,7 @@ import { Agence } from '@models/api/agency';
 import { Action, State, StateContext } from '@ngxs/store';
 import { AgencyService } from '@services/api/agency/agency.service';
 import { AgencyActions } from '../actions/agency.action';
+import { AuthActions } from '../actions/auth.action';
 
 @State<Agence>({
   name: 'agency',
@@ -17,6 +18,7 @@ export class AgencyState {
   @Action(AgencyActions.LogIn)
   logIn(ctx: StateContext<Agence>, action: AgencyActions.LogIn) {
     ctx.setState(action.payload);
+    ctx.dispatch(new AuthActions.SetToken(action.payload.Compte?.Token!));
     localStorage.setItem('token', action.payload.Compte?.Token!);
   }
 

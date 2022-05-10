@@ -12,7 +12,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="username"></param>
     /// <param name="password"></param>
@@ -86,7 +86,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="agenceId"></param>
     /// <returns></returns>
@@ -120,7 +120,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="startIndex"></param>
     /// <param name="stopIndex"></param>
@@ -158,7 +158,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="username"></param>
     /// <returns></returns>
@@ -189,7 +189,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="agenceId"></param>
     /// <returns></returns>
@@ -220,7 +220,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="agence"></param>
     /// <returns></returns>
@@ -241,7 +241,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="agence"></param>
     /// <returns></returns>
@@ -262,7 +262,7 @@ public class DAL_Agence
 
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="agenceId"></param>
     /// <returns></returns>

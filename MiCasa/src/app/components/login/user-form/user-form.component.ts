@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Client } from '@models/api/client.model';
 
@@ -39,6 +39,7 @@ export class UserFormComponent implements OnInit {
 
   client?: Client;
 
+  @Input()
   formAction?: 'registration' | 'edition';
 
   constructor() {}

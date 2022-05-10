@@ -20,4 +20,13 @@ export namespace ClientsActions {
     static readonly type = '[Clients] UpdateProfile';
     constructor(public payload: Client) {}
   }
+
+  export class ClearState {
+    static readonly type = '[Clients] ClearState';
+  }
+
+  export class LoadData {
+    static readonly type = '[Clients] LoadData';
+    constructor(public payload: Client[]) {}
+  }
 }
