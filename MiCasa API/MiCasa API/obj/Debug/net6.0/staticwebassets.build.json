@@ -1,19 +1,11 @@
 {
   "Version": 1,
-  "Hash": "i7sOw2mSzFDf288k8vzmxSskaQcpbljCIN0xC7QQ558=",
+  "Hash": "It/Z837hFt82aIr9kh4423k2dx1tSg04qWTPDaGiwMQ=",
   "Source": "MiCasa API",
   "BasePath": "_content/MiCasa API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [
-    {
-      "Name": "MiCasa API\\wwwroot",
-      "Source": "MiCasa API",
-      "ContentRoot": "C:\\Users\\ykhal\\OneDrive\\Images\\MiCasa API\\MiCasa API\\wwwroot\\",
-      "BasePath": "_content/MiCasa API",
-      "Pattern": "**"
-    }
-  ],
+  "DiscoveryPatterns": [],
   "Assets": []
 }
