@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yA2FzdgSZMhQRf7nHofgqaeiUj4EHwkSza0U+oMFCVw=",
+  "Hash": "C8UOzTUOtijHSIb4Xx0NvlBtK3UFfPX2erbsnH0u1PI=",
   "Source": "MiCasa API",
   "BasePath": "_content/MiCasa API",
   "Mode": "Default",
@@ -10,7 +10,7 @@
     {
       "Name": "MiCasa API\\wwwroot",
       "Source": "MiCasa API",
-      "ContentRoot": "C:\\Users\\tchio\\Documents\\TP\\Agile\\MiCasa\\MiCasa API\\MiCasa API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\ykhal\\OneDrive\\Images\\MiCasa\\MiCasa API\\MiCasa API\\wwwroot\\",
       "BasePath": "_content/MiCasa API",
       "Pattern": "**"
     }
