@@ -1,0 +1,88 @@
+<div class="container-fluid py-5 h-100">
+  <div class="row d-flex h-100">
+    <div class="col">
+      <div class="card">
+        <div
+          class="rounded-top text-white d-flex flex-row"
+          style="background-color: #38b000ff; height: 200px"
+        >
+          <div class="ms-4 mt-5 d-flex flex-column">
+            <img
+              src="https://www.pngmart.com/files/21/Admin-Profile-Vector-PNG-Photos.png"
+              alt="Generic placeholder image"
+              class="img-fluid img-thumbnail mt-4 mb-2"
+              style="width: 150px; z-index: 1"
+            />
+
+            <button
+              pButton
+              pRipple
+              icon="pi pi-user-edit"
+              label="Modifier le profile"
+              class="p-button-secondary p-button-outlined p-button-rounded p-button-raised"
+              [style]="{ 'margin-top': '10px' }"
+              (click)="displayEditModal = true"
+            ></button>
+          </div>
+          <div class="ms-3 details" style="margin-top: 130px">
+            <h5>Administrateur: {{ admin?.Compte?.Username }}</h5>
+          </div>
+        </div>
+        <div class="p-4 text-black" style="background-color: #f8f9fa">
+          <div class="d-flex justify-content-end text-center py-1">
+            <div>
+              <p class="mb-1 h5">73</p>
+              <p class="small text-muted mb-0">Heures d'activités</p>
+            </div>
+            <div class="px-3">
+              <p class="mb-1 h5">26</p>
+              <p class="small text-muted mb-0">Opérations en cours</p>
+            </div>
+            <div>
+              <p class="mb-1 h5">
+                {{ admin.Compte?.DateInscription | date: "dd/MM/yyyy" }}
+              </p>
+              <p class="small text-muted mb-0">Date d'inscription</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for agency editing -->
+<!-- <p-dialog
+  [(visible)]="displayEditModal"
+  [resizable]="false"
+  [draggable]="false"
+  position="center"
+  [modal]="true"
+  [closeOnEscape]="false"
+  [breakpoints]="{ '960px': '100vw' }"
+  [style]="{ width: '80vw' }"
+  (onHide)="displayEditModal = false"
+>
+  <ng-template pTemplate="header"
+    >Modification de {{ admin?.Compte?.Nom }}</ng-template
+  >
+
+  <ng-template pTemplate="content">
+    <app-agency-form
+      [agency]="agency"
+      [decoyAgency]="agency"
+      formAction="edition"
+    ></app-agency-form>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button
+      pButton
+      pRipple
+      label="Annuler"
+      (click)="displayEditModal = false"
+      class="p-button-danger"
+      [style]="{ background: '#e01e37ff' }"
+    ></button>
+  </ng-template>
+</p-dialog> -->

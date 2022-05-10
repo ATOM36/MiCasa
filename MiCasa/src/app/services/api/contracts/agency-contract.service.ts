@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
 import { ContratAgence } from '@models/api/contrat-agence';
 import { Message } from '@models/api/message';
+import { QueryData } from '@models/api/query-data';
 import { Observable } from 'rxjs';
 import { header } from '../api-header';
 
@@ -43,8 +44,11 @@ export class AgencyContractService {
    *
    * @returns
    */
-  getContracts = (start: number, stop: number): Observable<ContratAgence[]> =>
-    this.http.get<ContratAgence[]>(
+  getContracts = (
+    start: number,
+    stop: number
+  ): Observable<QueryData<ContratAgence[]>> =>
+    this.http.get<QueryData<ContratAgence[]>>(
       `${environment.apiUrl}ContratAgence/SelectRange?start=${start}&end=${stop}`,
       {
         headers: header,
@@ -56,8 +60,10 @@ export class AgencyContractService {
    * @param contratId
    * @returns
    */
-  getContract = (contratId: number): Observable<ContratAgence> =>
-    this.http.get<ContratAgence>(
+  getContract = (
+    contratId: number
+  ): Observable<QueryData<ContratAgence | Message>> =>
+    this.http.get<QueryData<ContratAgence>>(
       `${environment.apiUrl}ContratAgence/Select/${contratId}`,
       {
         headers: header,
